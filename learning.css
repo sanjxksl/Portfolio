@@ -1,0 +1,314 @@
+/* ==========================================
+   LEARNING PAGE
+   Robert Frost forest with branching paths
+   ========================================== */
+
+#learning {
+    padding: calc(var(--section-padding) + 80px) 0 var(--section-padding);
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #FAF7F2 0%, #E8DED1 100%);
+}
+
+/* Learning Hero with Quote */
+.learning-hero {
+    padding: 60px var(--container-padding);
+    text-align: center;
+}
+
+.frost-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-style: italic;
+    color: var(--dark-coffee);
+    line-height: 1.5;
+    max-width: 900px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+/* Forest Container */
+.learning-forest {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 100px 60px;
+    min-height: 800px;
+}
+
+/* SVG Paths */
+.path-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.path-svg path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawPath 2s ease-in-out forwards;
+}
+
+@keyframes drawPath {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Learning Nodes */
+.learning-nodes {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.learning-node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: none;
+    transition: all 0.4s ease;
+    animation: fadeIn 0.8s ease forwards;
+    opacity: 0;
+}
+
+.learning-node.start-node {
+    animation-delay: 0.2s;
+}
+
+.learning-node.branch-node {
+    animation-delay: 0.6s;
+}
+
+.learning-node.end-node {
+    animation-delay: 1s;
+}
+
+.node-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 3px solid var(--coffee);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(60, 47, 35, 0.15);
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.learning-node:hover .node-circle {
+    transform: scale(1.1);
+    box-shadow: 0 15px 50px rgba(60, 47, 35, 0.25);
+    border-color: var(--dark-coffee);
+}
+
+.node-icon {
+    font-size: 3rem;
+}
+
+.node-label {
+    margin-top: 20px;
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--espresso);
+    max-width: 200px;
+}
+
+.node-description {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--dark-coffee);
+    opacity: 0;
+    max-width: 220px;
+    transition: opacity 0.3s ease;
+}
+
+.learning-node:hover .node-description {
+    opacity: 1;
+}
+
+/* Project Clouds */
+.project-cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 20px 60px rgba(60, 47, 35, 0.2);
+    border: 1px solid rgba(139, 115, 85, 0.2);
+    max-width: 450px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.project-cloud.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+/* Position clouds near their nodes */
+#foundation-projects {
+    top: 70%;
+    left: 15%;
+}
+
+#design-projects {
+    top: 10%;
+    left: 55%;
+}
+
+#analytics-projects {
+    top: 50%;
+    left: 55%;
+}
+
+#product-projects {
+    top: 35%;
+    right: 5%;
+}
+
+.cloud-header {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--espresso);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--coffee);
+}
+
+/* Project Cards */
+.project-card {
+    padding: 20px;
+    background: var(--soft-beige);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    cursor: none;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.project-card:last-child {
+    margin-bottom: 0;
+}
+
+.project-card:hover {
+    transform: translateX(8px);
+    border-color: var(--coffee);
+    box-shadow: 0 8px 20px rgba(60, 47, 35, 0.1);
+}
+
+.project-card h4 {
+    font-size: 1.1rem;
+    color: var(--espresso);
+    margin-bottom: 8px;
+}
+
+.project-type {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(139, 115, 85, 0.15);
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: var(--coffee);
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.project-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--dark-coffee);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .learning-forest {
+        padding: 80px 40px;
+        min-height: 1000px;
+    }
+    
+    /* Adjust node positions for smaller screens */
+    .learning-node.start-node {
+        left: 10% !important;
+        top: 80% !important;
+    }
+    
+    .learning-node.branch-node[data-domain="design"] {
+        left: 45% !important;
+        top: 30% !important;
+    }
+    
+    .learning-node.branch-node[data-domain="analytics"] {
+        left: 45% !important;
+        top: 60% !important;
+    }
+    
+    .learning-node.end-node {
+        left: 70% !important;
+        top: 45% !important;
+    }
+    
+    .project-cloud {
+        max-width: 350px;
+        padding: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .frost-quote {
+        font-size: 1.5rem;
+    }
+    
+    .learning-forest {
+        padding: 60px 24px;
+        min-height: 1200px;
+    }
+    
+    .node-circle {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .node-icon {
+        font-size: 2.5rem;
+    }
+    
+    .node-label {
+        font-size: 1.1rem;
+        max-width: 150px;
+    }
+    
+    .project-cloud {
+        max-width: 300px;
+        padding: 20px;
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+    }
+    
+    .project-cloud.active {
+        transform: translate(-50%, -50%) !important;
+    }
+    
+    .cloud-header {
+        font-size: 1.2rem;
+    }
+}
