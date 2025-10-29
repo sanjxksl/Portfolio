@@ -106,6 +106,9 @@ a {
     transition: all 0.15s ease;
     transform: translate(-50%, -50%);
     mix-blend-mode: difference;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cursor-follower {
@@ -119,6 +122,35 @@ a {
     transition: all 0.3s ease;
     transform: translate(-50%, -50%);
     mix-blend-mode: difference;
+}
+
+/* Context-aware cursor styles */
+.cursor svg {
+    width: 16px;
+    height: 16px;
+    fill: var(--coffee);
+}
+
+.cursor-initials {
+    font-family: var(--font-serif);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--coffee);
+}
+
+.cursor-work {
+    width: 24px;
+    height: 24px;
+}
+
+.cursor-learning {
+    width: 24px;
+    height: 24px;
+}
+
+.cursor-about {
+    width: 28px;
+    height: 28px;
 }
 
 /* Navigation */
@@ -214,7 +246,6 @@ nav.hidden {
 
 /* Page System */
 .page {
-    min-height: 100vh;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease, visibility 0.5s ease;
@@ -222,12 +253,14 @@ nav.hidden {
     top: 0;
     left: 0;
     width: 100%;
+    display: none;
 }
 
 .page.active {
     opacity: 1;
     visibility: visible;
     position: relative;
+    display: block;
 }
 
 /* Section Title */

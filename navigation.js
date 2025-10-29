@@ -6,16 +6,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     const nav = document.getElementById('nav');
     const navLinks = document.querySelectorAll('.nav-link');
+    const navBrand = document.querySelector('.nav-brand');
     const pages = document.querySelectorAll('.page');
     let lastScroll = 0;
-    
+
+    // Handle brand link (home)
+    if (navBrand) {
+        navBrand.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage('home');
+
+            // Clear active state from nav links
+            navLinks.forEach(l => l.classList.remove('active'));
+        });
+    }
+
     // Handle page navigation
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href').substring(1);
             showPage(targetId);
-            
+
             // Update active state
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
