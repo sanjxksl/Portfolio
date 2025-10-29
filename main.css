@@ -103,7 +103,7 @@ a {
     position: fixed;
     pointer-events: none;
     z-index: 9999;
-    transition: all 0.15s ease;
+    transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease;
     transform: translate(-50%, -50%);
     mix-blend-mode: difference;
     display: flex;
@@ -119,7 +119,7 @@ a {
     position: fixed;
     pointer-events: none;
     z-index: 9999;
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease;
     transform: translate(-50%, -50%);
     mix-blend-mode: difference;
 }

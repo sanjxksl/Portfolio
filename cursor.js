@@ -23,13 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Smooth animation
     function animate() {
-        // Cursor follows immediately
-        cursorX += (mouseX - cursorX) * 0.2;
-        cursorY += (mouseY - cursorY) * 0.2;
+        // Cursor follows exactly with trackpad (1:1 motion)
+        cursorX = mouseX;
+        cursorY = mouseY;
 
-        // Follower lags behind
-        followerX += (mouseX - followerX) * 0.1;
-        followerY += (mouseY - followerY) * 0.1;
+        // Follower has very slight lag for visual effect
+        followerX += (mouseX - followerX) * 0.15;
+        followerY += (mouseY - followerY) * 0.15;
 
         cursor.style.left = cursorX + 'px';
         cursor.style.top = cursorY + 'px';
