@@ -45,21 +45,24 @@
     font-style: italic;
 }
 
-/* Forest Road Scene Container with Background Image */
+/* Forest Road Scene Container */
 .forest-road-scene {
     position: relative;
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 40px var(--container-padding);
-    min-height: 600px;
-    height: 75vh;
-    background: url('learning_bg.png') center center / cover no-repeat;
+    padding: 60px var(--container-padding);
+    min-height: 700px;
+    height: 80vh;
+    background:
+        radial-gradient(circle at 30% 40%, rgba(255, 245, 235, 0.4), transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(245, 230, 210, 0.3), transparent 50%),
+        linear-gradient(135deg, #EFE4D8 0%, #F5EBE0 50%, #EFE4D8 100%);
     border-radius: 30px;
     z-index: 1;
     box-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.08),
-        inset 0 0 60px rgba(232, 213, 196, 0.3);
+        0 20px 60px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 /* Soft fade edges to blend with page background */
@@ -71,18 +74,35 @@
     right: 0;
     bottom: 0;
     border-radius: 30px;
-    box-shadow: inset 0 0 80px 40px rgba(232, 213, 196, 0.4);
+    box-shadow: inset 0 0 100px 50px rgba(239, 228, 216, 0.5);
     pointer-events: none;
     z-index: 0;
 }
 
-/* Hide road SVG since we're using background image */
-.road-illustration {
-    display: none;
+/* Converging Paths SVG */
+.converging-paths {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
 }
 
-.maple-leaves-fall {
-    display: none;
+.journey-path {
+    animation: pathFadeIn 2.5s ease forwards;
+}
+
+@keyframes pathFadeIn {
+    from {
+        opacity: 0;
+        stroke-dashoffset: 100;
+    }
+    to {
+        opacity: 0.5;
+        stroke-dashoffset: 0;
+    }
 }
 
 /* Journey Markers Container */
@@ -93,8 +113,8 @@
     z-index: 5;
 }
 
-/* Individual Journey Marker */
-.journey-marker {
+/* Domain Markers (Trees) */
+.domain-marker {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -102,11 +122,16 @@
     cursor: pointer;
     transition: all 0.3s ease;
     animation: markerAppear 0.8s ease forwards;
+    z-index: 10;
 }
 
-.journey-marker:hover {
+.domain-marker:hover {
     transform: translateY(-8px);
-    z-index: 10;
+    z-index: 15;
+}
+
+.domain-marker.landmark {
+    z-index: 12;
 }
 
 @keyframes markerAppear {
@@ -120,59 +145,223 @@
     }
 }
 
-/* Background Style Trees */
-.bg-style-tree {
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
-    transition: all 0.3s ease;
-    margin-bottom: 8px;
+/* Domain Nodes - Clean circles */
+.domain-node {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(250, 245, 240, 0.98));
+    border-radius: 50%;
+    border: 3px solid rgba(139, 115, 85, 0.25);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.12),
+        inset 0 2px 0 rgba(255, 255, 255, 1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.journey-marker:hover .bg-style-tree {
-    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.25));
-    transform: scale(1.05);
+.node-inner {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #C19A7A, #A8856B);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.bg-style-tree.special {
-    animation: subtleGlow 3s ease-in-out infinite;
+.domain-marker:hover .domain-node {
+    transform: scale(1.1) translateY(-4px);
+    border-color: rgba(139, 115, 85, 0.4);
+    box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.18),
+        inset 0 2px 0 rgba(255, 255, 255, 1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.06);
 }
 
-@keyframes subtleGlow {
+.domain-marker:hover .node-inner {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #D4A97D, #B89570);
+}
+
+/* Special Product Strategy Node */
+.domain-node.special {
+    width: 85px;
+    height: 85px;
+    background: linear-gradient(135deg, rgba(255, 245, 240, 1), rgba(255, 250, 245, 1));
+    border-color: rgba(232, 93, 68, 0.3);
+    box-shadow:
+        0 10px 30px rgba(232, 93, 68, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.domain-node.special .node-inner {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #E85D44, #D84D34);
+}
+
+.node-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid rgba(232, 93, 68, 0.4);
+    animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
     0%, 100% {
-        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+        transform: scale(1);
+        opacity: 1;
     }
     50% {
-        filter: drop-shadow(0 4px 12px rgba(232, 93, 68, 0.3));
+        transform: scale(1.15);
+        opacity: 0;
     }
+}
+
+.domain-marker.landmark:hover .domain-node.special {
+    transform: scale(1.08) translateY(-4px);
+    border-color: rgba(232, 93, 68, 0.5);
+    box-shadow:
+        0 14px 40px rgba(232, 93, 68, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.domain-marker.landmark:hover .node-inner {
+    transform: scale(1.12);
+    background: linear-gradient(135deg, #F86D54, #E85D44);
+}
+
+/* Roadblocks (Rocks) */
+.roadblock {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: rockAppear 1s ease forwards;
+    z-index: 8;
+}
+
+.roadblock:hover {
+    transform: translateY(-4px);
+    z-index: 11;
+}
+
+.roadblock.central {
+    z-index: 9;
+}
+
+@keyframes rockAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Roadblock Shapes - Minimal hexagons */
+.roadblock-shape {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(107, 84, 68, 0.2), rgba(90, 68, 52, 0.3));
+    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.roadblock:hover .roadblock-shape {
+    transform: scale(1.15) translateY(-3px);
+    background: linear-gradient(135deg, rgba(107, 84, 68, 0.3), rgba(90, 68, 52, 0.4));
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Roadblock Tooltip */
+.roadblock-tooltip {
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #3C2F23;
+    text-align: center;
+    background: rgba(255, 248, 240, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 8px 16px;
+    border-radius: 20px;
+    box-shadow: 0 3px 12px rgba(107, 84, 68, 0.2);
+    white-space: nowrap;
+    border: 1.5px solid rgba(139, 115, 85, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px);
+    transition: all 0.3s ease;
+    margin-top: 8px;
+    max-width: 220px;
+    white-space: normal;
+}
+
+.roadblock:hover .roadblock-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 
 /* Marker Label - Blended with background */
 .marker-label {
     font-family: var(--font-serif);
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #3C2F23;
     text-align: center;
-    background: rgba(255, 252, 245, 0.92);
-    backdrop-filter: blur(8px);
-    padding: 10px 20px;
-    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 12px 24px;
+    border-radius: 30px;
     box-shadow:
-        0 3px 12px rgba(107, 84, 68, 0.25),
-        inset 0 1px 2px rgba(255, 255, 255, 0.8);
+        0 4px 16px rgba(107, 84, 68, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
     white-space: nowrap;
-    border: 1.5px solid rgba(160, 120, 90, 0.3);
-    transition: all 0.3s ease;
+    border: 2px solid rgba(139, 115, 85, 0.2);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.journey-marker:hover .marker-label {
-    background: rgba(255, 255, 255, 0.98);
-    color: #3C2F23;
-    border-color: rgba(139, 115, 85, 0.5);
+.domain-marker:hover .marker-label {
+    background: rgba(255, 255, 255, 1);
+    color: #2C1F13;
+    border-color: rgba(139, 115, 85, 0.4);
     box-shadow:
-        0 6px 24px rgba(107, 84, 68, 0.35),
-        inset 0 1px 2px rgba(255, 255, 255, 0.9);
-    transform: scale(1.08) translateY(-5px);
+        0 8px 32px rgba(107, 84, 68, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+    transform: scale(1.05) translateY(-3px);
+}
+
+.marker-label.special {
+    background: linear-gradient(135deg, rgba(255, 240, 235, 0.98), rgba(255, 250, 245, 0.98));
+    border-color: rgba(232, 93, 68, 0.3);
+    box-shadow:
+        0 6px 20px rgba(232, 93, 68, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.domain-marker.landmark:hover .marker-label.special {
+    background: linear-gradient(135deg, rgba(255, 235, 225, 1), rgba(255, 245, 240, 1));
+    border-color: rgba(232, 93, 68, 0.5);
+    box-shadow:
+        0 10px 36px rgba(232, 93, 68, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 /* Project Popups */
@@ -183,6 +372,7 @@
     transform: translate(-50%, -50%);
     max-width: 580px;
     width: 92%;
+    max-height: 85vh;
     background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(25px);
     border-radius: 28px;
@@ -195,6 +385,8 @@
     transform: translate(-50%, -45%) scale(0.9);
     transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-popup.active {
@@ -216,17 +408,39 @@
     font-size: 1.9rem;
     font-weight: 600;
     margin: 0 0 10px 0;
+    color: white;
 }
 
 .popup-subtitle {
     font-size: 1.05rem;
     font-style: italic;
     margin: 0;
-    opacity: 0.95;
+    color: rgba(255, 250, 240, 0.9);
+    opacity: 1;
 }
 
 .popup-content {
     padding: 32px 36px 36px;
+    overflow-y: auto;
+    max-height: calc(85vh - 120px);
+}
+
+.popup-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+    background: rgba(232, 213, 196, 0.3);
+    border-radius: 10px;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+    background: var(--coffee);
+    border-radius: 10px;
+}
+
+.popup-content::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-coffee);
 }
 
 .popup-description {
@@ -252,31 +466,35 @@
     display: flex;
     gap: 18px;
     align-items: flex-start;
-    padding: 20px;
-    background: linear-gradient(135deg, rgba(139, 115, 85, 0.06), rgba(139, 115, 85, 0.14));
-    border-radius: 18px;
-    border-left: 5px solid var(--coffee);
-    transition: all 0.3s ease;
+    padding: 22px;
+    background: linear-gradient(135deg, rgba(139, 115, 85, 0.08), rgba(139, 115, 85, 0.12));
+    border-radius: 16px;
+    border-left: 4px solid var(--coffee);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .popup-project:hover {
-    background: linear-gradient(135deg, rgba(139, 115, 85, 0.14), rgba(139, 115, 85, 0.22));
-    transform: translateX(8px);
+    background: linear-gradient(135deg, rgba(139, 115, 85, 0.12), rgba(139, 115, 85, 0.18));
+    transform: translateX(6px);
+    border-left-width: 5px;
     border-left-color: var(--dark-coffee);
-    box-shadow: 0 6px 20px rgba(60, 47, 35, 0.12);
+    box-shadow: 0 8px 24px rgba(60, 47, 35, 0.15);
 }
 
 .project-emoji {
     flex-shrink: 0;
-    font-size: 2.2rem;
-    width: 54px;
-    height: 54px;
+    font-size: 2rem;
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 14px;
-    box-shadow: 0 5px 15px rgba(60, 47, 35, 0.12);
+    box-shadow:
+        0 4px 12px rgba(60, 47, 35, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    border: 1px solid rgba(139, 115, 85, 0.15);
 }
 
 .popup-project div {
@@ -303,26 +521,28 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
     .forest-road-scene {
-        min-height: 2200px;
+        min-height: 650px;
+        height: 75vh;
     }
 
-    .road-illustration {
-        max-width: 900px;
-    }
-
-    .artistic-tree {
-        width: 160px;
+    .domain-tree {
+        width: 70px;
         height: auto;
     }
 
-    .artistic-rock {
-        width: 120px;
+    .rock-svg {
+        width: 45px;
         height: auto;
     }
 
     .marker-label {
         font-size: 1.05rem;
         padding: 8px 16px;
+    }
+
+    .roadblock-tooltip {
+        font-size: 0.82rem;
+        max-width: 200px;
     }
 
     .project-popup {
@@ -337,46 +557,33 @@
     }
 
     .forest-road-scene {
-        min-height: 2600px;
-        padding: 0 20px 80px;
-    }
-
-    .road-illustration {
-        max-width: 750px;
+        min-height: 600px;
+        height: 70vh;
+        padding: 20px;
     }
 
     .journey-markers {
         padding: 0 10px;
     }
 
-    .journey-marker[style*="left: 15%"] {
-        left: 8% !important;
-    }
-
-    .journey-marker[style*="right: 18%"] {
-        right: 8% !important;
-    }
-
-    .journey-marker[style*="left: 12%"] {
-        left: 8% !important;
-    }
-
-    .journey-marker[style*="right: 15%"] {
-        right: 8% !important;
-    }
-
-    .artistic-tree {
-        width: 140px;
+    .domain-tree {
+        width: 65px;
         height: auto;
     }
 
-    .artistic-rock {
-        width: 100px;
+    .rock-svg {
+        width: 42px;
         height: auto;
     }
 
     .marker-label {
         font-size: 0.95rem;
+        padding: 7px 14px;
+    }
+
+    .roadblock-tooltip {
+        font-size: 0.8rem;
+        max-width: 180px;
         padding: 7px 14px;
     }
 
@@ -409,11 +616,6 @@
         width: 48px;
         height: 48px;
     }
-
-    .falling-maple-leaf {
-        width: 32px;
-        height: 32px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -422,22 +624,29 @@
     }
 
     .forest-road-scene {
-        min-height: 2800px;
+        min-height: 650px;
+        height: 85vh;
     }
 
-    .artistic-tree {
-        width: 120px;
+    .domain-tree {
+        width: 60px;
         height: auto;
     }
 
-    .artistic-rock {
-        width: 85px;
+    .rock-svg {
+        width: 40px;
         height: auto;
     }
 
     .marker-label {
         font-size: 0.88rem;
         padding: 6px 12px;
+    }
+
+    .roadblock-tooltip {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        max-width: 180px;
     }
 
     .popup-header h3 {
@@ -454,10 +663,5 @@
 
     .popup-project p {
         font-size: 0.9rem;
-    }
-
-    .falling-maple-leaf {
-        width: 28px;
-        height: 28px;
     }
 }

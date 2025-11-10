@@ -100,20 +100,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial cursor style
     updateCursorForSection();
 
+    // Navigation link hover preview
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            const targetSection = link.getAttribute('href').replace('#', '');
+            // Temporarily show cursor style for that section
+            applyCursorStyle(targetSection);
+            cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            follower.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        });
+
+        link.addEventListener('mouseleave', () => {
+            // Return to current section's cursor
+            applyCursorStyle(currentSection);
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            follower.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+    });
+
     // Hover effects on interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .work-card, .work-item, .project-card, .floating-word, .journey-marker, .project-popup');
+    const interactiveElements = document.querySelectorAll('a:not(.nav-link), button, .work-card, .work-item, .project-card, .floating-word, .domain-marker, .roadblock, .project-popup');
 
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
             follower.style.transform = 'translate(-50%, -50%) scale(1.5)';
-            follower.style.borderColor = 'var(--coffee)';
         });
 
         el.addEventListener('mouseleave', () => {
             cursor.style.transform = 'translate(-50%, -50%) scale(1)';
             follower.style.transform = 'translate(-50%, -50%) scale(1)';
-            follower.style.borderColor = 'var(--coffee)';
         });
     });
 

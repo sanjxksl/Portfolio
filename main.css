@@ -11,17 +11,18 @@
     --coffee: #8B7355;
     --dark-coffee: #5C4A3A;
     --espresso: #3C2F23;
-    
-    /* Accent Pastels */
+
+    /* Accent Colors */
     --peach: #F4D9C6;
     --sage: #C9D1C8;
     --mauve: #D4C4D8;
     --powder-blue: #C8D5E0;
-    
+    --maple-orange: #E67E50;
+
     /* Typography */
     --font-serif: 'Cormorant Garamond', serif;
     --font-sans: 'Inter', sans-serif;
-    
+
     /* Spacing */
     --section-padding: 120px;
     --container-padding: 60px;
@@ -98,7 +99,7 @@ a {
 .cursor {
     width: 20px;
     height: 20px;
-    border: 2px solid var(--coffee);
+    border: 2px solid var(--maple-orange);
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
@@ -114,7 +115,7 @@ a {
 .cursor-follower {
     width: 8px;
     height: 8px;
-    background: var(--coffee);
+    background: var(--maple-orange);
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
@@ -128,14 +129,14 @@ a {
 .cursor svg {
     width: 16px;
     height: 16px;
-    fill: var(--coffee);
+    fill: var(--maple-orange);
 }
 
 .cursor-initials {
     font-family: var(--font-serif);
     font-size: 10px;
     font-weight: 600;
-    color: var(--coffee);
+    color: var(--maple-orange);
 }
 
 .cursor-work {

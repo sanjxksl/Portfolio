@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="hero.css">
     <link rel="stylesheet" href="work.css">
     <link rel="stylesheet" href="learning.css">
+    <link rel="stylesheet" href="about.css">
+    <link rel="stylesheet" href="footer-education.css">
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -80,7 +82,7 @@
             <div class="work-grid">
                 <article class="work-card" data-project="aesthify">
                     <div class="work-image">
-                        <img src="assets/images/aesthify.jpg" alt="Aesthify Visuals">
+                        <video src="assets/work/aesthify.mp4" alt="Aesthify Visuals" controls muted loop autoplay></video>
                     </div>
                     <div class="work-info">
                         <h3>Understanding what users actually want before designing anything</h3>
@@ -95,7 +97,7 @@
 
                 <article class="work-card" data-project="US Income Prediction">
                     <div class="work-image">
-                        <img src="assets/images/us-income.jpg" alt="US Income Prediction Visuals">
+                        <img src="assets/work/us-income.jpg" alt="US Income Prediction Visuals">
                     </div>
                     <div class="work-info">
                         <h3>Neural network for income prediction</h3>
@@ -114,19 +116,21 @@
         <section class="gallery-section">
             <div class="gallery-scroll">
                 <div class="gallery-track">
-                    <div class="gallery-item"><img src="assets/images/exp-1.jpg" alt="Experience"></div>
-                    <div class="gallery-item"><img src="assets/images/exp-2.jpg" alt="Experience"></div>
-                    <div class="gallery-item"><img src="assets/images/exp-3.jpg" alt="Experience"></div>
-                    <div class="gallery-item"><img src="assets/images/exp-4.jpg" alt="Experience"></div>
-                    <div class="gallery-item"><img src="assets/images/exp-5.jpg" alt="Experience"></div>
-                    <div class="gallery-item"><img src="assets/images/exp-6.jpg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-1.jpeg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-2.jpeg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-3.jpeg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-4.jpeg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-5.jpeg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-6.jpeg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-7.jpeg" alt="Experience"></div>
                     <!-- Duplicated for infinite scroll -->
-                    <div class="gallery-item"><img src="assets/images/exp-1.jpg" alt="Experience"></div>
-                    <div class="gallery-item"><img src="assets/images/exp-2.jpg" alt="Experience"></div>
-                    <div class="gallery-item"><img src="assets/images/exp-3.jpg" alt="Experience"></div>
-                    <div class="gallery-item"><img src="assets/images/exp-4.jpg" alt="Experience"></div>
-                    <div class="gallery-item"><img src="assets/images/exp-5.jpg" alt="Experience"></div>
-                    <div class="gallery-item"><img src="assets/images/exp-6.jpg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-1.jpeg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-2.jpeg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-3.jpeg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-4.jpeg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-5.jpeg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-6.jpeg" alt="Experience"></div>
+                    <div class="gallery-item"><img src="assets/images/exp-7.jpeg" alt="Experience"></div>
                 </div>
             </div>
         </section>
@@ -257,98 +261,87 @@
     <section id="learning" class="page">
         <div class="learning-hero">
             <blockquote class="frost-quote">
-                "Two roads diverged in a wood, and I—<br>
-                I took the one less traveled by,<br>
-                And that has made all the difference."
+                "Two roads diverged in a wood, and I took both,<br>
+                then built a bridge between them."
                 <footer>— Robert Frost, <cite>The Road Not Taken</cite></footer>
             </blockquote>
         </div>
 
-        <!-- Canadian Fall Forest Road Journey -->
+        <!-- Converging Paths Journey -->
         <div class="forest-road-scene">
-            <!-- Minimal Road SVG -->
-            <svg class="road-illustration" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
-                <!-- Clean winding road -->
-                <path class="road-body"
-                      d="M 440 0
-                         Q 430 150, 445 300
-                         Q 460 450, 500 600
-                         L 540 600
-                         Q 500 450, 485 300
-                         Q 470 150, 460 0
-                         Z"
-                      fill="#6B5444"
-                      stroke="none"/>
+            <!-- SVG Paths Converging to Center -->
+            <svg class="converging-paths" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet">
+                <!-- Path from Engineering (bottom-left) to Product (center) -->
+                <path class="journey-path" d="M 200 700 Q 350 500, 600 400"
+                      fill="none" stroke="#B8A594" stroke-width="2.5" opacity="0.3"/>
 
-                <!-- Center dashed line -->
-                <path class="road-centerline"
-                      d="M 450 0 Q 445 150 455 300 Q 465 450 520 600"
-                      fill="none"
-                      stroke="#F5E6D3"
-                      stroke-width="3"
-                      stroke-dasharray="40 30"
-                      stroke-linecap="round"
-                      opacity="0.9"/>
+                <!-- Path from Design (bottom-right) to Product (center) -->
+                <path class="journey-path" d="M 1000 700 Q 850 500, 600 400"
+                      fill="none" stroke="#B8A594" stroke-width="2.5" opacity="0.3"/>
+
+                <!-- Path from Analytics (top-left) to Product (center) -->
+                <path class="journey-path" d="M 200 100 Q 350 250, 600 400"
+                      fill="none" stroke="#B8A594" stroke-width="2.5" opacity="0.3"/>
             </svg>
 
-            <!-- Animated Falling Maple Leaves (SVG) - More subtle -->
-            <div class="maple-leaves-fall">
-                <svg class="falling-maple-leaf" style="left: 10%; animation-delay: 0s;" width="28" height="28" viewBox="0 0 40 40">
-                    <path d="M20 5 L22 15 L30 10 L25 18 L35 20 L25 22 L30 30 L22 25 L20 35 L18 25 L10 30 L15 22 L5 20 L15 18 L10 10 L18 15 Z"
-                          fill="#D2691E" stroke="#8B4513" stroke-width="0.5" opacity="0.7"/>
-                </svg>
-                <svg class="falling-maple-leaf" style="left: 85%; animation-delay: 2s;" width="26" height="26" viewBox="0 0 40 40">
-                    <path d="M20 5 L22 15 L30 10 L25 18 L35 20 L25 22 L30 30 L22 25 L20 35 L18 25 L10 30 L15 22 L5 20 L15 18 L10 10 L18 15 Z"
-                          fill="#FF6347" stroke="#8B4513" stroke-width="0.5" opacity="0.7"/>
-                </svg>
-                <svg class="falling-maple-leaf" style="left: 50%; animation-delay: 4s;" width="30" height="30" viewBox="0 0 40 40">
-                    <path d="M20 5 L22 15 L30 10 L25 18 L35 20 L25 22 L30 30 L22 25 L20 35 L18 25 L10 30 L15 22 L5 20 L15 18 L10 10 L18 15 Z"
-                          fill="#FF8C00" stroke="#8B4513" stroke-width="0.5" opacity="0.7"/>
-                </svg>
-            </div>
-
-            <!-- Journey Markers - Positioned on background image -->
+            <!-- Domain Markers -->
             <div class="journey-markers">
-                <!-- Marker 1: Engineering Foundation (Bottom Left) - With tree -->
-                <div class="journey-marker tree-marker" data-marker="engineering" style="bottom: 15%; left: 15%;">
-                    <svg class="bg-style-tree" width="60" height="75" viewBox="0 0 60 75">
-                        <rect x="25" y="50" width="10" height="25" fill="#6B5444" rx="2"/>
-                        <circle cx="30" cy="32" r="24" fill="#E67E50"/>
-                        <circle cx="18" cy="40" r="18" fill="#D96E40"/>
-                        <circle cx="42" cy="40" r="18" fill="#F28E60"/>
-                    </svg>
+                <!-- Domain 1: Engineering Foundation (Bottom Left) -->
+                <div class="domain-marker" data-domain="engineering" style="bottom: 8%; left: 12%;">
+                    <div class="domain-node">
+                        <div class="node-inner"></div>
+                    </div>
                     <div class="marker-label">Engineering Foundation</div>
                 </div>
 
-                <!-- Marker 2: Design Thinking (Bottom Right) - With trees -->
-                <div class="journey-marker tree-marker" data-marker="design" style="bottom: 20%; right: 15%;">
-                    <svg class="bg-style-tree" width="65" height="75" viewBox="0 0 70 75">
-                        <rect x="14" y="50" width="8" height="25" fill="#6B5444" rx="2"/>
-                        <rect x="48" y="50" width="8" height="25" fill="#6B5444" rx="2"/>
-                        <circle cx="18" cy="35" r="20" fill="#C85A3E"/>
-                        <circle cx="10" cy="42" r="14" fill="#B84A2E"/>
-                        <circle cx="26" cy="42" r="14" fill="#D86A4E"/>
-                        <circle cx="52" cy="35" r="20" fill="#A84A2E"/>
-                        <circle cx="44" cy="42" r="14" fill="#984020"/>
-                        <circle cx="60" cy="42" r="14" fill="#C85A3E"/>
-                    </svg>
+                <!-- Domain 2: Design Thinking (Bottom Right) -->
+                <div class="domain-marker" data-domain="design" style="bottom: 8%; right: 12%;">
+                    <div class="domain-node">
+                        <div class="node-inner"></div>
+                    </div>
                     <div class="marker-label">Design Thinking</div>
                 </div>
 
-                <!-- Marker 3: Data & Analytics (Top Left) - Already has trees in background -->
-                <div class="journey-marker tree-marker" data-marker="analytics" style="top: 25%; left: 18%;">
+                <!-- Domain 3: Data & Analytics (Top Left) -->
+                <div class="domain-marker" data-domain="analytics" style="top: 8%; left: 12%;">
+                    <div class="domain-node">
+                        <div class="node-inner"></div>
+                    </div>
                     <div class="marker-label">Data & Analytics</div>
                 </div>
 
-                <!-- Marker 4: Product Strategy (Top Right) - With special tree -->
-                <div class="journey-marker tree-marker landmark" data-marker="product" style="top: 15%; right: 20%;">
-                    <svg class="bg-style-tree special" width="60" height="75" viewBox="0 0 60 75">
-                        <rect x="25" y="50" width="10" height="25" fill="#6B5444" rx="2"/>
-                        <circle cx="30" cy="30" r="26" fill="#E85D44"/>
-                        <circle cx="17" cy="38" r="19" fill="#D84D34"/>
-                        <circle cx="43" cy="38" r="19" fill="#F86D54"/>
-                    </svg>
-                    <div class="marker-label">Product Strategy</div>
+                <!-- Domain 4: Product Strategy (Center) - Special landmark -->
+                <div class="domain-marker landmark" data-domain="product" style="top: 45%; left: 50%; transform: translate(-50%, -50%);">
+                    <div class="domain-node special">
+                        <div class="node-inner"></div>
+                        <div class="node-pulse"></div>
+                    </div>
+                    <div class="marker-label special">Product Strategy</div>
+                </div>
+
+                <!-- Roadblocks (Simple geometric shapes) -->
+                <!-- Rock 1: Between Engineering and Product -->
+                <div class="roadblock" data-roadblock="eng-product" style="bottom: 30%; left: 25%;">
+                    <div class="roadblock-shape"></div>
+                    <div class="roadblock-tooltip">"But engineers don't do user research"</div>
+                </div>
+
+                <!-- Rock 2: Between Design and Product -->
+                <div class="roadblock" data-roadblock="design-product" style="bottom: 30%; right: 25%;">
+                    <div class="roadblock-shape"></div>
+                    <div class="roadblock-tooltip">"You can't quantify aesthetics"</div>
+                </div>
+
+                <!-- Rock 3: Between Analytics and Product -->
+                <div class="roadblock" data-roadblock="analytics-product" style="top: 25%; left: 32%;">
+                    <div class="roadblock-shape"></div>
+                    <div class="roadblock-tooltip">"Pick a lane: technical or business"</div>
+                </div>
+
+                <!-- Rock 4: Central challenge -->
+                <div class="roadblock central" data-roadblock="central" style="top: 55%; left: 50%; transform: translate(-50%, -50%);">
+                    <div class="roadblock-shape"></div>
+                    <div class="roadblock-tooltip">"Product managers don't code"</div>
                 </div>
             </div>
 
@@ -356,25 +349,29 @@
             <div class="project-popup" id="popup-engineering">
                 <div class="popup-header">
                     <h3>Engineering Foundation</h3>
-                    <p class="popup-subtitle">Where it all began</p>
+                    <p class="popup-subtitle">Where I learned to build things</p>
                 </div>
                 <div class="popup-content">
-                    <p class="popup-description">
-                        Mechanical Engineering - Building things, understanding systems. Learning that creating products means understanding both what's technically possible and what people need.
-                    </p>
                     <div class="popup-projects">
                         <div class="popup-project">
                             <span class="project-emoji">🔧</span>
                             <div>
                                 <strong>Mining Safety Haptic Glove</strong>
-                                <p>Gesture-controlled haptic system for mining safety. Led stakeholder research and pivoted from inner-braces to glove-based solution.</p>
+                                <p>Stakeholder research revealed miners needed hands-free safety communication. Pivoted from inner-braces to glove-based haptic feedback system after field interviews.</p>
                             </div>
                         </div>
                         <div class="popup-project">
                             <span class="project-emoji">🖨️</span>
                             <div>
-                                <strong>Printing Press Operational Analysis</strong>
-                                <p>Ethnographic research identifying bottlenecks in print shop workflows. Proposed automated systems to reduce operator load.</p>
+                                <strong>Printing Press Workflow Optimization</strong>
+                                <p>Observed print shop operations to identify bottlenecks operators couldn't articulate. Proposed automated loading systems to reduce operator fatigue.</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">⚙️</span>
+                            <div>
+                                <strong>Mechanical Engineering Core</strong>
+                                <p>CAD, thermodynamics, manufacturing processes. Built technical foundation for understanding how systems work and fail.</p>
                             </div>
                         </div>
                     </div>
@@ -384,25 +381,29 @@
             <div class="project-popup" id="popup-design">
                 <div class="popup-header">
                     <h3>Design Thinking</h3>
-                    <p class="popup-subtitle">Understanding people</p>
+                    <p class="popup-subtitle">Where I learned to ask "why"</p>
                 </div>
                 <div class="popup-content">
-                    <p class="popup-description">
-                        User research, prototyping, human-centered design. Discovered I loved understanding <em>why</em> people wanted things more than <em>how</em> things worked.
-                    </p>
                     <div class="popup-projects">
                         <div class="popup-project">
                             <span class="project-emoji">🎯</span>
                             <div>
-                                <strong>Aesthify: Design Intelligence Platform</strong>
-                                <p>Built framework quantifying aesthetic principles. User study with 101 participants revealed simplicity drives preference.</p>
+                                <strong>Aesthify: ML-Powered Design Framework</strong>
+                                <p>Built framework to quantify aesthetic preferences using computer vision. Study with 101 participants revealed simplicity drives preference over symmetry. Open-sourced for design researchers.</p>
                             </div>
                         </div>
                         <div class="popup-project">
                             <span class="project-emoji">📱</span>
                             <div>
-                                <strong>Headspace Heuristic Evaluation</strong>
-                                <p>Applied Jakob Nielsen's 10 heuristics across 5 core screens, identifying 47 usability issues with actionable recommendations.</p>
+                                <strong>Headspace App Usability Audit</strong>
+                                <p>Applied Nielsen's 10 heuristics across 5 core screens. Identified 47 usability issues with prioritized recommendations for meditation app improvement.</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">👥</span>
+                            <div>
+                                <strong>User Research & Field Studies</strong>
+                                <p>Process mapping, contextual interviews, behavioral observation. Learning to find what users need but don't say.</p>
                             </div>
                         </div>
                     </div>
@@ -412,25 +413,36 @@
             <div class="project-popup" id="popup-analytics">
                 <div class="popup-header">
                     <h3>Data & Analytics</h3>
-                    <p class="popup-subtitle">Making decisions with evidence</p>
+                    <p class="popup-subtitle">Where I learned numbers tell stories</p>
                 </div>
                 <div class="popup-content">
-                    <p class="popup-description">
-                        Python, ML, statistical modeling, business intelligence. Learning to let data guide intuition, not replace it.
-                    </p>
                     <div class="popup-projects">
+                        <div class="popup-project">
+                            <span class="project-emoji">🧠</span>
+                            <div>
+                                <strong>Income Prediction Neural Network</strong>
+                                <p>Built 2-layer neural network on Census data. Achieved 85.6% accuracy using ensemble of 5 k-fold models with optimized decision thresholds for class imbalance.</p>
+                            </div>
+                        </div>
                         <div class="popup-project">
                             <span class="project-emoji">🎓</span>
                             <div>
-                                <strong>Alumni Career Success Prediction</strong>
-                                <p>Analyzed 3,300+ alumni records, built Random Forest models for salary prediction and career path classification.</p>
+                                <strong>Alumni Career Trajectory Analysis</strong>
+                                <p>Cleaned and analyzed 3,300+ fragmented alumni records. Built Random Forest models for salary prediction and career path classification to inform curriculum development.</p>
                             </div>
                         </div>
                         <div class="popup-project">
                             <span class="project-emoji">🏠</span>
                             <div>
-                                <strong>Summer Home Recommender System</strong>
-                                <p>Built recommendation system for vacation properties using collaborative filtering and user preference analysis.</p>
+                                <strong>Vacation Property Recommender</strong>
+                                <p>Built recommendation system using collaborative filtering and user preference analysis for summer home matching.</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">📊</span>
+                            <div>
+                                <strong>Statistical Modeling & Analysis</strong>
+                                <p>Regression, hypothesis testing, experimental design. Learning when data supports decisions and when it doesn't.</p>
                             </div>
                         </div>
                     </div>
@@ -439,26 +451,37 @@
 
             <div class="project-popup" id="popup-product">
                 <div class="popup-header">
-                    <h3>Product Strategy</h3>
-                    <p class="popup-subtitle">Where everything converges</p>
+                    <h3>Product & Strategy</h3>
+                    <p class="popup-subtitle">Where everything connects</p>
                 </div>
                 <div class="popup-content">
-                    <p class="popup-description">
-                        Building products at the intersection of technical possibility, user needs, and business goals. This is where the journey leads.
-                    </p>
                     <div class="popup-projects">
                         <div class="popup-project">
                             <span class="project-emoji">🏢</span>
                             <div>
                                 <strong>TATA Semiconductor Market Entry Strategy</strong>
-                                <p>Analyzed TATA's entry into India's semiconductor market through competitive analysis of 22 global players.</p>
+                                <p>Analyzed India's semiconductor opportunity for TATA Group. Competitive analysis of 22 global players, market sizing, and multi-phase roadmap from foundry acquisition to market expansion.</p>
                             </div>
                         </div>
                         <div class="popup-project">
                             <span class="project-emoji">🌊</span>
                             <div>
-                                <strong>HyperHorizon Go-to-Market Strategy</strong>
-                                <p>Led competitive analysis for autonomous underwater vehicle, secured CAD 100K+ through strategic positioning.</p>
+                                <strong>HyperHorizon Product Strategy</strong>
+                                <p>Led GTM strategy for autonomous underwater vehicle. Ethnographic research with government agencies validated product assumptions. Secured CAD 100K+ funding through competitive positioning and business cases.</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">💼</span>
+                            <div>
+                                <strong>Alumni CRM Migration & Automation</strong>
+                                <p>Migrated 1,270+ alumni records across 20+ countries to modern CRM. Automated grant approval workflows, achieving 57% growth in participation and 10% improvement in data accuracy.</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">🩸</span>
+                            <div>
+                                <strong>Red Ribbon Society (Founder)</strong>
+                                <p>Founded campus health initiative from zero. Organized 4 blood donation camps serving 300+ participants with 161 donors in inaugural event. Built sustainable operations model.</p>
                             </div>
                         </div>
                     </div>
@@ -471,19 +494,19 @@
     <section id="about" class="page">
         <div class="about-hero">
             <div class="about-image-container">
-                <img src="assets/images/sanjana-headshot.jpg" alt="Sanjana Kanchibotla" class="about-image">
+                <img src="assets/images/sanjana-headshot.jpeg" alt="Sanjana Kanchibotla" class="about-image">
             </div>
 
             <!-- Floating Words -->
             <div class="floating-words">
-                <span class="floating-word" data-fact="poetry" style="left: 15%; top: 20%;">poetry</span>
-                <span class="floating-word" data-fact="dance" style="left: 70%; top: 15%;">dance</span>
-                <span class="floating-word" data-fact="coffee" style="left: 10%; top: 60%;">coffee</span>
-                <span class="floating-word" data-fact="organize" style="left: 75%; top: 65%;">organize</span>
-                <span class="floating-word" data-fact="overthink" style="left: 20%; top: 80%;">overthink</span>
-                <span class="floating-word" data-fact="curious" style="left: 80%; top: 35%;">curious</span>
-                <span class="floating-word" data-fact="books" style="left: 65%; top: 80%;">books</span>
-                <span class="floating-word" data-fact="analytics" style="left: 40%; top: 10%;">analytics</span>
+                <span class="floating-word" data-fact="curious" style="left: 15%; top: 20%;">curious</span>
+                <span class="floating-word" data-fact="overthink" style="left: 70%; top: 15%;">overthink</span>
+                <span class="floating-word" data-fact="poetry" style="left: 10%; top: 60%;">poetry</span>
+                <span class="floating-word" data-fact="dance" style="left: 75%; top: 65%;">dance</span>
+                <span class="floating-word" data-fact="coffee" style="left: 20%; top: 80%;">coffee</span>
+                <span class="floating-word" data-fact="organize" style="left: 80%; top: 35%;">organize</span>
+                <span class="floating-word" data-fact="question" style="left: 65%; top: 80%;">question</span>
+                <span class="floating-word" data-fact="bridge" style="left: 40%; top: 10%;">bridge</span>
             </div>
 
             <!-- Tooltip -->
@@ -493,20 +516,44 @@
         <div class="about-content">
             <div class="about-section">
                 <p class="about-text">
-                    I build products by connecting what's technically possible with what users actually need. I believe good products come from understanding technical limits, user behavior, business goals, and finding solutions that work within all of them. I write Python, design in Figma, and lead stakeholder conversations because product work requires moving between all of them.
+                    I'm currently at Rotman's Management Analytics program, learning to turn data into product decisions. I write Python, build ML models, and design in Figma because product work means moving between all of them. Right now, I'm figuring out how to use analytics not just to measure what happened, but to understand what should happen next.
                 </p>
-                
+
                 <p class="about-text">
-                    Currently at Rotman's Management Analytics program, learning to use data to make better product decisions. Before this, I spent four years in India studying mechanical engineering and discovering I loved understanding why people wanted things more than how things worked. That curiosity led me through product design, then analytics, and now I'm figuring out how they all fit together.
+                    I spent four years studying mechanical engineering in India, thinking I'd design machines. Somewhere along the way, I realized I cared more about why people wanted things than how things worked. That led me to product design, then to data analytics, and now I'm trying to connect all of it. The path wasn't linear, and I definitely didn't have it figured out at 18.
                 </p>
-                
+
                 <p class="about-text">
-                    I overthink everything—it's both my superpower and my curse. I'll spend hours mapping out edge cases, user flows, and failure modes before writing a single line of code. Some call it analysis paralysis; I call it making sure I'm solving the right problem. The overthinking thing? It's a feature, not a bug.
+                    I build products by asking questions first. Every project starts with understanding the problem space before touching code. It takes longer upfront, but I'd rather spend time thinking through edge cases than fixing broken assumptions later.
                 </p>
-                
+
                 <p class="about-text">
-                    When I'm not building products or analyzing data, I'm either writing poetry for friends (used to publish, now I just write for people I care about), organizing my life in Notion with probably too many databases, or finding new coffee shops in Toronto where I can sit with a book and just think.
+                    Outside of work, I move between creative outlets that keep me grounded. What matters most is finding ways to think differently, whether that's through movement, words, or just sitting with an idea until it makes sense.
                 </p>
+            </div>
+
+            <div class="education-section">
+                <h3 class="section-heading">Education</h3>
+
+                <div class="education-item">
+                    <div class="edu-header">
+                        <h4>University of Toronto</h4>
+                        <span class="edu-year">2026</span>
+                    </div>
+                    <p class="edu-program">Rotman School of Management · Master of Management Analytics</p>
+                    <p class="edu-description">Learning to turn data into decisions</p>
+                    <p class="edu-involvement">Graduate Ambassador, Business Design Club</p>
+                </div>
+
+                <div class="education-item">
+                    <div class="edu-header">
+                        <h4>IIIT Design & Manufacturing Kancheepuram</h4>
+                        <span class="edu-year">2025</span>
+                    </div>
+                    <p class="edu-program">B.Tech in Mechanical Engineering · Minor in Product Design</p>
+                    <p class="edu-description">Where I learned to build things and question why they should exist</p>
+                    <p class="edu-involvement">Alumni Affairs Secretary, MaRS Society, Footlights, NCC</p>
+                </div>
             </div>
         </div>
     </section>
@@ -515,23 +562,29 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-header">
-                <h2>Let's Connect</h2>
-                <p>Where patterns meet poetry</p>
+                <h2>Connect with me</h2>
+                <p>Let's build something that matters</p>
             </div>
 
-            <div class="footer-grid">
+            <div class="footer-main">
                 <div class="footer-info">
-                    <h3>Sanjana Kanchibotla</h3>
-                    <a href="mailto:sanjana.kanchibotla@rotman.utoronto.ca">sanjana.kanchibotla@rotman.utoronto.ca</a>
-                    <a href="tel:+14164276330">(416) 427-6330</a>
+                    <p class="footer-name">Sanjana Kanchibotla</p>
+                    <a href="mailto:sanjanakanchibotla@gmail.com" class="footer-email">sanjanakanchibotla@gmail.com</a>
                 </div>
 
-                <form class="contact-form">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea placeholder="What's on your mind?" rows="4" required></textarea>
-                    <button type="submit">Send Message</button>
+                <div class="footer-divider"></div>
+
+                <form class="contact-form" action="mailto:sanjanakanchibotla@gmail.com" method="post" enctype="text/plain">
+                    <p class="form-label">Drop a message</p>
+                    <input type="text" name="name" placeholder="Name (optional)">
+                    <input type="email" name="email" placeholder="Email (optional)">
+                    <textarea name="message" placeholder="Your message" rows="3" required></textarea>
+                    <button type="submit">Send</button>
                 </form>
+            </div>
+
+            <div class="footer-copyright">
+                <p>© 2025 · Crafted with caffeine and curiosity</p>
             </div>
         </div>
     </footer>

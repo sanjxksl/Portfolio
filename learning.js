@@ -1,35 +1,35 @@
 // ==========================================
-// LEARNING PAGE - Fall Forest Road
-// Hover interactions for trees and rocks
+// LEARNING PAGE - Converging Paths Journey
+// Hover interactions for domains (trees) and roadblocks (rocks)
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    initMarkerHoverInteractions();
+    initDomainHoverInteractions();
 });
 
-// Marker hover interactions
-function initMarkerHoverInteractions() {
-    const markers = document.querySelectorAll('.journey-marker');
+// Domain marker hover interactions
+function initDomainHoverInteractions() {
+    const domainMarkers = document.querySelectorAll('.domain-marker');
     const popups = document.querySelectorAll('.project-popup');
     let activePopup = null;
     let hoverTimeout = null;
 
-    // Mapping between markers and their popups
-    const markerPopupMap = {
+    // Mapping between domain markers and their popups
+    const domainPopupMap = {
         'engineering': 'popup-engineering',
         'design': 'popup-design',
         'analytics': 'popup-analytics',
         'product': 'popup-product'
     };
 
-    markers.forEach(marker => {
-        const markerType = marker.getAttribute('data-marker');
-        const popupId = markerPopupMap[markerType];
+    domainMarkers.forEach(marker => {
+        const domainType = marker.getAttribute('data-domain');
+        const popupId = domainPopupMap[domainType];
         const popup = document.getElementById(popupId);
 
         if (!popup) return;
 
-        // Show popup on marker hover
+        // Show popup on domain marker hover
         marker.addEventListener('mouseenter', () => {
             // Clear any pending hide timeout
             if (hoverTimeout) {
@@ -96,7 +96,7 @@ function initMarkerHoverInteractions() {
 
     // Close popup when clicking outside
     document.addEventListener('click', (e) => {
-        if (activePopup && !e.target.closest('.project-popup') && !e.target.closest('.journey-marker')) {
+        if (activePopup && !e.target.closest('.project-popup') && !e.target.closest('.domain-marker')) {
             activePopup.classList.remove('active');
             activePopup = null;
         }
