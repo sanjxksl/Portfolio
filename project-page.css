@@ -1,0 +1,239 @@
+/* ==========================================
+   PROJECT PAGE
+   Individual project detail pages
+   ========================================== */
+
+.project-page {
+    padding: calc(var(--section-padding) + 80px) 0 var(--section-padding);
+    min-height: 100vh;
+}
+
+.project-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* Header */
+.project-header {
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 2px solid var(--soft-beige);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--coffee);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 32px;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--espresso);
+    transform: translateX(-4px);
+}
+
+.project-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--espresso);
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.project-company {
+    font-size: 1.5rem;
+    color: var(--coffee);
+    font-style: italic;
+    margin-bottom: 8px;
+}
+
+.project-date {
+    font-size: 1.1rem;
+    color: var(--dark-coffee);
+    opacity: 0.7;
+    margin-bottom: 24px;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.project-tags .tag {
+    padding: 8px 18px;
+    background: rgba(139, 115, 85, 0.1);
+    border: 1px solid rgba(139, 115, 85, 0.2);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--coffee);
+    font-weight: 500;
+}
+
+/* Content */
+.project-content {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.content-section {
+    margin-bottom: 48px;
+}
+
+.content-section h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--espresso);
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.content-section h3 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    color: var(--dark-coffee);
+    margin-bottom: 16px;
+    margin-top: 32px;
+}
+
+.content-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--dark-coffee);
+    margin-bottom: 20px;
+}
+
+.content-section ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 24px;
+}
+
+.content-section ul li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--dark-coffee);
+}
+
+.content-section ul li::before {
+    content: '•';
+    position: absolute;
+    left: 8px;
+    color: var(--maple-orange);
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+
+.content-section strong {
+    color: var(--espresso);
+    font-weight: 600;
+}
+
+/* Highlight Section */
+.content-section.highlight {
+    background: var(--soft-beige);
+    padding: 32px 36px;
+    border-radius: 16px;
+    border-left: 4px solid var(--maple-orange);
+}
+
+.content-section.highlight h2 {
+    margin-top: 0;
+}
+
+/* Link Styles */
+.project-github {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--espresso);
+    color: var(--cream);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+    cursor: none;
+}
+
+.project-github:hover {
+    background: var(--coffee);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(60, 47, 35, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .project-page {
+        padding: calc(var(--section-padding) + 60px) 0 var(--section-padding);
+    }
+
+    .project-header {
+        margin-bottom: 48px;
+        padding-bottom: 32px;
+    }
+
+    .project-title {
+        font-size: 2.5rem;
+    }
+
+    .project-company {
+        font-size: 1.3rem;
+    }
+
+    .content-section h2 {
+        font-size: 2rem;
+    }
+
+    .content-section h3 {
+        font-size: 1.5rem;
+    }
+
+    .content-section p,
+    .content-section ul li {
+        font-size: 1.05rem;
+    }
+
+    .content-section.highlight {
+        padding: 28px 24px;
+    }
+
+    .project-github {
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 480px) {
+    .back-link {
+        margin-bottom: 24px;
+    }
+
+    .project-tags .tag {
+        padding: 6px 14px;
+        font-size: 0.85rem;
+    }
+
+    .content-section.highlight {
+        padding: 24px 20px;
+    }
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashok Leyland - Product Intern | Sanjana Kanchibotla</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="project-page.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="nav-content">
+            <a href="index.html#home" class="nav-brand">Sanjana Kanchibotla</a>
+            <div class="nav-location">Toronto, ON</div>
+            <div class="nav-menu">
+                <a href="index.html#work" class="nav-link">Work</a>
+                <a href="index.html#learning" class="nav-link">Learning</a>
+                <a href="index.html#about" class="nav-link">About</a>
+            </div>
+            <div class="nav-socials">
+                <a href="https://github.com/sanjxksl" target="_blank" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com/in/sanjanaksl" target="_blank" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="project-page">
+        <div class="project-container">
+            <!-- Header -->
+            <header class="project-header">
+                <a href="index.html#work" class="back-link">← Back to Work</a>
+                <h1 class="project-title">Product Intern</h1>
+                <p class="project-company">Ashok Leyland</p>
+                <p class="project-date">Jul 2024 - Sep 2024</p>
+                <div class="project-tags">
+                    <span class="tag">Data Analytics</span>
+                    <span class="tag">Automation</span>
+                    <span class="tag">Product Strategy</span>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="project-content">
+                <section class="content-section">
+                    <h2>The Problem</h2>
+                    <p>Testing engines is expensive. Every physical test requires setting up the engine on a test bed, running it for hours, burning fuel, and having engineers monitor instrumentation. The R&D team needed a way to predict how engines would perform under different conditions without running all those tests.</p>
+                </section>
+
+                <section class="content-section">
+                    <h2>What I Did</h2>
+
+                    <h3>Built a simulation model from scratch</h3>
+                    <p>I used GT Suite (GT Power) to build a thermodynamic model of the H64v engine - a 6-cylinder, 4-valve commercial diesel engine in 250 HP and 280 HP configurations. This meant modeling the entire system: turbochargers, intercoolers, EGR systems, fuel injection, exhaust manifolds, everything.</p>
+
+                    <h3>Calibrated it against real test data</h3>
+                    <p>I validated the model in two ways. For steady-state conditions (constant speed and load), I tested full throttle across 800-2600 RPM and part throttle at 10 different load points. For transient conditions (changing speeds and loads), I validated against real duty cycles like T90, Sweep, Lug, and WHTC. The trick was matching the simulation to actual test bed measurements at critical points.</p>
+
+                    <h3>Ran parametric studies</h3>
+                    <p>Once the model was accurate, I tested variables like compression ratios, valve lifts, and injection timing to see their impact on power and efficiency. This helped the team make design decisions for the 280 HP variant without physically building and testing every configuration.</p>
+                </section>
+
+                <section class="content-section highlight">
+                    <h2>Results</h2>
+                    <p><strong>Steady-state accuracy:</strong></p>
+                    <ul>
+                        <li>Brake torque within ±3%</li>
+                        <li>Boost pressure within ±0.2 bar</li>
+                        <li>Fuel consumption within ±5%</li>
+                        <li>Overall accuracy >97% across all parameters</li>
+                    </ul>
+
+                    <p><strong>Transient accuracy:</strong></p>
+                    <ul>
+                        <li>T90 timing within 0.3 seconds</li>
+                        <li>Torque and fuel consumption within ±4%</li>
+                    </ul>
+
+                    <p>The model was accurate enough that engineers could confidently make design decisions without physical testing. I received a Certificate of Appreciation from the Senior Vice President for the work quality.</p>
+                </section>
+
+                <section class="content-section">
+                    <h2>What I Learned</h2>
+                    <p>95-97% accuracy sounds imperfect, but it's exactly what was needed. Perfect accuracy would've required more computational power and time than it was worth. The model just had to be good enough for engineers to trust the predictions over running expensive physical tests. Balancing accuracy with practicality is more important than chasing perfection.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="cursor.js"></script>
+</body>
+</html>

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         'dance': "Dancing since I was 5, performing since 6. Trained in 5 forms, won a few inter-university competitions in undergrad. But mostly, I dance to express what words can't. It's how I let go.",
 
-        'coffee': "Coffee shops are my thinking spaces. I've sketched product strategies on napkins between sips of pour-over.",
+        'coffee': "Exceptionally caffeine absorbent. Coffee makes me happy. Took classes on pour-over recipes with different beans. Would definitely start a cafe bookstore someday.",
 
         'organize': "I use Notion with too many databases. My friends joke that I organize my organization systems. It helps me think through complexity.",
 

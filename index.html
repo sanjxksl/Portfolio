@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="learning.css">
     <link rel="stylesheet" href="about.css">
     <link rel="stylesheet" href="footer-education.css">
+    <link rel="stylesheet" href="modal.css">
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -95,9 +96,9 @@
                     </div>
                 </article>
 
-                <article class="work-card" data-project="US Income Prediction">
+                <article class="work-card" data-project="us-income">
                     <div class="work-image">
-                        <img src="assets/work/us-income.jpg" alt="US Income Prediction Visuals">
+                        <img src="assets/work/us-income.png" alt="US Income Prediction Visuals">
                     </div>
                     <div class="work-info">
                         <h3>Neural network for income prediction</h3>
@@ -114,6 +115,7 @@
 
         <!-- Gallery -->
         <section class="gallery-section">
+            <h2 class="gallery-title">Beyond Work</h2>
             <div class="gallery-scroll">
                 <div class="gallery-track">
                     <div class="gallery-item"><img src="assets/images/exp-1.jpeg" alt="Experience"></div>
@@ -221,6 +223,20 @@
                             <span>Neural Networks</span>
                             <span>Statistical Modeling</span>
                             <span>Machine Learning Analytics</span>
+                        </div>
+                        <div class="work-more">View Details →</div>
+                    </article>
+
+                    <article class="work-item" data-work="summer-home">
+                        <div class="work-item-header">
+                            <h3>Summer Home Recommender</h3>
+                            <span class="work-date">Nov 2024</span>
+                        </div>
+                        <p>Recommendation system using LLM to extract intent from natural language queries. Scores properties across environment, budget, capacity, amenities, and location with dynamic weighting. Built CLI and Streamlit UI handling 100+ properties with CSV export.</p>
+                        <div class="work-tags">
+                            <span>Python</span>
+                            <span>Recommendation Systems</span>
+                            <span>NLP</span>
                         </div>
                         <div class="work-more">View Details →</div>
                     </article>
@@ -571,6 +587,17 @@
         </div>
     </section>
 
+    <!-- Project Modal -->
+    <div id="projectModal" class="project-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be dynamically inserted -->
+            </div>
+        </div>
+    </div>
+
     <!-- Global Footer / Contact -->
     <footer class="footer">
         <div class="footer-content">
@@ -597,7 +624,7 @@
             </div>
 
             <div class="footer-copyright">
-                <p>© 2025 · Crafted with caffeine and curiosity</p>
+                <p>© 2025 · Built with intention, refined through iteration</p>
             </div>
         </div>
     </footer>
@@ -607,6 +634,7 @@
     <script src="navigation.js"></script>
     <script src="learning.js"></script>
     <script src="about.js"></script>
+    <script src="modal.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

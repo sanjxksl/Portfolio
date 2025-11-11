@@ -258,6 +258,15 @@
     overflow: hidden;
 }
 
+.gallery-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-align: center;
+    margin-bottom: 60px;
+    color: var(--espresso);
+    opacity: 0.9;
+}
+
 .gallery-scroll {
     width: 100%;
     overflow: hidden;

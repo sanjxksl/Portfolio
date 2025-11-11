@@ -81,14 +81,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Work card click handling (for future project detail pages)
-    const workCards = document.querySelectorAll('.work-card, .work-item');
-    workCards.forEach(card => {
-        card.addEventListener('click', () => {
-            const projectId = card.getAttribute('data-project') || card.getAttribute('data-work');
-            console.log('Opening project:', projectId);
-            // Future: Navigate to project detail page
-            alert(`Project details for "${projectId}" coming soon!`);
-        });
-    });
 });
