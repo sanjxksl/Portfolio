@@ -10,6 +10,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const pages = document.querySelectorAll('.page');
     let lastScroll = 0;
 
+    // Handle initial hash on page load
+    const hash = window.location.hash.substring(1);
+    if (hash && pages.length > 0) {
+        showPage(hash);
+        // Update active state for nav links
+        navLinks.forEach(l => {
+            if (l.getAttribute('href') === `#${hash}`) {
+                l.classList.add('active');
+            } else {
+                l.classList.remove('active');
+            }
+        });
+    }
+
     // Handle brand link (home)
     if (navBrand) {
         navBrand.addEventListener('click', (e) => {
@@ -33,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('active');
         });
     });
-    
+
     // Show specific page
     function showPage(pageId) {
         pages.forEach(page => {
