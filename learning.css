@@ -45,55 +45,52 @@
     font-style: italic;
 }
 
-/* Forest Road Scene Container */
+/* Forest Road Scene Container - Redesigned */
 .forest-road-scene {
     position: relative;
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 100px var(--container-padding) 80px;
-    min-height: 800px;
-    height: auto;
+    padding: 80px 60px 100px;
+    min-height: 700px;
     background:
-        /* Sky gradient */
+        /* Sky gradient - softer tones */
         linear-gradient(180deg,
-            #D4E5F2 0%,
-            #E8DAC8 40%,
-            #E5D4C1 60%,
-            #DCC8B3 100%
+            #E8F2F7 0%,
+            #F0E8DC 50%,
+            #E8DDD0 100%
         );
-    border-radius: 40px;
-    z-index: 1;
+    border-radius: 30px;
     box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.12),
-        inset 0 2px 0 rgba(255, 255, 255, 0.6);
+        0 20px 60px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
     overflow: visible;
 }
 
-/* Road/ground layer with texture */
+/* Ground/grass layer */
 .forest-road-scene::before {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 65%;
+    height: 50%;
     background:
-        /* Grass texture on sides */
-        radial-gradient(ellipse at 20% 100%, rgba(139, 154, 121, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 100%, rgba(139, 154, 121, 0.15) 0%, transparent 50%),
-        /* Ground base */
+        /* Grass patches */
+        radial-gradient(ellipse at 15% 80%, rgba(120, 140, 100, 0.2) 0%, transparent 40%),
+        radial-gradient(ellipse at 85% 80%, rgba(120, 140, 100, 0.2) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 90%, rgba(130, 150, 110, 0.15) 0%, transparent 35%),
+        /* Ground */
         linear-gradient(180deg,
             transparent 0%,
-            rgba(196, 176, 156, 0.3) 20%,
-            rgba(176, 156, 136, 0.5) 50%,
-            rgba(156, 136, 116, 0.6) 100%
+            rgba(180, 160, 140, 0.2) 30%,
+            rgba(160, 140, 120, 0.4) 100%
         );
-    border-radius: 0 0 40px 40px;
-    z-index: 0;
+    border-radius: 0 0 30px 30px;
+    z-index: 1;
 }
 
-/* Soft fade edges to blend with page background */
+/* Soft fade edges */
 .forest-road-scene::after {
     content: '';
     position: absolute;
@@ -101,13 +98,13 @@
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 40px;
-    box-shadow: inset 0 0 100px 40px rgba(220, 200, 180, 0.2);
+    border-radius: 30px;
+    box-shadow: inset 0 0 80px 30px rgba(232, 221, 208, 0.3);
     pointer-events: none;
     z-index: 0;
 }
 
-/* Converging Paths SVG - Enhanced Road Trails */
+/* Road Paths - Simplified and clearer */
 .converging-paths {
     position: absolute;
     top: 0;
@@ -116,45 +113,26 @@
     height: 100%;
     z-index: 2;
     pointer-events: none;
-    opacity: 0.9;
 }
 
 .journey-path {
-    stroke: #B8A08A;
-    stroke-width: 20;
+    stroke: #C5B5A0;
+    stroke-width: 24;
     stroke-linecap: round;
     stroke-linejoin: round;
-    animation: pathFadeIn 2.5s ease forwards;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
-    opacity: 0.5;
-}
-
-/* Add subtle road texture with multiple overlapping paths */
-.journey-path:nth-child(1) {
-    stroke: #C4AE98;
-    stroke-width: 22;
-    opacity: 0.3;
-}
-
-.journey-path:nth-child(2) {
-    stroke: #B8A08A;
-    stroke-width: 18;
-    opacity: 0.5;
-}
-
-.journey-path:nth-child(3) {
-    stroke: #A89478;
-    stroke-width: 20;
     opacity: 0.4;
+    animation: pathDraw 2s ease forwards;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1));
 }
 
-@keyframes pathFadeIn {
+@keyframes pathDraw {
     from {
         opacity: 0;
         stroke-dasharray: 1000;
         stroke-dashoffset: 1000;
     }
     to {
+        opacity: 0.4;
         stroke-dasharray: 1000;
         stroke-dashoffset: 0;
     }
@@ -162,7 +140,9 @@
 
 /* Journey Markers Container */
 .journey-markers {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     z-index: 5;
@@ -386,28 +366,23 @@
     }
 }
 
-/* Roadblock Shapes - Stylized Geometric Rocks */
+/* Roadblock Shapes - Natural Rounded Stones */
 .roadblock-shape {
     position: relative;
-    width: 52px;
-    height: 52px;
-    background:
-        linear-gradient(145deg,
-            rgba(120, 100, 80, 0.8) 0%,
-            rgba(90, 75, 60, 0.9) 50%,
-            rgba(70, 60, 50, 0.95) 100%
-        );
-    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+    width: 48px;
+    height: 36px;
+    background: radial-gradient(ellipse at 35% 30%, #8A7562 0%, #6B5D4F 60%, #554A3E 100%);
+    border-radius: 45% 55% 50% 50% / 55% 60% 40% 45%;
     box-shadow:
-        0 6px 18px rgba(0, 0, 0, 0.25),
-        0 3px 8px rgba(0, 0, 0, 0.15),
-        inset -4px -4px 8px rgba(0, 0, 0, 0.3),
-        inset 4px 4px 8px rgba(255, 255, 255, 0.1);
-    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+        0 6px 16px rgba(0, 0, 0, 0.3),
+        0 3px 8px rgba(0, 0, 0, 0.2),
+        inset -6px -6px 12px rgba(0, 0, 0, 0.4),
+        inset 6px 6px 12px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: rotate(-5deg);
 }
 
-/* Rock texture overlay using ::before */
+/* Stone texture and highlights */
 .roadblock-shape::before {
     content: '';
     position: absolute;
@@ -416,37 +391,33 @@
     width: 100%;
     height: 100%;
     background:
-        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.2) 0%, transparent 50%);
-    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.2) 0%, transparent 35%),
+        radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.1) 0%, transparent 30%);
+    border-radius: 45% 55% 50% 50% / 55% 60% 40% 45%;
 }
 
-/* Rock highlight using ::after */
+/* Stone highlight spot */
 .roadblock-shape::after {
     content: '';
     position: absolute;
     top: 8px;
     left: 12px;
-    width: 20px;
-    height: 15px;
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.25), transparent 60%);
-    clip-path: polygon(20% 0%, 80% 0%, 100% 40%, 70% 100%, 30% 100%, 0% 40%);
+    width: 18px;
+    height: 12px;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.3), transparent 60%);
+    border-radius: 50% 40% 45% 55%;
+    transform: rotate(-10deg);
 }
 
 .roadblock:hover .roadblock-shape {
-    transform: scale(1.25) translateY(-5px) rotate(2deg);
-    background:
-        linear-gradient(145deg,
-            rgba(135, 115, 95, 0.9) 0%,
-            rgba(105, 90, 75, 0.95) 50%,
-            rgba(85, 75, 65, 1) 100%
-        );
+    transform: scale(1.2) translateY(-6px) rotate(-3deg);
+    background: radial-gradient(ellipse at 35% 30%, #9A8572 0%, #7B6D5F 60%, #65594E 100%);
     box-shadow:
-        0 10px 28px rgba(0, 0, 0, 0.3),
-        0 5px 14px rgba(0, 0, 0, 0.2),
-        inset -5px -5px 10px rgba(0, 0, 0, 0.35),
-        inset 5px 5px 10px rgba(255, 255, 255, 0.15);
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        0 10px 24px rgba(0, 0, 0, 0.35),
+        0 5px 12px rgba(0, 0, 0, 0.25),
+        inset -7px -7px 14px rgba(0, 0, 0, 0.45),
+        inset 7px 7px 14px rgba(255, 255, 255, 0.15);
 }
 
 /* Roadblock Tooltip */
@@ -716,26 +687,23 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
     .forest-road-scene {
-        min-height: 700px;
-        height: auto;
-        padding: 80px var(--container-padding) 60px;
+        min-height: 650px;
+        padding: 70px 50px 90px;
     }
 
     .domain-node {
-        width: 78px;
-        height: 95px;
+        width: 75px;
+        height: 92px;
     }
 
     .domain-node::before {
-        width: 62px;
-        height: 62px;
-        top: 10px;
+        width: 60px;
+        height: 60px;
     }
 
     .domain-node::after {
-        width: 58px;
-        height: 58px;
-        top: 14px;
+        width: 56px;
+        height: 56px;
     }
 
     .node-inner {
@@ -744,32 +712,32 @@
     }
 
     .domain-node.special {
-        width: 95px;
-        height: 118px;
+        width: 92px;
+        height: 112px;
     }
 
     .domain-node.special::before {
-        width: 76px;
-        height: 76px;
+        width: 74px;
+        height: 74px;
     }
 
     .domain-node.special::after {
-        width: 72px;
-        height: 72px;
+        width: 70px;
+        height: 70px;
     }
 
     .domain-node.special .node-inner {
         width: 20px;
-        height: 42px;
+        height: 40px;
     }
 
     .roadblock-shape {
         width: 42px;
-        height: 42px;
+        height: 32px;
     }
 
     .marker-label {
-        font-size: 0.98rem;
+        font-size: 0.95rem;
         padding: 10px 20px;
     }
 
@@ -790,64 +758,57 @@
     }
 
     .forest-road-scene {
-        min-height: 650px;
-        height: auto;
-        padding: 70px 20px 50px;
-    }
-
-    .journey-markers {
-        padding: 0 10px;
+        min-height: 600px;
+        padding: 60px 30px 80px;
     }
 
     .domain-node {
-        width: 68px;
-        height: 82px;
+        width: 60px;
+        height: 72px;
     }
 
     .domain-node::before {
-        width: 54px;
-        height: 54px;
-        top: 8px;
+        width: 48px;
+        height: 48px;
     }
 
     .domain-node::after {
-        width: 50px;
-        height: 50px;
-        top: 12px;
+        width: 44px;
+        height: 44px;
     }
 
     .node-inner {
-        width: 14px;
-        height: 28px;
+        width: 13px;
+        height: 26px;
     }
 
     .domain-node.special {
-        width: 85px;
-        height: 102px;
+        width: 75px;
+        height: 92px;
     }
 
     .domain-node.special::before {
-        width: 68px;
-        height: 68px;
+        width: 60px;
+        height: 60px;
     }
 
     .domain-node.special::after {
-        width: 64px;
-        height: 64px;
+        width: 56px;
+        height: 56px;
     }
 
     .domain-node.special .node-inner {
-        width: 18px;
-        height: 36px;
+        width: 17px;
+        height: 33px;
     }
 
     .roadblock-shape {
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 28px;
     }
 
     .marker-label {
-        font-size: 0.9rem;
+        font-size: 0.88rem;
         padding: 8px 16px;
     }
 
@@ -858,19 +819,7 @@
     }
 
     .journey-path {
-        stroke-width: 16;
-    }
-
-    .journey-path:nth-child(1) {
-        stroke-width: 18;
-    }
-
-    .journey-path:nth-child(2) {
-        stroke-width: 14;
-    }
-
-    .journey-path:nth-child(3) {
-        stroke-width: 16;
+        stroke-width: 20;
     }
 
     .project-popup {
@@ -910,60 +859,57 @@
     }
 
     .forest-road-scene {
-        min-height: 680px;
-        height: auto;
-        padding: 60px 15px 40px;
+        min-height: 550px;
+        padding: 50px 20px 70px;
     }
 
     .domain-node {
-        width: 58px;
-        height: 72px;
+        width: 50px;
+        height: 62px;
     }
 
     .domain-node::before {
-        width: 46px;
-        height: 46px;
-        top: 8px;
+        width: 40px;
+        height: 40px;
     }
 
     .domain-node::after {
-        width: 42px;
-        height: 42px;
-        top: 12px;
+        width: 36px;
+        height: 36px;
     }
 
     .node-inner {
-        width: 12px;
-        height: 24px;
+        width: 11px;
+        height: 22px;
     }
 
     .domain-node.special {
-        width: 72px;
-        height: 90px;
+        width: 65px;
+        height: 80px;
     }
 
     .domain-node.special::before {
-        width: 58px;
-        height: 58px;
+        width: 52px;
+        height: 52px;
     }
 
     .domain-node.special::after {
-        width: 54px;
-        height: 54px;
+        width: 48px;
+        height: 48px;
     }
 
     .domain-node.special .node-inner {
-        width: 16px;
-        height: 30px;
+        width: 15px;
+        height: 28px;
     }
 
     .roadblock-shape {
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 24px;
     }
 
     .marker-label {
-        font-size: 0.85rem;
+        font-size: 0.82rem;
         padding: 7px 14px;
     }
 
@@ -974,19 +920,7 @@
     }
 
     .journey-path {
-        stroke-width: 14;
-    }
-
-    .journey-path:nth-child(1) {
-        stroke-width: 16;
-    }
-
-    .journey-path:nth-child(2) {
-        stroke-width: 12;
-    }
-
-    .journey-path:nth-child(3) {
-        stroke-width: 14;
+        stroke-width: 18;
     }
 
     .popup-header h3 {

@@ -292,21 +292,21 @@
         <!-- Converging Paths Journey -->
         <div class="forest-road-scene">
             <!-- SVG Paths Converging to Center -->
-            <svg class="converging-paths" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet">
+            <svg class="converging-paths" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
                 <!-- Path from Engineering (bottom-left) to Product (center) -->
-                <path class="journey-path" d="M 180 680 Q 350 520, 600 384" fill="none"/>
+                <path class="journey-path" d="M 150 520 Q 300 400, 500 300" fill="none"/>
 
                 <!-- Path from Design (bottom-right) to Product (center) -->
-                <path class="journey-path" d="M 1020 680 Q 850 520, 600 384" fill="none"/>
+                <path class="journey-path" d="M 850 520 Q 700 400, 500 300" fill="none"/>
 
                 <!-- Path from Analytics (top-left) to Product (center) -->
-                <path class="journey-path" d="M 180 144 Q 350 264, 600 384" fill="none"/>
+                <path class="journey-path" d="M 150 80 Q 300 180, 500 300" fill="none"/>
             </svg>
 
-            <!-- Domain Markers -->
+            <!-- Domain Markers - Completely repositioned -->
             <div class="journey-markers">
                 <!-- Domain 1: Engineering Foundation (Bottom Left) -->
-                <div class="domain-marker" data-domain="engineering" style="bottom: 12%; left: 15%;">
+                <div class="domain-marker" data-domain="engineering" style="position: absolute; bottom: 60px; left: 80px;">
                     <div class="domain-node">
                         <div class="node-inner"></div>
                     </div>
@@ -314,7 +314,7 @@
                 </div>
 
                 <!-- Domain 2: Design Thinking (Bottom Right) -->
-                <div class="domain-marker" data-domain="design" style="bottom: 12%; right: 15%;">
+                <div class="domain-marker" data-domain="design" style="position: absolute; bottom: 60px; right: 80px;">
                     <div class="domain-node">
                         <div class="node-inner"></div>
                     </div>
@@ -322,7 +322,7 @@
                 </div>
 
                 <!-- Domain 3: Data & Analytics (Top Left) -->
-                <div class="domain-marker" data-domain="analytics" style="top: 18%; left: 15%;">
+                <div class="domain-marker" data-domain="analytics" style="position: absolute; top: 120px; left: 80px;">
                     <div class="domain-node">
                         <div class="node-inner"></div>
                     </div>
@@ -330,7 +330,7 @@
                 </div>
 
                 <!-- Domain 4: Product Strategy (Center) - Special landmark -->
-                <div class="domain-marker landmark" data-domain="product" style="top: 48%; left: 50%; transform: translate(-50%, -50%);">
+                <div class="domain-marker landmark" data-domain="product" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                     <div class="domain-node special">
                         <div class="node-inner"></div>
                         <div class="node-pulse"></div>
@@ -338,27 +338,27 @@
                     <div class="marker-label special">Product Strategy</div>
                 </div>
 
-                <!-- Roadblocks (Simple geometric shapes) -->
+                <!-- Roadblocks - Natural stone positions -->
                 <!-- Rock 1: Between Engineering and Product -->
-                <div class="roadblock" data-roadblock="eng-product" style="bottom: 28%; left: 28%;">
+                <div class="roadblock" data-roadblock="eng-product" style="position: absolute; bottom: 180px; left: 220px;">
                     <div class="roadblock-shape"></div>
                     <div class="roadblock-tooltip">"But engineers don't do user research"</div>
                 </div>
 
                 <!-- Rock 2: Between Design and Product -->
-                <div class="roadblock" data-roadblock="design-product" style="bottom: 28%; right: 28%;">
+                <div class="roadblock" data-roadblock="design-product" style="position: absolute; bottom: 180px; right: 220px;">
                     <div class="roadblock-shape"></div>
                     <div class="roadblock-tooltip">"You can't quantify aesthetics"</div>
                 </div>
 
                 <!-- Rock 3: Between Analytics and Product -->
-                <div class="roadblock" data-roadblock="analytics-product" style="top: 32%; left: 35%;">
+                <div class="roadblock" data-roadblock="analytics-product" style="position: absolute; top: 200px; left: 240px;">
                     <div class="roadblock-shape"></div>
                     <div class="roadblock-tooltip">"Pick a lane: technical or business"</div>
                 </div>
 
                 <!-- Rock 4: Central challenge -->
-                <div class="roadblock central" data-roadblock="central" style="top: 58%; left: 50%; transform: translate(-50%, -50%);">
+                <div class="roadblock central" data-roadblock="central" style="position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%);">
                     <div class="roadblock-shape"></div>
                     <div class="roadblock-tooltip">"Product managers don't code"</div>
                 </div>
