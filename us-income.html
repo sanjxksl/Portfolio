@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Prediction Neural Network | Sanjana Kanchibotla</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="project-page.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="nav-content">
+            <a href="index.html#home" class="nav-brand">Sanjana Kanchibotla</a>
+            <div class="nav-location">Toronto, ON</div>
+            <div class="nav-menu">
+                <a href="index.html#work" class="nav-link">Work</a>
+                <a href="index.html#learning" class="nav-link">Learning</a>
+                <a href="index.html#about" class="nav-link">About</a>
+            </div>
+            <div class="nav-socials">
+                <a href="https://github.com/sanjxksl" target="_blank" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com/in/sanjanaksl" target="_blank" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="project-page">
+        <div class="project-container">
+            <!-- Header -->
+            <header class="project-header">
+                <a href="index.html#work" class="back-link">← Back to Work</a>
+                <h1 class="project-title">Income Prediction Neural Network</h1>
+                <p class="project-date">Oct 2025</p>
+                <div class="project-tags">
+                    <span class="tag">Neural Networks</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Statistical Modeling</span>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="project-content">
+                <section class="content-section">
+                    <h2>What I Did</h2>
+                    <p>Built a 2-layer neural network to predict income levels from US Census data. The goal was to systematically test what actually improved performance versus what just looked sophisticated on paper.</p>
+                </section>
+
+                <section class="content-section">
+                    <h2>Approach</h2>
+                    <p>Instead of using one model, I ensembled 5 cross-validation models to reduce variance. Optimized decision thresholds to handle class imbalance (most people earn under $50K). Stripped out features that added noise rather than signal.</p>
+                </section>
+
+                <section class="content-section highlight">
+                    <h2>Results</h2>
+                    <p>Achieved 85.6% accuracy. But honestly, the process taught me more than the final number. Removing complexity often improved performance. Adding more features didn't always help. Sometimes the best optimization is figuring out what not to do.</p>
+                </section>
+
+                <section class="content-section">
+                    <h2>What I Learned</h2>
+                    <p>Complexity doesn't equal performance. Half the work was removing things that seemed like they should help but actually hurt the model. That's harder than it sounds because it goes against the instinct to keep adding more.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="cursor.js"></script>
+</body>
+</html>

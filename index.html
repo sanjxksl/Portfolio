@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="learning.css">
     <link rel="stylesheet" href="about.css">
     <link rel="stylesheet" href="footer-education.css">
-    <link rel="stylesheet" href="modal.css">
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -81,7 +80,7 @@
             <h2 class="section-title">Recent Work</h2>
             
             <div class="work-grid">
-                <article class="work-card" data-project="aesthify">
+                <a href="aesthify.html" class="work-card">
                     <div class="work-image">
                         <video src="assets/work/aesthify.mp4" alt="Aesthify Visuals" controls muted loop autoplay></video>
                     </div>
@@ -94,9 +93,9 @@
                             <span class="meta-tag">Python</span>
                         </div>
                     </div>
-                </article>
+                </a>
 
-                <article class="work-card" data-project="us-income">
+                <a href="us-income.html" class="work-card">
                     <div class="work-image">
                         <img src="assets/work/us-income.png" alt="US Income Prediction Visuals">
                     </div>
@@ -109,7 +108,7 @@
                             <span class="meta-tag">Statistical Modeling</span>
                         </div>
                     </div>
-                </article>
+                </a>
             </div>
         </section>
 
@@ -150,7 +149,7 @@
             <div class="work-category">
                 <h2 class="category-title">Internships & Experience</h2>
                 <div class="work-list">
-                    <article class="work-item" data-work="ashok-leyland">
+                    <a href="ashok-leyland.html" class="work-item">
                         <div class="work-item-header">
                             <h3>Product Intern</h3>
                             <span class="work-company">Ashok Leyland</span>
@@ -163,9 +162,9 @@
                             <span>Product Strategy</span>
                         </div>
                         <div class="work-more">View Details →</div>
-                    </article>
+                    </a>
 
-                    <article class="work-item" data-work="hyperhorizon">
+                    <a href="hyperhorizon.html" class="work-item">
                         <div class="work-item-header">
                             <h3>Product Management Intern</h3>
                             <span class="work-company">HyperHorizon</span>
@@ -178,14 +177,14 @@
                             <span>User Research</span>
                         </div>
                         <div class="work-more">View Details →</div>
-                    </article>
+                    </a>
                 </div>
             </div>
 
             <div class="work-category">
                 <h2 class="category-title">Projects</h2>
                 <div class="work-list">
-                    <article class="work-item" data-work="aesthify">
+                    <a href="aesthify.html" class="work-item">
                         <div class="work-item-header">
                             <h3>Aesthify: AI-Powered Design Intelligence</h3>
                             <span class="work-date">May 2025</span>
@@ -197,9 +196,9 @@
                             <span>Python</span>
                         </div>
                         <div class="work-more">View Details →</div>
-                    </article>
+                    </a>
 
-                    <article class="work-item" data-work="us-income">
+                    <a href="us-income.html" class="work-item">
                         <div class="work-item-header">
                             <h3>Income Prediction Neural Network</h3>
                             <span class="work-date">Oct 2025</span>
@@ -211,23 +210,23 @@
                             <span>Machine Learning Analytics</span>
                         </div>
                         <div class="work-more">View Details →</div>
-                    </article>
+                    </a>
 
-                    <article class="work-item" data-work="alumni-career">
+                    <a href="alumni-career.html" class="work-item">
                         <div class="work-item-header">
                             <h3>Alumni Career Success Prediction</h3>
                             <span class="work-date">Nov 2023</span>
                         </div>
                         <p>Random Forest models predicting career trajectories from 3,300+ alumni records to inform curriculum development.</p>
                         <div class="work-tags">
-                            <span>Neural Networks</span>
+                            <span>Random Forest</span>
                             <span>Statistical Modeling</span>
                             <span>Machine Learning Analytics</span>
                         </div>
                         <div class="work-more">View Details →</div>
-                    </article>
+                    </a>
 
-                    <article class="work-item" data-work="summer-home">
+                    <a href="summer-home.html" class="work-item">
                         <div class="work-item-header">
                             <h3>Summer Home Recommender</h3>
                             <span class="work-date">Nov 2024</span>
@@ -239,14 +238,14 @@
                             <span>NLP</span>
                         </div>
                         <div class="work-more">View Details →</div>
-                    </article>
+                    </a>
                 </div>
             </div>
 
             <div class="work-category">
                 <h2 class="category-title">Leadership & Volunteering</h2>
                 <div class="work-list">
-                    <article class="work-item" data-work="alumni-affairs">
+                    <a href="alumni-affairs.html" class="work-item">
                         <div class="work-item-header">
                             <h3>Alumni Affairs Secretary</h3>
                             <span class="work-company">IIITDM Kancheepuram</span>
@@ -259,9 +258,9 @@
                             <span>Data Analytics</span>
                         </div>
                         <div class="work-more">View Details →</div>
-                    </article>
+                    </a>
 
-                    <article class="work-item" data-work="red-ribbon">
+                    <a href="red-ribbon.html" class="work-item">
                         <div class="work-item-header">
                             <h3>Founder, Red Ribbon Society</h3>
                             <span class="work-company">IIITDM Kancheepuram</span>
@@ -274,7 +273,7 @@
                             <span>Impact</span>
                         </div>
                         <div class="work-more">View Details →</div>
-                    </article>
+                    </a>
                 </div>
             </div>
         </div>
@@ -587,17 +586,6 @@
         </div>
     </section>
 
-    <!-- Project Modal -->
-    <div id="projectModal" class="project-modal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <div class="modal-body" id="modalBody">
-                <!-- Content will be dynamically inserted -->
-            </div>
-        </div>
-    </div>
-
     <!-- Global Footer / Contact -->
     <footer class="footer">
         <div class="footer-content">
@@ -634,7 +622,6 @@
     <script src="navigation.js"></script>
     <script src="learning.js"></script>
     <script src="about.js"></script>
-    <script src="modal.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthify - AI-Powered Design Intelligence | Sanjana Kanchibotla</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="project-page.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="nav-content">
+            <a href="index.html#home" class="nav-brand">Sanjana Kanchibotla</a>
+            <div class="nav-location">Toronto, ON</div>
+            <div class="nav-menu">
+                <a href="index.html#work" class="nav-link">Work</a>
+                <a href="index.html#learning" class="nav-link">Learning</a>
+                <a href="index.html#about" class="nav-link">About</a>
+            </div>
+            <div class="nav-socials">
+                <a href="https://github.com/sanjxksl" target="_blank" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com/in/sanjanaksl" target="_blank" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="project-page">
+        <div class="project-container">
+            <!-- Header -->
+            <header class="project-header">
+                <a href="index.html#work" class="back-link">← Back to Work</a>
+                <h1 class="project-title">Aesthify: AI-Powered Design Intelligence</h1>
+                <p class="project-date">May 2025</p>
+                <div class="project-tags">
+                    <span class="tag">Machine Learning</span>
+                    <span class="tag">User Research</span>
+                    <span class="tag">Python</span>
+                </div>
+                <a href="https://github.com/sanjxksl/Aesthify" target="_blank" class="project-github">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                    View on GitHub
+                </a>
+            </header>
+
+            <!-- Content -->
+            <div class="project-content">
+                <section class="content-section">
+                    <h2>The Problem</h2>
+                    <p>Designers talk about balance, symmetry, and contrast, but there's no structured way to quantify these principles or connect them to how users actually perceive aesthetics. Everyone relies on intuition without understanding what users actually prefer.</p>
+                </section>
+
+                <section class="content-section">
+                    <h2>What I Built</h2>
+
+                    <h3>The technical framework</h3>
+                    <p>I used YOLOv8 for object detection in interior design layouts, then built rule-based scoring for 7 design principles: balance, proportion, symmetry, simplicity, harmony, contrast, and unity. I chose rule-based over machine learning because I wanted the system to be explainable and grounded in actual design theory, not a black box.</p>
+                    <p>Built a Flask interface that shows real-time scoring with bounding box visualizations. The architecture supports both local (YOLOv8) and cloud (Roboflow) detection.</p>
+
+                    <h3>The user study</h3>
+                    <p>I recruited 101 participants to rate 8 interior design images on a 1-9 scale. Collected ratings, emotion tags, style preferences, and demographics. Then analyzed patterns across age groups, professions, countries, and design styles.</p>
+                </section>
+
+                <section class="content-section highlight">
+                    <h2>Key Findings</h2>
+
+                    <p><strong>What actually predicts user preference:</strong></p>
+                    <ul>
+                        <li>Simplicity: r = 0.68 (strongest predictor)</li>
+                        <li>Contrast: r = 0.56</li>
+                        <li>Unity: r = 0.40</li>
+                        <li>Symmetry: r = -0.60 (negative correlation, users rated symmetric layouts lower)</li>
+                    </ul>
+
+                    <p><strong>Demographic patterns:</strong></p>
+                    <ul>
+                        <li>18-25 year-olds consistently preferred minimalist, modern designs</li>
+                        <li>Design and psychology backgrounds gave higher ratings than engineering or medical</li>
+                        <li>Cultural variation was significant: Netherlands/UAE preferred traditional, India/Canada leaned modern</li>
+                    </ul>
+
+                    <p><strong>Three distinct user groups emerged:</strong></p>
+                    <ul>
+                        <li>44%: Calm, Minimalist, Elegant</li>
+                        <li>31%: Energetic, Elegant, Cozy</li>
+                        <li>26%: Calm, Elegant, Dull</li>
+                    </ul>
+                </section>
+
+                <section class="content-section">
+                    <h2>Impact</h2>
+                    <p>Open-sourced on GitHub and currently used by design research scholars for data-driven decisions. The study proved empirically that aesthetic perception varies significantly by demographics and culture. The negative correlation with symmetry challenged traditional design assumptions.</p>
+                </section>
+
+                <section class="content-section">
+                    <h2>What I Learned</h2>
+                    <p>The tool is only valuable because of the user study. Without connecting computation to actual perception, it's just another aesthetic scorer. The wide variance in ratings for identical layouts proves that aesthetics is inherently subjective and culturally shaped. You can't design for "everyone" because everyone sees things differently.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="cursor.js"></script>
+</body>
+</html>

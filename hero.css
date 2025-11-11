@@ -193,6 +193,9 @@
     overflow: hidden;
     transition: all 0.4s ease;
     cursor: none;
+    display: block;
+    text-decoration: none;
+    color: inherit;
 }
 
 .work-card:hover {

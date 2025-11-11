@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer Home Recommender | Sanjana Kanchibotla</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="project-page.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="nav-content">
+            <a href="index.html#home" class="nav-brand">Sanjana Kanchibotla</a>
+            <div class="nav-location">Toronto, ON</div>
+            <div class="nav-menu">
+                <a href="index.html#work" class="nav-link">Work</a>
+                <a href="index.html#learning" class="nav-link">Learning</a>
+                <a href="index.html#about" class="nav-link">About</a>
+            </div>
+            <div class="nav-socials">
+                <a href="https://github.com/sanjxksl" target="_blank" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com/in/sanjanaksl" target="_blank" class="social-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="project-page">
+        <div class="project-container">
+            <!-- Header -->
+            <header class="project-header">
+                <a href="index.html#work" class="back-link">← Back to Work</a>
+                <h1 class="project-title">Summer Home Recommender</h1>
+                <p class="project-date">Nov 2024</p>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Recommendation Systems</span>
+                    <span class="tag">NLP</span>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="project-content">
+                <section class="content-section">
+                    <h2>What I Built</h2>
+                    <p>A recommendation system that uses LLMs to extract intent from natural language queries, then scores properties across multiple dimensions: environment, budget, capacity, amenities, and location.</p>
+                </section>
+
+                <section class="content-section">
+                    <h2>How It Works</h2>
+                    <p>Instead of forcing users to fill out forms with checkboxes, they just describe what they want in natural language. The LLM extracts their preferences and priorities. The system then dynamically weights each scoring dimension based on what the user actually cares about.</p>
+
+                    <p>Built both a CLI and Streamlit UI. Handles 100+ properties with CSV export for further analysis.</p>
+                </section>
+
+                <section class="content-section">
+                    <h2>What I Learned</h2>
+                    <p>Natural language interfaces are harder than they seem. The challenge isn't the NLP part, it's handling ambiguity and conflicting preferences. When someone says they want "quiet but close to town," the system has to make tradeoffs, and those tradeoffs need to match user expectations.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="cursor.js"></script>
+</body>
+</html>
