@@ -51,8 +51,8 @@
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 80px var(--container-padding);
-    min-height: 700px;
+    padding: 100px var(--container-padding) 80px;
+    min-height: 800px;
     height: auto;
     background:
         /* Sky gradient */
@@ -67,7 +67,7 @@
     box-shadow:
         0 30px 80px rgba(0, 0, 0, 0.12),
         inset 0 2px 0 rgba(255, 255, 255, 0.6);
-    overflow: hidden;
+    overflow: visible;
 }
 
 /* Road/ground layer with texture */
@@ -716,9 +716,9 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
     .forest-road-scene {
-        min-height: 650px;
+        min-height: 700px;
         height: auto;
-        padding: 60px var(--container-padding);
+        padding: 80px var(--container-padding) 60px;
     }
 
     .domain-node {
@@ -790,9 +790,9 @@
     }
 
     .forest-road-scene {
-        min-height: 600px;
+        min-height: 650px;
         height: auto;
-        padding: 40px 20px;
+        padding: 70px 20px 50px;
     }
 
     .journey-markers {
@@ -910,9 +910,9 @@
     }
 
     .forest-road-scene {
-        min-height: 650px;
+        min-height: 680px;
         height: auto;
-        padding: 30px 15px;
+        padding: 60px 15px 40px;
     }
 
     .domain-node {
