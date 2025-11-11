@@ -55,14 +55,42 @@
     min-height: 700px;
     height: auto;
     background:
-        radial-gradient(circle at 30% 40%, rgba(255, 245, 235, 0.6), transparent 60%),
-        radial-gradient(circle at 70% 60%, rgba(245, 230, 210, 0.5), transparent 60%),
-        linear-gradient(135deg, #FAF3ED 0%, #F8F0E8 50%, #FAF3ED 100%);
+        /* Sky gradient */
+        linear-gradient(180deg,
+            #D4E5F2 0%,
+            #E8DAC8 40%,
+            #E5D4C1 60%,
+            #DCC8B3 100%
+        );
     border-radius: 40px;
     z-index: 1;
     box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        0 30px 80px rgba(0, 0, 0, 0.12),
+        inset 0 2px 0 rgba(255, 255, 255, 0.6);
+    overflow: hidden;
+}
+
+/* Road/ground layer with texture */
+.forest-road-scene::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65%;
+    background:
+        /* Grass texture on sides */
+        radial-gradient(ellipse at 20% 100%, rgba(139, 154, 121, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(139, 154, 121, 0.15) 0%, transparent 50%),
+        /* Ground base */
+        linear-gradient(180deg,
+            transparent 0%,
+            rgba(196, 176, 156, 0.3) 20%,
+            rgba(176, 156, 136, 0.5) 50%,
+            rgba(156, 136, 116, 0.6) 100%
+        );
+    border-radius: 0 0 40px 40px;
+    z-index: 0;
 }
 
 /* Soft fade edges to blend with page background */
@@ -74,29 +102,50 @@
     right: 0;
     bottom: 0;
     border-radius: 40px;
-    box-shadow: inset 0 0 120px 60px rgba(250, 243, 237, 0.3);
+    box-shadow: inset 0 0 100px 40px rgba(220, 200, 180, 0.2);
     pointer-events: none;
     z-index: 0;
 }
 
-/* Converging Paths SVG */
+/* Converging Paths SVG - Enhanced Road Trails */
 .converging-paths {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 2;
     pointer-events: none;
-    opacity: 0.7;
+    opacity: 0.9;
 }
 
 .journey-path {
-    stroke: #C19A7A;
-    stroke-width: 3;
+    stroke: #B8A08A;
+    stroke-width: 20;
     stroke-linecap: round;
+    stroke-linejoin: round;
     animation: pathFadeIn 2.5s ease forwards;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    opacity: 0.5;
+}
+
+/* Add subtle road texture with multiple overlapping paths */
+.journey-path:nth-child(1) {
+    stroke: #C4AE98;
+    stroke-width: 22;
+    opacity: 0.3;
+}
+
+.journey-path:nth-child(2) {
+    stroke: #B8A08A;
+    stroke-width: 18;
+    opacity: 0.5;
+}
+
+.journey-path:nth-child(3) {
+    stroke: #A89478;
+    stroke-width: 20;
+    opacity: 0.4;
 }
 
 @keyframes pathFadeIn {
@@ -106,7 +155,6 @@
         stroke-dashoffset: 1000;
     }
     to {
-        opacity: 0.4;
         stroke-dasharray: 1000;
         stroke-dashoffset: 0;
     }
@@ -152,110 +200,168 @@
     }
 }
 
-/* Domain Nodes - Clean circles */
+/* Domain Nodes - Illustrated 2D Trees */
 .domain-node {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 110px;
     margin-bottom: 20px;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 1), rgba(250, 245, 240, 0.95));
-    border-radius: 50%;
-    border: 3px solid rgba(193, 154, 122, 0.3);
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.08),
-        0 4px 10px rgba(0, 0, 0, 0.06),
-        inset 0 2px 0 rgba(255, 255, 255, 1),
-        inset 0 -1px 3px rgba(0, 0, 0, 0.03);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
 }
 
+/* Tree trunk */
 .node-inner {
-    width: 48px;
-    height: 48px;
-    background: linear-gradient(145deg, #D4A97D, #B89570);
-    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    width: 16px;
+    height: 35px;
+    background: linear-gradient(180deg, #8B6F47 0%, #6B5437 100%);
+    border-radius: 2px;
     box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        inset -2px 0 4px rgba(0, 0, 0, 0.3),
+        inset 2px 0 4px rgba(255, 255, 255, 0.1);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 1;
+}
+
+/* Tree canopy (foliage) - using ::before */
+.domain-node::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 80px;
+    background: linear-gradient(145deg, #7A9B6E 0%, #5D7A52 100%);
+    clip-path: polygon(
+        50% 0%,
+        20% 25%,
+        25% 40%,
+        10% 50%,
+        15% 70%,
+        5% 85%,
+        20% 100%,
+        80% 100%,
+        95% 85%,
+        85% 70%,
+        90% 50%,
+        75% 40%,
+        80% 25%
+    );
+    box-shadow:
+        inset -8px -8px 16px rgba(0, 0, 0, 0.2),
+        inset 8px 8px 16px rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 2;
+}
+
+/* Tree highlights - using ::after */
+.domain-node::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 55px;
+    background: radial-gradient(ellipse at 30% 30%, rgba(255, 255, 255, 0.2), transparent 60%);
+    clip-path: polygon(
+        50% 0%,
+        25% 30%,
+        30% 50%,
+        20% 70%,
+        40% 100%,
+        60% 100%,
+        80% 70%,
+        70% 50%,
+        75% 30%
+    );
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 3;
 }
 
 .domain-marker:hover .domain-node {
-    transform: scale(1.15) translateY(-6px);
-    border-color: rgba(193, 154, 122, 0.6);
-    box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.12),
-        0 8px 16px rgba(0, 0, 0, 0.08),
-        inset 0 2px 0 rgba(255, 255, 255, 1),
-        inset 0 -1px 3px rgba(0, 0, 0, 0.05);
+    transform: scale(1.12) translateY(-8px);
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.2));
+}
+
+.domain-marker:hover .domain-node::before {
+    background: linear-gradient(145deg, #8BB17E 0%, #6D8A62 100%);
 }
 
 .domain-marker:hover .node-inner {
-    transform: scale(1.15);
-    background: linear-gradient(145deg, #E5BA8E, #C9A581);
-    box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    background: linear-gradient(180deg, #9B7F57 0%, #7B6447 100%);
 }
 
-/* Special Product Strategy Node */
+/* Special Product Strategy Tree - Larger & Distinctive */
 .domain-node.special {
-    width: 95px;
-    height: 95px;
-    background: linear-gradient(145deg, rgba(255, 250, 245, 1), rgba(255, 245, 240, 1));
-    border-color: rgba(232, 93, 68, 0.4);
-    border-width: 4px;
-    box-shadow:
-        0 12px 35px rgba(232, 93, 68, 0.15),
-        0 6px 15px rgba(232, 93, 68, 0.1),
-        inset 0 2px 0 rgba(255, 255, 255, 1),
-        inset 0 -1px 3px rgba(232, 93, 68, 0.08);
+    width: 110px;
+    height: 135px;
+    filter: drop-shadow(0 12px 24px rgba(232, 93, 68, 0.25));
 }
 
+/* Special tree trunk - wider and taller */
 .domain-node.special .node-inner {
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(145deg, #F86D54, #E85D44);
-    box-shadow:
-        0 4px 12px rgba(232, 93, 68, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    width: 22px;
+    height: 45px;
+    background: linear-gradient(180deg, #9B5F47 0%, #7B4F37 100%);
+}
+
+/* Special tree canopy - autumn/orange tones */
+.domain-node.special::before {
+    width: 85px;
+    height: 95px;
+    background: linear-gradient(145deg, #E89B6E 0%, #D87A52 100%);
+}
+
+/* Special tree highlights */
+.domain-node.special::after {
+    width: 60px;
+    height: 65px;
+    top: 20px;
+    background: radial-gradient(ellipse at 35% 25%, rgba(255, 200, 150, 0.4), transparent 60%);
 }
 
 .node-pulse {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    border: 2px solid rgba(232, 93, 68, 0.4);
+    border: 3px solid rgba(232, 93, 68, 0.3);
     animation: pulse 2.5s ease-in-out infinite;
+    z-index: 0;
 }
 
 @keyframes pulse {
     0%, 100% {
-        transform: scale(1);
-        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 0.6;
     }
     50% {
-        transform: scale(1.15);
+        transform: translate(-50%, -50%) scale(1.2);
         opacity: 0;
     }
 }
 
 .domain-marker.landmark:hover .domain-node.special {
-    transform: scale(1.08) translateY(-4px);
-    border-color: rgba(232, 93, 68, 0.5);
-    box-shadow:
-        0 14px 40px rgba(232, 93, 68, 0.3),
-        inset 0 2px 0 rgba(255, 255, 255, 1),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.06);
+    transform: scale(1.15) translateY(-10px);
+    filter: drop-shadow(0 16px 32px rgba(232, 93, 68, 0.35));
 }
 
-.domain-marker.landmark:hover .node-inner {
-    transform: scale(1.12);
-    background: linear-gradient(135deg, #F86D54, #E85D44);
+.domain-marker.landmark:hover .domain-node.special::before {
+    background: linear-gradient(145deg, #F8AB7E 0%, #E88A62 100%);
+}
+
+.domain-marker.landmark:hover .domain-node.special .node-inner {
+    background: linear-gradient(180deg, #AB6F57 0%, #8B5F47 100%);
 }
 
 /* Roadblocks (Rocks) */
@@ -290,24 +396,67 @@
     }
 }
 
-/* Roadblock Shapes - Minimal hexagons */
+/* Roadblock Shapes - Stylized Geometric Rocks */
 .roadblock-shape {
-    width: 46px;
-    height: 46px;
-    background: linear-gradient(145deg, rgba(139, 115, 85, 0.25), rgba(107, 84, 68, 0.35));
+    position: relative;
+    width: 52px;
+    height: 52px;
+    background:
+        linear-gradient(145deg,
+            rgba(120, 100, 80, 0.8) 0%,
+            rgba(90, 75, 60, 0.9) 50%,
+            rgba(70, 60, 50, 0.95) 100%
+        );
     clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
     box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.12),
-        0 2px 6px rgba(0, 0, 0, 0.08);
+        0 6px 18px rgba(0, 0, 0, 0.25),
+        0 3px 8px rgba(0, 0, 0, 0.15),
+        inset -4px -4px 8px rgba(0, 0, 0, 0.3),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.1);
     transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+/* Rock texture overlay using ::before */
+.roadblock-shape::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.2) 0%, transparent 50%);
+    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+}
+
+/* Rock highlight using ::after */
+.roadblock-shape::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    width: 20px;
+    height: 15px;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.25), transparent 60%);
+    clip-path: polygon(20% 0%, 80% 0%, 100% 40%, 70% 100%, 30% 100%, 0% 40%);
 }
 
 .roadblock:hover .roadblock-shape {
-    transform: scale(1.2) translateY(-4px);
-    background: linear-gradient(145deg, rgba(139, 115, 85, 0.4), rgba(107, 84, 68, 0.5));
+    transform: scale(1.25) translateY(-5px) rotate(2deg);
+    background:
+        linear-gradient(145deg,
+            rgba(135, 115, 95, 0.9) 0%,
+            rgba(105, 90, 75, 0.95) 50%,
+            rgba(85, 75, 65, 1) 100%
+        );
     box-shadow:
-        0 8px 24px rgba(0, 0, 0, 0.18),
-        0 4px 10px rgba(0, 0, 0, 0.12);
+        0 10px 28px rgba(0, 0, 0, 0.3),
+        0 5px 14px rgba(0, 0, 0, 0.2),
+        inset -5px -5px 10px rgba(0, 0, 0, 0.35),
+        inset 5px 5px 10px rgba(255, 255, 255, 0.15);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
 /* Roadblock Tooltip */
@@ -578,22 +727,48 @@
 @media (max-width: 1024px) {
     .forest-road-scene {
         min-height: 650px;
-        height: 75vh;
+        height: auto;
+        padding: 60px var(--container-padding);
     }
 
-    .domain-tree {
-        width: 70px;
-        height: auto;
+    .domain-node {
+        width: 75px;
+        height: 95px;
     }
 
-    .rock-svg {
-        width: 45px;
-        height: auto;
+    .domain-node::before {
+        width: 60px;
+        height: 70px;
+    }
+
+    .node-inner {
+        width: 14px;
+        height: 30px;
+    }
+
+    .domain-node.special {
+        width: 95px;
+        height: 115px;
+    }
+
+    .domain-node.special::before {
+        width: 75px;
+        height: 85px;
+    }
+
+    .domain-node.special .node-inner {
+        width: 18px;
+        height: 38px;
+    }
+
+    .roadblock-shape {
+        width: 42px;
+        height: 42px;
     }
 
     .marker-label {
-        font-size: 1.05rem;
-        padding: 8px 16px;
+        font-size: 0.98rem;
+        padding: 10px 20px;
     }
 
     .roadblock-tooltip {
@@ -614,33 +789,74 @@
 
     .forest-road-scene {
         min-height: 600px;
-        height: 70vh;
-        padding: 20px;
+        height: auto;
+        padding: 40px 20px;
     }
 
     .journey-markers {
         padding: 0 10px;
     }
 
-    .domain-tree {
+    .domain-node {
         width: 65px;
-        height: auto;
+        height: 80px;
     }
 
-    .rock-svg {
-        width: 42px;
-        height: auto;
+    .domain-node::before {
+        width: 52px;
+        height: 60px;
+    }
+
+    .node-inner {
+        width: 12px;
+        height: 25px;
+    }
+
+    .domain-node.special {
+        width: 80px;
+        height: 100px;
+    }
+
+    .domain-node.special::before {
+        width: 65px;
+        height: 75px;
+    }
+
+    .domain-node.special .node-inner {
+        width: 16px;
+        height: 32px;
+    }
+
+    .roadblock-shape {
+        width: 38px;
+        height: 38px;
     }
 
     .marker-label {
-        font-size: 0.95rem;
-        padding: 7px 14px;
+        font-size: 0.9rem;
+        padding: 8px 16px;
     }
 
     .roadblock-tooltip {
         font-size: 0.8rem;
         max-width: 180px;
-        padding: 7px 14px;
+        padding: 8px 14px;
+    }
+
+    .journey-path {
+        stroke-width: 16;
+    }
+
+    .journey-path:nth-child(1) {
+        stroke-width: 18;
+    }
+
+    .journey-path:nth-child(2) {
+        stroke-width: 14;
+    }
+
+    .journey-path:nth-child(3) {
+        stroke-width: 16;
     }
 
     .project-popup {
@@ -681,28 +897,70 @@
 
     .forest-road-scene {
         min-height: 650px;
-        height: 85vh;
+        height: auto;
+        padding: 30px 15px;
     }
 
-    .domain-tree {
-        width: 60px;
-        height: auto;
+    .domain-node {
+        width: 55px;
+        height: 70px;
     }
 
-    .rock-svg {
-        width: 40px;
-        height: auto;
+    .domain-node::before {
+        width: 45px;
+        height: 52px;
+    }
+
+    .node-inner {
+        width: 10px;
+        height: 22px;
+    }
+
+    .domain-node.special {
+        width: 70px;
+        height: 88px;
+    }
+
+    .domain-node.special::before {
+        width: 58px;
+        height: 65px;
+    }
+
+    .domain-node.special .node-inner {
+        width: 14px;
+        height: 28px;
+    }
+
+    .roadblock-shape {
+        width: 34px;
+        height: 34px;
     }
 
     .marker-label {
-        font-size: 0.88rem;
-        padding: 6px 12px;
+        font-size: 0.85rem;
+        padding: 7px 14px;
     }
 
     .roadblock-tooltip {
-        font-size: 0.8rem;
-        padding: 6px 12px;
-        max-width: 180px;
+        font-size: 0.78rem;
+        padding: 7px 12px;
+        max-width: 170px;
+    }
+
+    .journey-path {
+        stroke-width: 14;
+    }
+
+    .journey-path:nth-child(1) {
+        stroke-width: 16;
+    }
+
+    .journey-path:nth-child(2) {
+        stroke-width: 12;
+    }
+
+    .journey-path:nth-child(3) {
+        stroke-width: 14;
     }
 
     .popup-header h3 {
