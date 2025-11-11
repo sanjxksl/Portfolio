@@ -45,14 +45,14 @@
     font-style: italic;
 }
 
-/* Forest Road Scene Container - Redesigned */
+/* Forest Road Scene Container - Professional Circular Layout */
 .forest-road-scene {
     position: relative;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 80px 60px 100px;
-    min-height: 700px;
+    padding: 100px 80px 120px;
+    min-height: 900px;
     background:
         /* Sky gradient - softer tones */
         linear-gradient(180deg,
@@ -180,67 +180,67 @@
     }
 }
 
-/* Domain Nodes - Illustrated 2D Trees */
+/* Domain Nodes - Professional Polished Trees */
 .domain-node {
     position: relative;
-    width: 90px;
-    height: 110px;
+    width: 110px;
+    height: 170px;
     margin-bottom: 20px;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
 }
 
-/* Tree trunk */
+/* Tree trunk - Natural brown tones */
 .node-inner {
     position: absolute;
     bottom: 0;
-    width: 18px;
-    height: 38px;
-    background: linear-gradient(180deg, #8B6F47 0%, #6B5437 100%);
-    border-radius: 3px 3px 0 0;
+    width: 22px;
+    height: 55px;
+    background: linear-gradient(180deg, #4A3B2F 0%, #3B2E24 100%);
+    border-radius: 4px 4px 0 0;
     box-shadow:
-        inset -3px 0 6px rgba(0, 0, 0, 0.3),
-        inset 3px 0 6px rgba(255, 255, 255, 0.1),
-        0 2px 4px rgba(0, 0, 0, 0.2);
+        inset -2px 0 4px rgba(0, 0, 0, 0.2),
+        inset 2px 0 3px rgba(255, 255, 255, 0.06),
+        0 2px 4px rgba(0, 0, 0, 0.12);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 1;
 }
 
-/* Tree canopy (foliage) - simplified organic shape */
+/* Tree canopy (foliage) - Muted forest greens */
 .domain-node::before {
     content: '';
     position: absolute;
-    top: 8px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 72px;
-    height: 72px;
-    background: radial-gradient(ellipse at 40% 35%, #8FB17E 0%, #7A9B6E 40%, #5D7A52 100%);
+    width: 95px;
+    height: 95px;
+    background: radial-gradient(ellipse at 40% 35%, #6B8066 0%, #5A6E56 40%, #4A5C48 100%);
     border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
     box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.2),
-        inset -10px -10px 20px rgba(0, 0, 0, 0.15),
-        inset 10px 10px 20px rgba(255, 255, 255, 0.1);
+        0 3px 8px rgba(0, 0, 0, 0.12),
+        inset -8px -8px 16px rgba(0, 0, 0, 0.08),
+        inset 8px 8px 16px rgba(255, 255, 255, 0.05);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 2;
 }
 
-/* Tree foliage texture - using ::after */
+/* Tree foliage texture - Subtle highlights */
 .domain-node::after {
     content: '';
     position: absolute;
-    top: 12px;
+    top: 14px;
     left: 50%;
     transform: translateX(-50%);
-    width: 68px;
-    height: 68px;
+    width: 91px;
+    height: 91px;
     background:
-        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.25), transparent 35%),
-        radial-gradient(circle at 65% 40%, rgba(0, 0, 0, 0.15), transparent 40%),
-        radial-gradient(circle at 45% 60%, rgba(255, 255, 255, 0.15), transparent 30%);
+        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.06), transparent 35%),
+        radial-gradient(circle at 65% 40%, rgba(0, 0, 0, 0.08), transparent 40%),
+        radial-gradient(circle at 45% 60%, rgba(255, 255, 255, 0.04), transparent 30%);
     border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 3;
@@ -248,51 +248,51 @@
 }
 
 .domain-marker:hover .domain-node {
-    transform: scale(1.12) translateY(-8px);
-    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.25));
+    transform: scale(1.08) translateY(-6px);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
 }
 
 .domain-marker:hover .domain-node::before {
-    background: radial-gradient(ellipse at 40% 35%, #9FC18E 0%, #8BB17E 40%, #6D8A62 100%);
-    transform: translateX(-50%) scale(1.05);
+    background: radial-gradient(ellipse at 40% 35%, #75897A 0%, #64786A 40%, #546658 100%);
+    transform: translateX(-50%) scale(1.03);
 }
 
 .domain-marker:hover .node-inner {
-    background: linear-gradient(180deg, #9B7F57 0%, #7B6447 100%);
+    background: linear-gradient(180deg, #544539 0%, #45372E 100%);
 }
 
-/* Special Product Strategy Tree - Larger & Distinctive */
+/* Special Product Strategy Tree - Larger with Deep Amber/Burgundy */
 .domain-node.special {
-    width: 110px;
-    height: 135px;
-    filter: drop-shadow(0 12px 24px rgba(232, 93, 68, 0.25));
+    width: 140px;
+    height: 230px;
+    filter: drop-shadow(0 5px 10px rgba(184, 112, 79, 0.15));
 }
 
-/* Special tree trunk - wider and taller */
+/* Special tree trunk - wider and taller with burgundy tones */
 .domain-node.special .node-inner {
-    width: 24px;
-    height: 48px;
-    background: linear-gradient(180deg, #9B5F47 0%, #7B4F37 100%);
+    width: 28px;
+    height: 70px;
+    background: linear-gradient(180deg, #5A3F2F 0%, #4A3225 100%);
 }
 
-/* Special tree canopy - autumn/orange tones */
+/* Special tree canopy - Deep amber/burgundy tones */
 .domain-node.special::before {
-    width: 88px;
-    height: 88px;
-    top: 10px;
-    background: radial-gradient(ellipse at 40% 35%, #F8AB7E 0%, #E89B6E 40%, #D87A52 100%);
+    width: 120px;
+    height: 120px;
+    top: 12px;
+    background: radial-gradient(ellipse at 40% 35%, #B8704F 0%, #A05D42 40%, #8A5038 100%);
     border-radius: 50% 50% 48% 48% / 58% 58% 42% 42%;
 }
 
-/* Special tree highlights */
+/* Special tree subtle highlights */
 .domain-node.special::after {
-    width: 84px;
-    height: 84px;
-    top: 14px;
+    width: 116px;
+    height: 116px;
+    top: 16px;
     background:
-        radial-gradient(circle at 32% 28%, rgba(255, 220, 180, 0.35), transparent 40%),
-        radial-gradient(circle at 68% 45%, rgba(0, 0, 0, 0.12), transparent 35%),
-        radial-gradient(circle at 48% 65%, rgba(255, 200, 150, 0.2), transparent 32%);
+        radial-gradient(circle at 32% 28%, rgba(255, 200, 170, 0.06), transparent 40%),
+        radial-gradient(circle at 68% 45%, rgba(0, 0, 0, 0.08), transparent 35%),
+        radial-gradient(circle at 48% 65%, rgba(255, 180, 150, 0.04), transparent 32%);
     border-radius: 50% 50% 48% 48% / 58% 58% 42% 42%;
 }
 
@@ -301,10 +301,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    border: 3px solid rgba(232, 93, 68, 0.3);
+    border: 2px solid rgba(184, 112, 79, 0.2);
     animation: pulse 2.5s ease-in-out infinite;
     z-index: 0;
 }
@@ -312,26 +312,26 @@
 @keyframes pulse {
     0%, 100% {
         transform: translate(-50%, -50%) scale(0.9);
-        opacity: 0.6;
+        opacity: 0.4;
     }
     50% {
-        transform: translate(-50%, -50%) scale(1.2);
+        transform: translate(-50%, -50%) scale(1.15);
         opacity: 0;
     }
 }
 
 .domain-marker.landmark:hover .domain-node.special {
-    transform: scale(1.15) translateY(-10px);
-    filter: drop-shadow(0 16px 32px rgba(232, 93, 68, 0.35));
+    transform: scale(1.08) translateY(-6px);
+    filter: drop-shadow(0 7px 14px rgba(184, 112, 79, 0.18));
 }
 
 .domain-marker.landmark:hover .domain-node.special::before {
-    background: radial-gradient(ellipse at 40% 35%, #FFBB8E 0%, #F8AB7E 40%, #E88A62 100%);
-    transform: translateX(-50%) scale(1.05);
+    background: radial-gradient(ellipse at 40% 35%, #C2805F 0%, #AA6D52 40%, #946048 100%);
+    transform: translateX(-50%) scale(1.03);
 }
 
 .domain-marker.landmark:hover .domain-node.special .node-inner {
-    background: linear-gradient(180deg, #AB6F57 0%, #8B5F47 100%);
+    background: linear-gradient(180deg, #644A3A 0%, #544030 100%);
 }
 
 /* Roadblocks (Rocks) */
@@ -366,23 +366,23 @@
     }
 }
 
-/* Roadblock Shapes - Natural Rounded Stones */
+/* Roadblock Shapes - Professional Natural Stones */
 .roadblock-shape {
     position: relative;
-    width: 48px;
-    height: 36px;
-    background: radial-gradient(ellipse at 35% 30%, #8A7562 0%, #6B5D4F 60%, #554A3E 100%);
-    border-radius: 45% 55% 50% 50% / 55% 60% 40% 45%;
+    width: 75px;
+    height: 52px;
+    background: radial-gradient(ellipse at 35% 30%, #9A8A7B 0%, #7D6F62 60%, #5E5449 100%);
+    border-radius: 42% 58% 48% 52% / 54% 62% 38% 46%;
     box-shadow:
-        0 6px 16px rgba(0, 0, 0, 0.3),
-        0 3px 8px rgba(0, 0, 0, 0.2),
-        inset -6px -6px 12px rgba(0, 0, 0, 0.4),
-        inset 6px 6px 12px rgba(255, 255, 255, 0.1);
+        0 4px 10px rgba(0, 0, 0, 0.15),
+        0 2px 5px rgba(0, 0, 0, 0.1),
+        inset -4px -4px 8px rgba(0, 0, 0, 0.12),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.06);
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform: rotate(-5deg);
+    transform: rotate(-3deg);
 }
 
-/* Stone texture and highlights */
+/* Stone texture with multiple small highlights */
 .roadblock-shape::before {
     content: '';
     position: absolute;
@@ -391,33 +391,37 @@
     width: 100%;
     height: 100%;
     background:
-        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.2) 0%, transparent 35%),
-        radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.1) 0%, transparent 30%);
-    border-radius: 45% 55% 50% 50% / 55% 60% 40% 45%;
+        radial-gradient(circle at 22% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 25%),
+        radial-gradient(circle at 38% 28%, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 68% 35%, rgba(255, 255, 255, 0.06) 0%, transparent 22%),
+        radial-gradient(circle at 70% 65%, rgba(0, 0, 0, 0.08) 0%, transparent 30%),
+        radial-gradient(circle at 45% 75%, rgba(0, 0, 0, 0.06) 0%, transparent 25%);
+    border-radius: 42% 58% 48% 52% / 54% 62% 38% 46%;
 }
 
-/* Stone highlight spot */
+/* Additional subtle stone detail spots */
 .roadblock-shape::after {
     content: '';
     position: absolute;
-    top: 8px;
-    left: 12px;
-    width: 18px;
-    height: 12px;
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.3), transparent 60%);
-    border-radius: 50% 40% 45% 55%;
-    transform: rotate(-10deg);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 52% 32%, rgba(255, 255, 255, 0.04) 0%, transparent 18%),
+        radial-gradient(circle at 80% 50%, rgba(0, 0, 0, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 30% 68%, rgba(255, 255, 255, 0.03) 0%, transparent 16%);
+    border-radius: 42% 58% 48% 52% / 54% 62% 38% 46%;
 }
 
 .roadblock:hover .roadblock-shape {
-    transform: scale(1.2) translateY(-6px) rotate(-3deg);
-    background: radial-gradient(ellipse at 35% 30%, #9A8572 0%, #7B6D5F 60%, #65594E 100%);
+    transform: scale(1.05) translateY(-2px) rotate(-2deg);
+    background: radial-gradient(ellipse at 35% 30%, #A49588 0%, #877A6F 60%, #68615A 100%);
     box-shadow:
-        0 10px 24px rgba(0, 0, 0, 0.35),
-        0 5px 12px rgba(0, 0, 0, 0.25),
-        inset -7px -7px 14px rgba(0, 0, 0, 0.45),
-        inset 7px 7px 14px rgba(255, 255, 255, 0.15);
+        0 5px 12px rgba(0, 0, 0, 0.18),
+        0 3px 6px rgba(0, 0, 0, 0.12),
+        inset -4px -4px 8px rgba(0, 0, 0, 0.14),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.08);
 }
 
 /* Roadblock Tooltip */
