@@ -66,42 +66,29 @@
    MARKER STYLES
    ========================================== */
 
-/* Tree Markers (Knowledge Domains) */
+/* Tree Markers (Knowledge Domains) - Invisible hotspots over background trees */
 .tree-marker {
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 10;
-    animation: markerFadeIn 0.8s ease forwards;
+    transform: translate(-50%, -50%);
 }
 
-.tree-marker:hover {
-    transform: translateY(-8px) scale(1.05);
-    z-index: 15;
-}
-
-.tree-marker .marker-icon {
-    font-size: 3rem;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    width: 70px;
-    height: 70px;
+.tree-marker .marker-hotspot {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 6px 20px rgba(60, 47, 35, 0.2);
-    border: 3px solid rgba(139, 115, 85, 0.3);
-    transition: all 0.3s ease;
-    margin-bottom: 10px;
+    background: transparent;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
 }
 
-.tree-marker:hover .marker-icon {
-    box-shadow: 0 10px 30px rgba(60, 47, 35, 0.3);
-    border-color: var(--coffee);
+.tree-marker:hover .marker-hotspot {
+    background: rgba(139, 115, 85, 0.15);
+    box-shadow: 0 0 0 4px rgba(139, 115, 85, 0.2), 0 0 20px rgba(139, 115, 85, 0.3);
     transform: scale(1.1);
 }
 
@@ -111,101 +98,113 @@
     font-weight: 600;
     color: #2C1F13;
     text-align: center;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(12px);
-    padding: 10px 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(60, 47, 35, 0.15);
-    border: 2px solid rgba(139, 115, 85, 0.25);
+    padding: 12px 24px;
+    border-radius: 24px;
+    box-shadow: 0 6px 20px rgba(60, 47, 35, 0.2);
+    border: 2px solid rgba(139, 115, 85, 0.4);
     white-space: nowrap;
-    transition: all 0.3s ease;
+    margin-top: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.9);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .tree-marker:hover .marker-label {
-    background: rgba(255, 255, 255, 1);
-    border-color: var(--coffee);
-    transform: scale(1.05);
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
 }
 
-/* Stone Markers (Roadblocks) */
+/* Stone Markers (Roadblocks) - Invisible hotspots over background stones */
 .stone-marker {
     position: absolute;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 8;
-    animation: markerFadeIn 1s ease forwards;
-}
-
-.stone-marker:hover {
-    transform: translateY(-6px) scale(1.1);
-    z-index: 12;
-}
-
-.stone-marker .marker-icon {
-    font-size: 2.5rem;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(8px);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    box-shadow: 0 5px 15px rgba(60, 47, 35, 0.2);
-    border: 2px solid rgba(139, 115, 85, 0.25);
+    cursor: pointer;
+    z-index: 8;
+    transform: translate(-50%, -50%);
+}
+
+.stone-marker .marker-hotspot {
+    width: 70px;
+    height: 50px;
+    border-radius: 40%;
+    background: transparent;
     transition: all 0.3s ease;
+    position: relative;
 }
 
-.stone-marker:hover .marker-icon {
-    box-shadow: 0 8px 24px rgba(60, 47, 35, 0.3);
-    border-color: var(--coffee);
-    background: rgba(255, 255, 255, 1);
+.stone-marker:hover .marker-hotspot {
+    background: rgba(125, 113, 103, 0.2);
+    box-shadow: 0 0 0 3px rgba(125, 113, 103, 0.25), 0 0 15px rgba(125, 113, 103, 0.3);
+    transform: scale(1.15);
 }
 
-/* Achievement Markers (Maple Leaves) */
+.stone-marker .marker-label {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2C1F13;
+    text-align: center;
+    background: rgba(255, 252, 248, 0.98);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 5px 16px rgba(60, 47, 35, 0.2);
+    border: 2px solid rgba(125, 113, 103, 0.35);
+    white-space: nowrap;
+    margin-top: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(0.9);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    max-width: 240px;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+.stone-marker:hover .marker-label {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* Achievement Markers (Maple Leaves) - Visible overlay elements */
 .achievement-marker {
     position: absolute;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 9;
-    animation: markerFadeIn 1.2s ease forwards;
+    animation: leafFloat 3s ease-in-out infinite;
+    transform: translate(-50%, -50%);
 }
 
 .achievement-marker:hover {
-    transform: translateY(-8px) scale(1.15) rotate(10deg);
+    transform: translate(-50%, -50%) translateY(-8px) scale(1.15) rotate(10deg);
     z-index: 13;
 }
 
 .achievement-marker .marker-icon {
-    font-size: 2.8rem;
-    background: linear-gradient(135deg, rgba(255, 247, 230, 0.98), rgba(255, 240, 220, 0.95));
-    backdrop-filter: blur(10px);
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 6px 18px rgba(232, 93, 68, 0.25);
-    border: 2.5px solid rgba(232, 93, 68, 0.3);
+    font-size: 3rem;
+    filter: drop-shadow(0 4px 12px rgba(232, 93, 68, 0.3));
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .achievement-marker:hover .marker-icon {
-    box-shadow: 0 10px 30px rgba(232, 93, 68, 0.4);
-    border-color: var(--maple-orange);
-    background: linear-gradient(135deg, rgba(255, 240, 220, 1), rgba(255, 235, 210, 1));
+    filter: drop-shadow(0 8px 20px rgba(232, 93, 68, 0.5));
 }
 
-/* Marker Fade In Animation */
-@keyframes markerFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.8);
+/* Gentle floating animation for maple leaves */
+@keyframes leafFloat {
+    0%, 100% {
+        transform: translate(-50%, -50%) translateY(0px) rotate(0deg);
     }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+    50% {
+        transform: translate(-50%, -50%) translateY(-6px) rotate(5deg);
     }
 }
 
@@ -445,27 +444,24 @@
         max-width: 1200px;
     }
 
-    .tree-marker .marker-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 2.5rem;
+    .tree-marker .marker-hotspot {
+        width: 70px;
+        height: 70px;
     }
 
-    .stone-marker .marker-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 2rem;
+    .stone-marker .marker-hotspot {
+        width: 60px;
+        height: 45px;
     }
 
     .achievement-marker .marker-icon {
-        width: 55px;
-        height: 55px;
-        font-size: 2.3rem;
+        font-size: 2.5rem;
     }
 
-    .tree-marker .marker-label {
+    .tree-marker .marker-label,
+    .stone-marker .marker-label {
         font-size: 0.9rem;
-        padding: 8px 16px;
+        padding: 10px 18px;
     }
 }
 
@@ -485,27 +481,24 @@
         margin: 0 20px;
     }
 
-    .tree-marker .marker-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 2rem;
+    .tree-marker .marker-hotspot {
+        width: 60px;
+        height: 60px;
     }
 
-    .stone-marker .marker-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 1.8rem;
+    .stone-marker .marker-hotspot {
+        width: 50px;
+        height: 40px;
     }
 
     .achievement-marker .marker-icon {
-        width: 48px;
-        height: 48px;
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
-    .tree-marker .marker-label {
+    .tree-marker .marker-label,
+    .stone-marker .marker-label {
         font-size: 0.85rem;
-        padding: 7px 14px;
+        padding: 8px 16px;
     }
 
     .journey-popup {
@@ -550,27 +543,24 @@
         margin: 0 10px;
     }
 
-    .tree-marker .marker-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 1.8rem;
+    .tree-marker .marker-hotspot {
+        width: 50px;
+        height: 50px;
     }
 
-    .stone-marker .marker-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.5rem;
+    .stone-marker .marker-hotspot {
+        width: 45px;
+        height: 35px;
     }
 
     .achievement-marker .marker-icon {
-        width: 42px;
-        height: 42px;
-        font-size: 1.7rem;
+        font-size: 2rem;
     }
 
-    .tree-marker .marker-label {
-        font-size: 0.75rem;
-        padding: 6px 12px;
+    .tree-marker .marker-label,
+    .stone-marker .marker-label {
+        font-size: 0.8rem;
+        padding: 7px 14px;
     }
 
     .popup-header h3 {
