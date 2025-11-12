@@ -318,13 +318,25 @@
                 <div class="marker-label">Field choice</div>
             </div>
 
-            <!-- 4. Tree: Data Analytics (top-right tree) -->
+            <!-- 4. Tree: Engineering Foundation (bottom-left green tree) -->
+            <div class="tree-marker" data-tree="engineering" style="left: 20%; top: 62%;">
+                <div class="marker-hotspot"></div>
+                <div class="marker-label">Engineering basics</div>
+            </div>
+
+            <!-- 5. Tree: Product Design (bottom-left orange tree) -->
+            <div class="tree-marker" data-tree="product-design" style="left: 11%; top: 59%;">
+                <div class="marker-hotspot"></div>
+                <div class="marker-label">Product thinking</div>
+            </div>
+
+            <!-- 6. Tree: Data Analytics (top-right tree) -->
             <div class="tree-marker" data-tree="analytics" style="left: 78%; top: 35%;">
                 <div class="marker-hotspot"></div>
                 <div class="marker-label">Data & analytics</div>
             </div>
 
-            <!-- 5. Tree: Building Things (top-left tree) -->
+            <!-- 7. Tree: Building Things (top-left tree) -->
             <div class="tree-marker" data-tree="current" style="left: 32%; top: 18%;">
                 <div class="marker-hotspot"></div>
                 <div class="marker-label">Building things</div>
@@ -375,6 +387,102 @@
             </div>
 
             <!-- Popups for Trees (Knowledge Domains) -->
+            <div class="journey-popup" id="popup-engineering">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>Engineering Foundation (2021-2025)</h3>
+                    <p class="popup-subtitle">Where I learned to build things</p>
+                </div>
+                <div class="popup-content">
+                    <p class="popup-description">Started with mechanical engineering, thinking I'd design machines. Learned CAD, simulations, product development. But I cared more about solving the right problems than building perfect solutions.</p>
+
+                    <div class="popup-projects">
+                        <div class="popup-project">
+                            <span class="project-emoji">⚙️</span>
+                            <div>
+                                <strong>Ashok Leyland Engine Simulation</strong>
+                                <p>Built GT-Suite model for 4-cylinder diesel engine. Achieved brake torque error within ±3%, model accuracy >97%. Learned that technical precision matters, but understanding the system matters more.</p>
+                                <a href="projects/ashok-leyland.html" class="project-link">View Details →</a>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">🔧</span>
+                            <div>
+                                <strong>Mining Safety Haptic Glove</strong>
+                                <p>Stakeholder research revealed miners needed hands-free safety communication. Pivoted from inner-braces to glove-based haptic feedback after field interviews. First lesson in product-market fit.</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">📦</span>
+                            <div>
+                                <strong>Auxetic Phone Case</strong>
+                                <p>Designed impact-absorbing phone case using auxetic structures. Learned CAD, prototyping, and that good design requires understanding material properties and user needs.</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">🎓</span>
+                            <div>
+                                <strong>Alumni Career Data Analysis</strong>
+                                <p>Cleaned 3,300+ messy alumni records. Built Random Forest models for career prediction. Discovered data science while managing alumni affairs. This project opened the analytics path.</p>
+                                <a href="https://github.com/sanjxksl/alumni-career-success" target="_blank" class="project-link">GitHub →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="journey-popup" id="popup-product-design">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>Product & Design Thinking (2023-2025)</h3>
+                    <p class="popup-subtitle">Where I learned to ask "why"</p>
+                </div>
+                <div class="popup-content">
+                    <p class="popup-description">Added product design minor after realizing I cared more about people than machines. Learned ethnography, systems design, strategic frameworks. Discovered that good products start with understanding problems, not solutions.</p>
+
+                    <div class="popup-projects">
+                        <div class="popup-project">
+                            <span class="project-emoji">🎯</span>
+                            <div>
+                                <strong>Aesthify: Design Intelligence Framework</strong>
+                                <p>Built ML framework to quantify aesthetic principles using YOLOv8. Study with 101 participants revealed simplicity and contrast drive preference. Proved you CAN quantify aesthetics, contrary to what everyone said.</p>
+                                <a href="projects/aesthify.html" class="project-link">View Details →</a>
+                                <a href="https://github.com/sanjxksl/Aesthify" target="_blank" class="project-link">GitHub →</a>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">🌊</span>
+                            <div>
+                                <strong>HyperHorizon Go-to-Market Strategy</strong>
+                                <p>Led market research for autonomous underwater vehicle. Researched 22 competitors, interviewed potential users, won 4 government competitions. Learned ownership the hard way in messy startup environment.</p>
+                                <a href="projects/hyperhorizon.html" class="project-link">View Details →</a>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">📱</span>
+                            <div>
+                                <strong>Headspace UX Evaluation</strong>
+                                <p>Applied Nielsen's 10 heuristics across 5 core screens. Identified 47 usability issues with actionable recommendations. Learned to critique design systematically, not just say "it feels off."</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">🏢</span>
+                            <div>
+                                <strong>TATA Semiconductor Strategy</strong>
+                                <p>Analyzed India's semiconductor opportunity. Competitive analysis of 22 global players, market sizing, multi-phase roadmap. Learned to think about markets, not just products.</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">🖨️</span>
+                            <div>
+                                <strong>Printing Press Ethnography</strong>
+                                <p>Observed print shop operations to find bottlenecks operators couldn't articulate. Proposed automation based on actual workflow, not assumptions. First real ethnographic research project.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="journey-popup" id="popup-analytics">
                 <div class="popup-close">&times;</div>
                 <div class="popup-header">
