@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     createPopupBackdrop();
 });
 
-// Global variables for hover delay management
-let hoverTimeout = null;
+// Global variable to track active popup
 let activePopup = null;
 
 // Initialize all marker interactions
@@ -33,7 +32,7 @@ function createPopupBackdrop() {
     backdrop.addEventListener('click', closeAllPopups);
 }
 
-// Tree Markers (Knowledge Domains) - HOVER to open
+// Tree Markers (Knowledge Domains) - CLICK to open popup (hover shows label via CSS)
 function initTreeMarkers() {
     const treeMarkers = document.querySelectorAll('.tree-marker');
 
@@ -44,28 +43,7 @@ function initTreeMarkers() {
 
         if (!popup) return;
 
-        // Open popup on hover
-        marker.addEventListener('mouseenter', () => {
-            clearHoverTimeout();
-            openPopup(popup);
-        });
-
-        // Start close timer when leaving marker
-        marker.addEventListener('mouseleave', () => {
-            startCloseTimer(popup);
-        });
-
-        // Keep popup open when hovering over it
-        popup.addEventListener('mouseenter', () => {
-            clearHoverTimeout();
-        });
-
-        // Start close timer when leaving popup
-        popup.addEventListener('mouseleave', () => {
-            startCloseTimer(popup);
-        });
-
-        // Click also works (for touch devices)
+        // Click to toggle popup
         marker.addEventListener('click', (e) => {
             e.stopPropagation();
             if (popup.classList.contains('active')) {
@@ -77,7 +55,7 @@ function initTreeMarkers() {
     });
 }
 
-// Stone Markers (Roadblocks) - HOVER to open
+// Stone Markers (Roadblocks) - CLICK to open popup (hover shows label via CSS)
 function initStoneMarkers() {
     const stoneMarkers = document.querySelectorAll('.stone-marker');
 
@@ -88,28 +66,7 @@ function initStoneMarkers() {
 
         if (!popup) return;
 
-        // Open popup on hover
-        marker.addEventListener('mouseenter', () => {
-            clearHoverTimeout();
-            openPopup(popup);
-        });
-
-        // Start close timer when leaving marker
-        marker.addEventListener('mouseleave', () => {
-            startCloseTimer(popup);
-        });
-
-        // Keep popup open when hovering over it
-        popup.addEventListener('mouseenter', () => {
-            clearHoverTimeout();
-        });
-
-        // Start close timer when leaving popup
-        popup.addEventListener('mouseleave', () => {
-            startCloseTimer(popup);
-        });
-
-        // Click also works (for touch devices)
+        // Click to toggle popup
         marker.addEventListener('click', (e) => {
             e.stopPropagation();
             if (popup.classList.contains('active')) {
@@ -181,21 +138,6 @@ function initEscapeKey() {
     });
 }
 
-// Hover delay management functions
-function startCloseTimer(popup) {
-    clearHoverTimeout();
-    hoverTimeout = setTimeout(() => {
-        closePopup(popup);
-    }, 500); // 500ms delay before closing
-}
-
-function clearHoverTimeout() {
-    if (hoverTimeout) {
-        clearTimeout(hoverTimeout);
-        hoverTimeout = null;
-    }
-}
-
 // Open Popup
 function openPopup(popup) {
     // Close any currently open popups
@@ -236,8 +178,6 @@ function closePopup(popup) {
 
 // Close All Popups
 function closeAllPopups() {
-    clearHoverTimeout();
-
     const popups = document.querySelectorAll('.journey-popup');
     popups.forEach(popup => {
         popup.classList.remove('active');
