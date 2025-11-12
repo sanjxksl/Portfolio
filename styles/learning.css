@@ -124,6 +124,7 @@
     visibility: hidden;
     transform: translateY(-10px) scale(0.9);
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
 }
 
 .tree-marker:hover .marker-label {
@@ -200,6 +201,7 @@
     max-width: 240px;
     white-space: normal;
     line-height: 1.4;
+    pointer-events: none;
 }
 
 .stone-marker:hover .marker-label {
