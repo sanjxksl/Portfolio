@@ -292,38 +292,51 @@
         <!-- Journey Map with Hand-drawn Background -->
         <div class="journey-map-container">
 
-            <!-- Tree Markers (Knowledge Domains) - Positioned over background trees -->
-            <div class="tree-marker" data-tree="engineering" style="left: 18%; top: 55%;">
+            <!-- Journey Markers - Chronological Order (Left to Right) -->
+
+            <!-- 0. Bunny: Journey Start (Wanna know me better?) -->
+            <div class="bunny-marker" style="left: 5%; top: 30%;">
+                <div class="bunny-hotspot"></div>
+                <div class="bunny-speech-bubble">Wanna know me better?</div>
+            </div>
+
+            <!-- 1. Stone: Cars or People? (First dilemma, before first tree) -->
+            <div class="stone-marker" data-stone="cars-or-people" style="left: 15%; top: 45%;">
+                <div class="marker-hotspot"></div>
+                <div class="marker-label">Cars or People?</div>
+            </div>
+
+            <!-- 2. Tree: Engineering Foundation (Left tree) -->
+            <div class="tree-marker" data-tree="engineering" style="left: 22%; top: 55%;">
                 <div class="marker-hotspot"></div>
                 <div class="marker-label">Engineering Foundation</div>
             </div>
 
+            <!-- 3. Stone: Don't Waste the Degree (Between first and second tree) -->
+            <div class="stone-marker" data-stone="dont-waste-degree" style="left: 35%; top: 35%;">
+                <div class="marker-hotspot"></div>
+                <div class="marker-label">Don't Waste the Degree</div>
+            </div>
+
+            <!-- 4. Tree: Product & Design (Middle tree) -->
             <div class="tree-marker" data-tree="product-design" style="left: 52%; top: 35%;">
                 <div class="marker-hotspot"></div>
                 <div class="marker-label">Product & Design</div>
             </div>
 
+            <!-- 5. Stone: Underqualified but Overambitious (Moving toward right) -->
+            <div class="stone-marker" data-stone="underqualified" style="left: 65%; top: 50%;">
+                <div class="marker-hotspot"></div>
+                <div class="marker-label">Underqualified but Overambitious</div>
+            </div>
+
+            <!-- 6. Tree: Analytics & ML / Rotman (Right tree) -->
             <div class="tree-marker" data-tree="analytics" style="left: 85%; top: 48%;">
                 <div class="marker-hotspot"></div>
                 <div class="marker-label">Analytics & ML</div>
             </div>
 
-            <!-- Stone Markers (Roadblocks) - Positioned over background stones -->
-            <div class="stone-marker" data-stone="cars-or-people" style="left: 30%; top: 62%;">
-                <div class="marker-hotspot"></div>
-                <div class="marker-label">Cars or People?</div>
-            </div>
-
-            <div class="stone-marker" data-stone="dont-waste-degree" style="left: 56%; top: 28%;">
-                <div class="marker-hotspot"></div>
-                <div class="marker-label">Don't Waste the Degree</div>
-            </div>
-
-            <div class="stone-marker" data-stone="underqualified" style="left: 68%; top: 70%;">
-                <div class="marker-hotspot"></div>
-                <div class="marker-label">Underqualified but Overambitious</div>
-            </div>
-
+            <!-- 7. Stone: Finance or Tech? (Near analytics tree) -->
             <div class="stone-marker" data-stone="finance-or-tech" style="left: 78%; top: 38%;">
                 <div class="marker-hotspot"></div>
                 <div class="marker-label">Finance or Tech?</div>
