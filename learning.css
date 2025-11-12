@@ -180,120 +180,27 @@
     }
 }
 
-/* Domain Nodes - Professional Polished Trees */
+/* Domain Nodes - SVG Trees */
 .domain-node {
-    position: relative;
-    width: 110px;
-    height: 170px;
+    display: block;
     margin-bottom: 20px;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
-}
-
-/* Tree trunk - Natural brown tones */
-.node-inner {
-    position: absolute;
-    bottom: 0;
-    width: 22px;
-    height: 55px;
-    background: linear-gradient(180deg, #4A3B2F 0%, #3B2E24 100%);
-    border-radius: 4px 4px 0 0;
-    box-shadow:
-        inset -2px 0 4px rgba(0, 0, 0, 0.2),
-        inset 2px 0 3px rgba(255, 255, 255, 0.06),
-        0 2px 4px rgba(0, 0, 0, 0.12);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: 1;
-}
-
-/* Tree canopy (foliage) - Muted forest greens */
-.domain-node::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 95px;
-    height: 95px;
-    background: radial-gradient(ellipse at 40% 35%, #6B8066 0%, #5A6E56 40%, #4A5C48 100%);
-    border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
-    box-shadow:
-        0 3px 8px rgba(0, 0, 0, 0.12),
-        inset -8px -8px 16px rgba(0, 0, 0, 0.08),
-        inset 8px 8px 16px rgba(255, 255, 255, 0.05);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: 2;
-}
-
-/* Tree foliage texture - Subtle highlights */
-.domain-node::after {
-    content: '';
-    position: absolute;
-    top: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 91px;
-    height: 91px;
-    background:
-        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.06), transparent 35%),
-        radial-gradient(circle at 65% 40%, rgba(0, 0, 0, 0.08), transparent 40%),
-        radial-gradient(circle at 45% 60%, rgba(255, 255, 255, 0.04), transparent 30%);
-    border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: 3;
-    pointer-events: none;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 
 .domain-marker:hover .domain-node {
-    transform: scale(1.08) translateY(-6px);
-    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
+    transform: scale(1.05) translateY(-4px);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
 }
 
-.domain-marker:hover .domain-node::before {
-    background: radial-gradient(ellipse at 40% 35%, #75897A 0%, #64786A 40%, #546658 100%);
-    transform: translateX(-50%) scale(1.03);
-}
-
-.domain-marker:hover .node-inner {
-    background: linear-gradient(180deg, #544539 0%, #45372E 100%);
-}
-
-/* Special Product Strategy Tree - Larger with Deep Amber/Burgundy */
+/* Special Product Strategy Tree */
 .domain-node.special {
-    width: 140px;
-    height: 230px;
-    filter: drop-shadow(0 5px 10px rgba(184, 112, 79, 0.15));
+    filter: drop-shadow(0 5px 10px rgba(184, 112, 79, 0.2));
 }
 
-/* Special tree trunk - wider and taller with burgundy tones */
-.domain-node.special .node-inner {
-    width: 28px;
-    height: 70px;
-    background: linear-gradient(180deg, #5A3F2F 0%, #4A3225 100%);
-}
-
-/* Special tree canopy - Deep amber/burgundy tones */
-.domain-node.special::before {
-    width: 120px;
-    height: 120px;
-    top: 12px;
-    background: radial-gradient(ellipse at 40% 35%, #B8704F 0%, #A05D42 40%, #8A5038 100%);
-    border-radius: 50% 50% 48% 48% / 58% 58% 42% 42%;
-}
-
-/* Special tree subtle highlights */
-.domain-node.special::after {
-    width: 116px;
-    height: 116px;
-    top: 16px;
-    background:
-        radial-gradient(circle at 32% 28%, rgba(255, 200, 170, 0.06), transparent 40%),
-        radial-gradient(circle at 68% 45%, rgba(0, 0, 0, 0.08), transparent 35%),
-        radial-gradient(circle at 48% 65%, rgba(255, 180, 150, 0.04), transparent 32%);
-    border-radius: 50% 50% 48% 48% / 58% 58% 42% 42%;
+.domain-marker.landmark:hover .domain-node.special {
+    transform: scale(1.05) translateY(-4px);
+    filter: drop-shadow(0 7px 14px rgba(184, 112, 79, 0.3));
 }
 
 .node-pulse {
@@ -366,62 +273,16 @@
     }
 }
 
-/* Roadblock Shapes - Professional Natural Stones */
+/* Roadblock Shapes - SVG Stones */
 .roadblock-shape {
-    position: relative;
-    width: 75px;
-    height: 52px;
-    background: radial-gradient(ellipse at 35% 30%, #9A8A7B 0%, #7D6F62 60%, #5E5449 100%);
-    border-radius: 42% 58% 48% 52% / 54% 62% 38% 46%;
-    box-shadow:
-        0 4px 10px rgba(0, 0, 0, 0.15),
-        0 2px 5px rgba(0, 0, 0, 0.1),
-        inset -4px -4px 8px rgba(0, 0, 0, 0.12),
-        inset 4px 4px 8px rgba(255, 255, 255, 0.06);
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform: rotate(-3deg);
-}
-
-/* Stone texture with multiple small highlights */
-.roadblock-shape::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        radial-gradient(circle at 22% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 25%),
-        radial-gradient(circle at 38% 28%, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
-        radial-gradient(circle at 68% 35%, rgba(255, 255, 255, 0.06) 0%, transparent 22%),
-        radial-gradient(circle at 70% 65%, rgba(0, 0, 0, 0.08) 0%, transparent 30%),
-        radial-gradient(circle at 45% 75%, rgba(0, 0, 0, 0.06) 0%, transparent 25%);
-    border-radius: 42% 58% 48% 52% / 54% 62% 38% 46%;
-}
-
-/* Additional subtle stone detail spots */
-.roadblock-shape::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        radial-gradient(circle at 52% 32%, rgba(255, 255, 255, 0.04) 0%, transparent 18%),
-        radial-gradient(circle at 80% 50%, rgba(0, 0, 0, 0.05) 0%, transparent 20%),
-        radial-gradient(circle at 30% 68%, rgba(255, 255, 255, 0.03) 0%, transparent 16%);
-    border-radius: 42% 58% 48% 52% / 54% 62% 38% 46%;
+    display: block;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
 }
 
 .roadblock:hover .roadblock-shape {
-    transform: scale(1.05) translateY(-2px) rotate(-2deg);
-    background: radial-gradient(ellipse at 35% 30%, #A49588 0%, #877A6F 60%, #68615A 100%);
-    box-shadow:
-        0 5px 12px rgba(0, 0, 0, 0.18),
-        0 3px 6px rgba(0, 0, 0, 0.12),
-        inset -4px -4px 8px rgba(0, 0, 0, 0.14),
-        inset 4px 4px 8px rgba(255, 255, 255, 0.08);
+    transform: scale(1.08) translateY(-3px);
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
 }
 
 /* Roadblock Tooltip */

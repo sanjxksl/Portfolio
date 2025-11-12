@@ -307,53 +307,218 @@
             <div class="journey-markers">
                 <!-- Domain 1: Data & Analytics (135° - Top Left) -->
                 <div class="domain-marker" data-domain="analytics" style="position: absolute; left: calc(50% - 198px); top: calc(50% - 198px); transform: translate(-50%, -50%);">
-                    <div class="domain-node">
-                        <div class="node-inner"></div>
-                    </div>
+                    <svg class="domain-node" width="110" height="140" viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Trunk -->
+                        <rect x="47" y="80" width="16" height="60" rx="2" fill="#4A3B2F"/>
+                        <rect x="47" y="80" width="16" height="60" rx="2" fill="url(#trunkGradient)"/>
+                        <!-- Bark texture lines -->
+                        <line x1="50" y1="85" x2="50" y2="135" stroke="#3B2E24" stroke-width="1" opacity="0.4"/>
+                        <line x1="60" y1="90" x2="60" y2="138" stroke="#3B2E24" stroke-width="1" opacity="0.4"/>
+
+                        <!-- Canopy - Multiple layers for depth -->
+                        <!-- Back layer -->
+                        <ellipse cx="55" cy="50" rx="42" ry="45" fill="#4A5C48" opacity="0.7"/>
+                        <!-- Middle layer -->
+                        <ellipse cx="55" cy="48" rx="38" ry="42" fill="#5A6E56"/>
+                        <!-- Front layer -->
+                        <ellipse cx="55" cy="45" rx="34" ry="38" fill="#6B8066"/>
+                        <!-- Highlights -->
+                        <ellipse cx="40" cy="35" rx="12" ry="10" fill="#7A8F75" opacity="0.5"/>
+                        <ellipse cx="65" cy="42" rx="10" ry="8" fill="#7A8F75" opacity="0.4"/>
+
+                        <!-- Shadow details -->
+                        <path d="M 30 60 Q 55 70, 80 60" stroke="none" fill="#3D4D3B" opacity="0.15"/>
+
+                        <defs>
+                            <linearGradient id="trunkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#3B2E24" stop-opacity="0.3"/>
+                                <stop offset="50%" stop-color="transparent"/>
+                                <stop offset="100%" stop-color="#5A4A3C" stop-opacity="0.2"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
                     <div class="marker-label">Data & Analytics</div>
                 </div>
 
                 <!-- Domain 2: Engineering Foundation (225° - Bottom Left) -->
                 <div class="domain-marker" data-domain="engineering" style="position: absolute; left: calc(50% - 198px); top: calc(50% + 198px); transform: translate(-50%, -50%);">
-                    <div class="domain-node">
-                        <div class="node-inner"></div>
-                    </div>
+                    <svg class="domain-node" width="110" height="140" viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Trunk -->
+                        <rect x="47" y="80" width="16" height="60" rx="2" fill="#4A3B2F"/>
+                        <rect x="47" y="80" width="16" height="60" rx="2" fill="url(#trunkGradient2)"/>
+                        <!-- Bark texture -->
+                        <line x1="51" y1="88" x2="51" y2="132" stroke="#3B2E24" stroke-width="1" opacity="0.4"/>
+                        <line x1="59" y1="92" x2="59" y2="136" stroke="#3B2E24" stroke-width="1" opacity="0.4"/>
+
+                        <!-- Canopy layers -->
+                        <ellipse cx="55" cy="50" rx="42" ry="45" fill="#4A5C48" opacity="0.7"/>
+                        <ellipse cx="55" cy="48" rx="38" ry="42" fill="#5A6E56"/>
+                        <ellipse cx="55" cy="45" rx="34" ry="38" fill="#6B8066"/>
+                        <!-- Highlights -->
+                        <ellipse cx="68" cy="38" rx="11" ry="9" fill="#7A8F75" opacity="0.5"/>
+                        <ellipse cx="42" cy="43" rx="10" ry="8" fill="#7A8F75" opacity="0.4"/>
+                        <!-- Shadow -->
+                        <path d="M 30 60 Q 55 70, 80 60" stroke="none" fill="#3D4D3B" opacity="0.15"/>
+
+                        <defs>
+                            <linearGradient id="trunkGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#3B2E24" stop-opacity="0.3"/>
+                                <stop offset="50%" stop-color="transparent"/>
+                                <stop offset="100%" stop-color="#5A4A3C" stop-opacity="0.2"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
                     <div class="marker-label">Engineering Foundation</div>
                 </div>
 
                 <!-- Domain 3: Design Thinking (315° - Bottom Right) -->
                 <div class="domain-marker" data-domain="design" style="position: absolute; left: calc(50% + 198px); top: calc(50% + 198px); transform: translate(-50%, -50%);">
-                    <div class="domain-node">
-                        <div class="node-inner"></div>
-                    </div>
+                    <svg class="domain-node" width="110" height="140" viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Trunk -->
+                        <rect x="47" y="80" width="16" height="60" rx="2" fill="#4A3B2F"/>
+                        <rect x="47" y="80" width="16" height="60" rx="2" fill="url(#trunkGradient3)"/>
+                        <!-- Bark texture -->
+                        <line x1="52" y1="86" x2="52" y2="134" stroke="#3B2E24" stroke-width="1" opacity="0.4"/>
+                        <line x1="58" y1="91" x2="58" y2="137" stroke="#3B2E24" stroke-width="1" opacity="0.4"/>
+
+                        <!-- Canopy layers -->
+                        <ellipse cx="55" cy="50" rx="42" ry="45" fill="#4A5C48" opacity="0.7"/>
+                        <ellipse cx="55" cy="48" rx="38" ry="42" fill="#5A6E56"/>
+                        <ellipse cx="55" cy="45" rx="34" ry="38" fill="#6B8066"/>
+                        <!-- Highlights -->
+                        <ellipse cx="43" cy="40" rx="11" ry="10" fill="#7A8F75" opacity="0.5"/>
+                        <ellipse cx="66" cy="36" rx="10" ry="8" fill="#7A8F75" opacity="0.4"/>
+                        <!-- Shadow -->
+                        <path d="M 30 60 Q 55 70, 80 60" stroke="none" fill="#3D4D3B" opacity="0.15"/>
+
+                        <defs>
+                            <linearGradient id="trunkGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#3B2E24" stop-opacity="0.3"/>
+                                <stop offset="50%" stop-color="transparent"/>
+                                <stop offset="100%" stop-color="#5A4A3C" stop-opacity="0.2"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
                     <div class="marker-label">Design Thinking</div>
                 </div>
 
                 <!-- Domain 4: Product Strategy (Center) - Special landmark -->
                 <div class="domain-marker landmark" data-domain="product" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
-                    <div class="domain-node special">
-                        <div class="node-inner"></div>
-                        <div class="node-pulse"></div>
-                    </div>
+                    <svg class="domain-node special" width="140" height="180" viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Trunk - Thicker for special tree -->
+                        <rect x="60" y="95" width="20" height="85" rx="2.5" fill="#5A3F2F"/>
+                        <rect x="60" y="95" width="20" height="85" rx="2.5" fill="url(#trunkGradientSpecial)"/>
+                        <!-- Bark texture -->
+                        <line x1="64" y1="100" x2="64" y2="175" stroke="#4A3225" stroke-width="1.2" opacity="0.4"/>
+                        <line x1="76" y1="105" x2="76" y2="178" stroke="#4A3225" stroke-width="1.2" opacity="0.4"/>
+                        <line x1="70" y1="102" x2="70" y2="176" stroke="#4A3225" stroke-width="0.8" opacity="0.3"/>
+
+                        <!-- Canopy layers - Autumn/amber tones -->
+                        <!-- Back layer -->
+                        <ellipse cx="70" cy="55" rx="52" ry="55" fill="#8A5038" opacity="0.7"/>
+                        <!-- Middle layer -->
+                        <ellipse cx="70" cy="52" rx="48" ry="51" fill="#A05D42"/>
+                        <!-- Front layer -->
+                        <ellipse cx="70" cy="48" rx="44" ry="47" fill="#B8704F"/>
+                        <!-- Highlights - warm tones -->
+                        <ellipse cx="48" cy="38" rx="15" ry="12" fill="#C98561" opacity="0.6"/>
+                        <ellipse cx="88" cy="45" rx="13" ry="11" fill="#C98561" opacity="0.5"/>
+                        <ellipse cx="70" cy="32" rx="11" ry="9" fill="#D49A76" opacity="0.5"/>
+                        <!-- Shadow details -->
+                        <path d="M 35 70 Q 70 82, 105 70" stroke="none" fill="#6D3E2A" opacity="0.15"/>
+
+                        <defs>
+                            <linearGradient id="trunkGradientSpecial" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#4A3225" stop-opacity="0.4"/>
+                                <stop offset="50%" stop-color="transparent"/>
+                                <stop offset="100%" stop-color="#6A4F3A" stop-opacity="0.3"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="node-pulse"></div>
                     <div class="marker-label special">Product Strategy</div>
                 </div>
 
                 <!-- Roadblocks - Circular positioning at 180px radius -->
                 <!-- Stone 1: 180° (Left) - Between Analytics and Engineering -->
                 <div class="roadblock" data-roadblock="analytics-eng" style="position: absolute; left: calc(50% - 180px); top: 50%; transform: translate(-50%, -50%);">
-                    <div class="roadblock-shape"></div>
+                    <svg class="roadblock-shape" width="70" height="50" viewBox="0 0 70 50" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Irregular stone shape -->
+                        <path d="M 10 28 L 5 20 L 12 8 L 25 5 L 42 7 L 58 12 L 65 22 L 62 35 L 48 45 L 28 47 L 15 42 Z"
+                              fill="#7D7167" stroke="none"/>
+                        <!-- Layers for depth -->
+                        <path d="M 10 28 L 5 20 L 12 8 L 25 5 L 42 7 L 58 12 L 65 22 L 62 35 L 48 45 L 28 47 L 15 42 Z"
+                              fill="url(#stoneGradient1)" stroke="none"/>
+                        <!-- Texture/crack lines -->
+                        <path d="M 15 10 L 22 18 L 28 22" stroke="#5E5449" stroke-width="1" fill="none" opacity="0.4"/>
+                        <path d="M 45 12 L 42 22 L 38 30" stroke="#5E5449" stroke-width="1" fill="none" opacity="0.3"/>
+                        <path d="M 28 25 L 35 32" stroke="#5E5449" stroke-width="0.8" fill="none" opacity="0.3"/>
+                        <!-- Highlights -->
+                        <ellipse cx="20" cy="15" rx="6" ry="4" fill="#A69A8E" opacity="0.4"/>
+                        <ellipse cx="45" cy="20" rx="5" ry="3" fill="#A69A8E" opacity="0.3"/>
+
+                        <defs>
+                            <radialGradient id="stoneGradient1" cx="35%" cy="30%">
+                                <stop offset="0%" stop-color="#9A8A7B" stop-opacity="0.3"/>
+                                <stop offset="60%" stop-color="#7D6F62" stop-opacity="0.5"/>
+                                <stop offset="100%" stop-color="#5E5449" stop-opacity="0.6"/>
+                            </radialGradient>
+                        </defs>
+                    </svg>
                     <div class="roadblock-tooltip">"Pick a lane: technical or business"</div>
                 </div>
 
                 <!-- Stone 2: 270° (Bottom) - Between Engineering and Design -->
                 <div class="roadblock" data-roadblock="eng-design" style="position: absolute; left: 50%; top: calc(50% + 180px); transform: translate(-50%, -50%);">
-                    <div class="roadblock-shape"></div>
+                    <svg class="roadblock-shape" width="68" height="48" viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Irregular stone shape - different than first -->
+                        <path d="M 8 25 L 6 18 L 10 10 L 20 6 L 35 5 L 50 8 L 60 15 L 63 25 L 58 38 L 45 44 L 30 46 L 18 40 Z"
+                              fill="#7D7167" stroke="none"/>
+                        <path d="M 8 25 L 6 18 L 10 10 L 20 6 L 35 5 L 50 8 L 60 15 L 63 25 L 58 38 L 45 44 L 30 46 L 18 40 Z"
+                              fill="url(#stoneGradient2)" stroke="none"/>
+                        <!-- Cracks -->
+                        <path d="M 20 12 L 25 20 L 30 26" stroke="#5E5449" stroke-width="1" fill="none" opacity="0.4"/>
+                        <path d="M 48 14 L 45 24" stroke="#5E5449" stroke-width="1" fill="none" opacity="0.3"/>
+                        <path d="M 32 28 L 38 35" stroke="#5E5449" stroke-width="0.8" fill="none" opacity="0.35"/>
+                        <!-- Highlights -->
+                        <ellipse cx="24" cy="14" rx="5" ry="4" fill="#A69A8E" opacity="0.35"/>
+                        <ellipse cx="48" cy="22" rx="6" ry="3" fill="#A69A8E" opacity="0.3"/>
+
+                        <defs>
+                            <radialGradient id="stoneGradient2" cx="38%" cy="28%">
+                                <stop offset="0%" stop-color="#9A8A7B" stop-opacity="0.3"/>
+                                <stop offset="60%" stop-color="#7D6F62" stop-opacity="0.5"/>
+                                <stop offset="100%" stop-color="#5E5449" stop-opacity="0.6"/>
+                            </radialGradient>
+                        </defs>
+                    </svg>
                     <div class="roadblock-tooltip">"But engineers don't do user research"</div>
                 </div>
 
                 <!-- Stone 3: 45° (Top Right) - Between Design and Analytics -->
                 <div class="roadblock" data-roadblock="design-analytics" style="position: absolute; left: calc(50% + 127px); top: calc(50% - 127px); transform: translate(-50%, -50%);">
-                    <div class="roadblock-shape"></div>
+                    <svg class="roadblock-shape" width="72" height="52" viewBox="0 0 72 52" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Irregular stone shape - third variation -->
+                        <path d="M 12 30 L 8 22 L 10 12 L 18 6 L 32 4 L 48 6 L 62 14 L 66 24 L 64 36 L 52 46 L 35 50 L 20 45 Z"
+                              fill="#7D7167" stroke="none"/>
+                        <path d="M 12 30 L 8 22 L 10 12 L 18 6 L 32 4 L 48 6 L 62 14 L 66 24 L 64 36 L 52 46 L 35 50 L 20 45 Z"
+                              fill="url(#stoneGradient3)" stroke="none"/>
+                        <!-- Cracks -->
+                        <path d="M 22 15 L 28 24 L 32 30" stroke="#5E5449" stroke-width="1" fill="none" opacity="0.4"/>
+                        <path d="M 50 16 L 48 26 L 44 34" stroke="#5E5449" stroke-width="1" fill="none" opacity="0.3"/>
+                        <path d="M 35 18 L 38 28" stroke="#5E5449" stroke-width="0.8" fill="none" opacity="0.35"/>
+                        <!-- Highlights -->
+                        <ellipse cx="26" cy="16" rx="6" ry="5" fill="#A69A8E" opacity="0.4"/>
+                        <ellipse cx="52" cy="24" rx="5" ry="4" fill="#A69A8E" opacity="0.3"/>
+
+                        <defs>
+                            <radialGradient id="stoneGradient3" cx="36%" cy="32%">
+                                <stop offset="0%" stop-color="#9A8A7B" stop-opacity="0.3"/>
+                                <stop offset="60%" stop-color="#7D6F62" stop-opacity="0.5"/>
+                                <stop offset="100%" stop-color="#5E5449" stop-opacity="0.6"/>
+                            </radialGradient>
+                        </defs>
+                    </svg>
                     <div class="roadblock-tooltip">"You can't quantify aesthetics"</div>
                 </div>
             </div>
