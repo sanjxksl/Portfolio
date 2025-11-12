@@ -294,70 +294,82 @@
 
             <!-- Journey Markers - Chronological Order (Left to Right) -->
 
-            <!-- 0. Bunny: Journey Start (Wanna know me better?) -->
-            <div class="bunny-marker" style="left: 5%; top: 30%;">
+            <!-- 0. Bunny: Journey Start -->
+            <div class="bunny-marker" style="left: 18%; top: 23%;">
                 <div class="bunny-hotspot"></div>
                 <div class="bunny-speech-bubble">Wanna know me better?</div>
             </div>
 
-            <!-- 1. Stone: Cars or People? (First dilemma, before first tree) -->
-            <div class="stone-marker" data-stone="cars-or-people" style="left: 15%; top: 45%;">
+            <!-- 1. Tree: Engineering Foundation (Bottom-left green tree) -->
+            <div class="tree-marker" data-tree="engineering" style="left: 18%; top: 48%;">
                 <div class="marker-hotspot"></div>
-                <div class="marker-label">Cars or People?</div>
+                <div class="marker-label">Engineering basics</div>
             </div>
 
-            <!-- 2. Tree: Engineering Foundation (Left tree) -->
-            <div class="tree-marker" data-tree="engineering" style="left: 22%; top: 55%;">
+            <!-- 2. Stone: Cars or People? (Center-left stone) -->
+            <div class="stone-marker" data-stone="cars-or-people" style="left: 32%; top: 52%;">
                 <div class="marker-hotspot"></div>
-                <div class="marker-label">Engineering Foundation</div>
+                <div class="marker-label">Career dilemma</div>
             </div>
 
-            <!-- 3. Stone: Don't Waste the Degree (Between first and second tree) -->
-            <div class="stone-marker" data-stone="dont-waste-degree" style="left: 35%; top: 35%;">
+            <!-- 3. Tree: Product & Design (Top-center orange tree) -->
+            <div class="tree-marker" data-tree="product-design" style="left: 38%; top: 12%;">
                 <div class="marker-hotspot"></div>
-                <div class="marker-label">Don't Waste the Degree</div>
+                <div class="marker-label">Product thinking</div>
             </div>
 
-            <!-- 4. Tree: Product & Design (Middle tree) -->
-            <div class="tree-marker" data-tree="product-design" style="left: 52%; top: 35%;">
+            <!-- 4. Stone: Don't Waste the Degree (Upper center stone) -->
+            <div class="stone-marker" data-stone="dont-waste-degree" style="left: 52%; top: 22%;">
                 <div class="marker-hotspot"></div>
-                <div class="marker-label">Product & Design</div>
+                <div class="marker-label">Degree pressure</div>
             </div>
 
-            <!-- 5. Stone: Underqualified but Overambitious (Moving toward right) -->
-            <div class="stone-marker" data-stone="underqualified" style="left: 65%; top: 50%;">
+            <!-- 5. Tree: Analytics & ML (Right green tree) -->
+            <div class="tree-marker" data-tree="analytics" style="left: 78%; top: 35%;">
                 <div class="marker-hotspot"></div>
-                <div class="marker-label">Underqualified but Overambitious</div>
+                <div class="marker-label">Data & analytics</div>
             </div>
 
-            <!-- 6. Tree: Analytics & ML / Rotman (Right tree) -->
-            <div class="tree-marker" data-tree="analytics" style="left: 85%; top: 48%;">
+            <!-- 6. Stone: Finance or Tech? (Bottom-right stone) -->
+            <div class="stone-marker" data-stone="finance-or-tech" style="left: 53%; top: 88%;">
                 <div class="marker-hotspot"></div>
-                <div class="marker-label">Analytics & ML</div>
+                <div class="marker-label">Field choice</div>
             </div>
 
-            <!-- 7. Stone: Finance or Tech? (Near analytics tree) -->
-            <div class="stone-marker" data-stone="finance-or-tech" style="left: 78%; top: 38%;">
+            <!-- 7. Tree: Current Work (Bottom-right orange tree) -->
+            <div class="tree-marker" data-tree="current" style="left: 62%; top: 73%;">
                 <div class="marker-hotspot"></div>
-                <div class="marker-label">Finance or Tech?</div>
+                <div class="marker-label">Building things</div>
             </div>
 
-            <!-- Achievement Markers (Maple Leaves) - CSS-animated overlay elements -->
-            <div class="achievement-marker" data-achievement="uoft" style="left: 62%; top: 25%; animation-delay: 0s;">
-                <div class="maple-leaf">
-                    <div class="leaf-shape"></div>
+            <!-- Achievement Markers (Gold Stars) - CSS-animated overlay elements -->
+            <div class="achievement-marker" data-achievement="uoft" style="left: 42%; top: 8%; animation-delay: 0s;">
+                <div class="gold-star">
+                    <div class="star-shape"></div>
                 </div>
             </div>
 
-            <div class="achievement-marker" data-achievement="minor-switch" style="left: 44%; top: 42%; animation-delay: 0.5s;">
-                <div class="maple-leaf">
-                    <div class="leaf-shape"></div>
+            <div class="achievement-marker" data-achievement="fortune500" style="left: 58%; top: 18%; animation-delay: 0.3s;">
+                <div class="gold-star">
+                    <div class="star-shape"></div>
                 </div>
             </div>
 
-            <div class="achievement-marker" data-achievement="international-move" style="left: 73%; top: 55%; animation-delay: 1s;">
-                <div class="maple-leaf">
-                    <div class="leaf-shape"></div>
+            <div class="achievement-marker" data-achievement="minor-switch" style="left: 28%; top: 48%; animation-delay: 0.6s;">
+                <div class="gold-star">
+                    <div class="star-shape"></div>
+                </div>
+            </div>
+
+            <div class="achievement-marker" data-achievement="international-move" style="left: 68%; top: 42%; animation-delay: 0.9s;">
+                <div class="gold-star">
+                    <div class="star-shape"></div>
+                </div>
+            </div>
+
+            <div class="achievement-marker" data-achievement="alumni-secretary" style="left: 48%; top: 82%; animation-delay: 1.2s;">
+                <div class="gold-star">
+                    <div class="star-shape"></div>
                 </div>
             </div>
 
@@ -505,6 +517,41 @@
                 </div>
             </div>
 
+            <div class="journey-popup" id="popup-current">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>Building Things (Present)</h3>
+                    <p class="popup-subtitle">Where everything comes together</p>
+                </div>
+                <div class="popup-content">
+                    <p class="popup-description">Currently working on projects that combine product thinking, design, and analytics. Building portfolio website, exploring ML applications in design, and figuring out what comes next. The journey continues - still learning, still building, still asking questions.</p>
+
+                    <div class="popup-projects">
+                        <div class="popup-project">
+                            <span class="project-emoji">💼</span>
+                            <div>
+                                <strong>This Portfolio Website</strong>
+                                <p>Hand-drawn journey map, interactive elements, thoughtful design. Built to tell my story authentically, not just showcase work. Learning frontend development through doing.</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">🎨</span>
+                            <div>
+                                <strong>Design + ML Exploration</strong>
+                                <p>Experimenting with computer vision for design evaluation. Bridging creative and analytical thinking. Still figuring out where this leads.</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">🌱</span>
+                            <div>
+                                <strong>What's Next</strong>
+                                <p>Looking for opportunities that value curiosity, systems thinking, and the ability to bridge technical and human problems. Probably in product or tech.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Popups for Stones (Roadblocks) -->
             <div class="journey-popup small" id="popup-cars-or-people">
                 <div class="popup-close">&times;</div>
@@ -526,16 +573,6 @@
                 </div>
             </div>
 
-            <div class="journey-popup small" id="popup-underqualified">
-                <div class="popup-close">&times;</div>
-                <div class="popup-header">
-                    <h3>Underqualified but Overambitious</h3>
-                </div>
-                <div class="popup-content">
-                    <p>In 2022, I put "UofT Rotman" on my vision board. Everyone said I needed more work experience, better grades, stronger profile. But I applied anyway in 2024, got in, and moved to Canada in 2025. Sometimes you're exactly qualified enough if you're willing to do the work to catch up.</p>
-                </div>
-            </div>
-
             <div class="journey-popup small" id="popup-finance-or-tech">
                 <div class="popup-close">&times;</div>
                 <div class="popup-header">
@@ -546,21 +583,31 @@
                 </div>
             </div>
 
-            <!-- Popups for Achievements (Maple Leaves) -->
+            <!-- Popups for Achievements (Gold Stars) -->
             <div class="journey-popup small" id="popup-uoft">
                 <div class="popup-close">&times;</div>
                 <div class="popup-header">
-                    <h3>🍁 UofT Admission</h3>
+                    <h3>⭐ Got into UofT</h3>
                 </div>
                 <div class="popup-content">
                     <p>Vision board in 2022. Application in 2024. Admission letter in 2025. Turned the impossible into inevitable through consistent work. Learned that audacious goals need timelines, not just hope.</p>
                 </div>
             </div>
 
+            <div class="journey-popup small" id="popup-fortune500">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>⭐ First Fortune 500 Intern</h3>
+                </div>
+                <div class="popup-content">
+                    <p>Product Management intern at HyperHorizon. Led market research for autonomous underwater vehicles, won 4 government competitions, secured funding. Learned to own decisions in messy startup environments where nobody had the answers.</p>
+                </div>
+            </div>
+
             <div class="journey-popup small" id="popup-minor-switch">
                 <div class="popup-close">&times;</div>
                 <div class="popup-header">
-                    <h3>🍁 Product Design Minor</h3>
+                    <h3>⭐ Product Design Minor</h3>
                 </div>
                 <div class="popup-content">
                     <p>Found the bridge between engineering and people. Added product design minor in third year. Learned ethnography, systems thinking, user-centered design. Proved you don't have to abandon technical skills to care about humans.</p>
@@ -570,10 +617,20 @@
             <div class="journey-popup small" id="popup-international-move">
                 <div class="popup-close">&times;</div>
                 <div class="popup-header">
-                    <h3>🍁 International Move to Canada</h3>
+                    <h3>⭐ International Move to Canada</h3>
                 </div>
                 <div class="popup-content">
                     <p>Left India, family, familiarity. Moved to Toronto in January 2025 to start Rotman's Management Analytics program. Learned to build a life from scratch while learning neural networks and A/B testing. Still figuring it out, but that's the point.</p>
+                </div>
+            </div>
+
+            <div class="journey-popup small" id="popup-alumni-secretary">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>⭐ Alumni Affairs Secretary</h3>
+                </div>
+                <div class="popup-content">
+                    <p>Grew annual alumni meet from 350 to 550 attendees. Established Alumni Association and Alumni Office from scratch. Learned that building institutions means creating systems that outlive your tenure. Structures still operating after I left.</p>
                 </div>
             </div>
 
