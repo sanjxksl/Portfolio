@@ -289,388 +289,271 @@
             </blockquote>
         </div>
 
-        <!-- Converging Paths Journey -->
-        <div class="forest-road-scene">
-            <!-- SVG Paths Converging to Center -->
-            <svg class="converging-paths" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
-                <!-- Path from Analytics (135° - top-left) to Product (center) -->
-                <path class="journey-path" d="M 302 102 Q 400 200, 500 300" fill="none"/>
+        <!-- Journey Map with Hand-drawn Background -->
+        <div class="journey-map-container">
 
-                <!-- Path from Engineering (225° - bottom-left) to Product (center) -->
-                <path class="journey-path" d="M 302 498 Q 400 400, 500 300" fill="none"/>
-
-                <!-- Path from Design (315° - bottom-right) to Product (center) -->
-                <path class="journey-path" d="M 698 498 Q 600 400, 500 300" fill="none"/>
-            </svg>
-
-            <!-- Domain Markers - Circular Layout with Polar Coordinates -->
-            <div class="journey-markers">
-                <!-- Domain 1: Data & Analytics (135° - Top Left) -->
-                <div class="domain-marker" data-domain="analytics" style="position: absolute; left: calc(50% - 198px); top: calc(50% - 198px); transform: translate(-50%, -50%);">
-                    <svg class="domain-node" width="110" height="140" viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Trunk -->
-                        <rect x="47" y="80" width="16" height="60" rx="2" fill="#4A3B2F"/>
-                        <rect x="47" y="80" width="16" height="60" rx="2" fill="url(#trunkGradient)"/>
-                        <!-- Bark texture lines -->
-                        <line x1="50" y1="85" x2="50" y2="135" stroke="#3B2E24" stroke-width="1" opacity="0.4"/>
-                        <line x1="60" y1="90" x2="60" y2="138" stroke="#3B2E24" stroke-width="1" opacity="0.4"/>
-
-                        <!-- Canopy - Multiple layers for depth -->
-                        <!-- Back layer -->
-                        <ellipse cx="55" cy="50" rx="42" ry="45" fill="#4A5C48" opacity="0.7"/>
-                        <!-- Middle layer -->
-                        <ellipse cx="55" cy="48" rx="38" ry="42" fill="#5A6E56"/>
-                        <!-- Front layer -->
-                        <ellipse cx="55" cy="45" rx="34" ry="38" fill="#6B8066"/>
-                        <!-- Highlights -->
-                        <ellipse cx="40" cy="35" rx="12" ry="10" fill="#7A8F75" opacity="0.5"/>
-                        <ellipse cx="65" cy="42" rx="10" ry="8" fill="#7A8F75" opacity="0.4"/>
-
-                        <!-- Shadow details -->
-                        <path d="M 30 60 Q 55 70, 80 60" stroke="none" fill="#3D4D3B" opacity="0.15"/>
-
-                        <defs>
-                            <linearGradient id="trunkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#3B2E24" stop-opacity="0.3"/>
-                                <stop offset="50%" stop-color="transparent"/>
-                                <stop offset="100%" stop-color="#5A4A3C" stop-opacity="0.2"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                    <div class="marker-label">Data & Analytics</div>
-                </div>
-
-                <!-- Domain 2: Engineering Foundation (225° - Bottom Left) -->
-                <div class="domain-marker" data-domain="engineering" style="position: absolute; left: calc(50% - 198px); top: calc(50% + 198px); transform: translate(-50%, -50%);">
-                    <svg class="domain-node" width="110" height="140" viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Trunk -->
-                        <rect x="47" y="80" width="16" height="60" rx="2" fill="#4A3B2F"/>
-                        <rect x="47" y="80" width="16" height="60" rx="2" fill="url(#trunkGradient2)"/>
-                        <!-- Bark texture -->
-                        <line x1="51" y1="88" x2="51" y2="132" stroke="#3B2E24" stroke-width="1" opacity="0.4"/>
-                        <line x1="59" y1="92" x2="59" y2="136" stroke="#3B2E24" stroke-width="1" opacity="0.4"/>
-
-                        <!-- Canopy layers -->
-                        <ellipse cx="55" cy="50" rx="42" ry="45" fill="#4A5C48" opacity="0.7"/>
-                        <ellipse cx="55" cy="48" rx="38" ry="42" fill="#5A6E56"/>
-                        <ellipse cx="55" cy="45" rx="34" ry="38" fill="#6B8066"/>
-                        <!-- Highlights -->
-                        <ellipse cx="68" cy="38" rx="11" ry="9" fill="#7A8F75" opacity="0.5"/>
-                        <ellipse cx="42" cy="43" rx="10" ry="8" fill="#7A8F75" opacity="0.4"/>
-                        <!-- Shadow -->
-                        <path d="M 30 60 Q 55 70, 80 60" stroke="none" fill="#3D4D3B" opacity="0.15"/>
-
-                        <defs>
-                            <linearGradient id="trunkGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#3B2E24" stop-opacity="0.3"/>
-                                <stop offset="50%" stop-color="transparent"/>
-                                <stop offset="100%" stop-color="#5A4A3C" stop-opacity="0.2"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                    <div class="marker-label">Engineering Foundation</div>
-                </div>
-
-                <!-- Domain 3: Design Thinking (315° - Bottom Right) -->
-                <div class="domain-marker" data-domain="design" style="position: absolute; left: calc(50% + 198px); top: calc(50% + 198px); transform: translate(-50%, -50%);">
-                    <svg class="domain-node" width="110" height="140" viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Trunk -->
-                        <rect x="47" y="80" width="16" height="60" rx="2" fill="#4A3B2F"/>
-                        <rect x="47" y="80" width="16" height="60" rx="2" fill="url(#trunkGradient3)"/>
-                        <!-- Bark texture -->
-                        <line x1="52" y1="86" x2="52" y2="134" stroke="#3B2E24" stroke-width="1" opacity="0.4"/>
-                        <line x1="58" y1="91" x2="58" y2="137" stroke="#3B2E24" stroke-width="1" opacity="0.4"/>
-
-                        <!-- Canopy layers -->
-                        <ellipse cx="55" cy="50" rx="42" ry="45" fill="#4A5C48" opacity="0.7"/>
-                        <ellipse cx="55" cy="48" rx="38" ry="42" fill="#5A6E56"/>
-                        <ellipse cx="55" cy="45" rx="34" ry="38" fill="#6B8066"/>
-                        <!-- Highlights -->
-                        <ellipse cx="43" cy="40" rx="11" ry="10" fill="#7A8F75" opacity="0.5"/>
-                        <ellipse cx="66" cy="36" rx="10" ry="8" fill="#7A8F75" opacity="0.4"/>
-                        <!-- Shadow -->
-                        <path d="M 30 60 Q 55 70, 80 60" stroke="none" fill="#3D4D3B" opacity="0.15"/>
-
-                        <defs>
-                            <linearGradient id="trunkGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#3B2E24" stop-opacity="0.3"/>
-                                <stop offset="50%" stop-color="transparent"/>
-                                <stop offset="100%" stop-color="#5A4A3C" stop-opacity="0.2"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                    <div class="marker-label">Design Thinking</div>
-                </div>
-
-                <!-- Domain 4: Product Strategy (Center) - Special landmark -->
-                <div class="domain-marker landmark" data-domain="product" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
-                    <svg class="domain-node special" width="140" height="180" viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Trunk - Thicker for special tree -->
-                        <rect x="60" y="95" width="20" height="85" rx="2.5" fill="#5A3F2F"/>
-                        <rect x="60" y="95" width="20" height="85" rx="2.5" fill="url(#trunkGradientSpecial)"/>
-                        <!-- Bark texture -->
-                        <line x1="64" y1="100" x2="64" y2="175" stroke="#4A3225" stroke-width="1.2" opacity="0.4"/>
-                        <line x1="76" y1="105" x2="76" y2="178" stroke="#4A3225" stroke-width="1.2" opacity="0.4"/>
-                        <line x1="70" y1="102" x2="70" y2="176" stroke="#4A3225" stroke-width="0.8" opacity="0.3"/>
-
-                        <!-- Canopy layers - Autumn/amber tones -->
-                        <!-- Back layer -->
-                        <ellipse cx="70" cy="55" rx="52" ry="55" fill="#8A5038" opacity="0.7"/>
-                        <!-- Middle layer -->
-                        <ellipse cx="70" cy="52" rx="48" ry="51" fill="#A05D42"/>
-                        <!-- Front layer -->
-                        <ellipse cx="70" cy="48" rx="44" ry="47" fill="#B8704F"/>
-                        <!-- Highlights - warm tones -->
-                        <ellipse cx="48" cy="38" rx="15" ry="12" fill="#C98561" opacity="0.6"/>
-                        <ellipse cx="88" cy="45" rx="13" ry="11" fill="#C98561" opacity="0.5"/>
-                        <ellipse cx="70" cy="32" rx="11" ry="9" fill="#D49A76" opacity="0.5"/>
-                        <!-- Shadow details -->
-                        <path d="M 35 70 Q 70 82, 105 70" stroke="none" fill="#6D3E2A" opacity="0.15"/>
-
-                        <defs>
-                            <linearGradient id="trunkGradientSpecial" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#4A3225" stop-opacity="0.4"/>
-                                <stop offset="50%" stop-color="transparent"/>
-                                <stop offset="100%" stop-color="#6A4F3A" stop-opacity="0.3"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                    <div class="node-pulse"></div>
-                    <div class="marker-label special">Product Strategy</div>
-                </div>
-
-                <!-- Roadblocks - Circular positioning at 180px radius -->
-                <!-- Stone 1: 180° (Left) - Between Analytics and Engineering -->
-                <div class="roadblock" data-roadblock="analytics-eng" style="position: absolute; left: calc(50% - 180px); top: 50%; transform: translate(-50%, -50%);">
-                    <svg class="roadblock-shape" width="70" height="50" viewBox="0 0 70 50" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Irregular stone shape -->
-                        <path d="M 10 28 L 5 20 L 12 8 L 25 5 L 42 7 L 58 12 L 65 22 L 62 35 L 48 45 L 28 47 L 15 42 Z"
-                              fill="#7D7167" stroke="none"/>
-                        <!-- Layers for depth -->
-                        <path d="M 10 28 L 5 20 L 12 8 L 25 5 L 42 7 L 58 12 L 65 22 L 62 35 L 48 45 L 28 47 L 15 42 Z"
-                              fill="url(#stoneGradient1)" stroke="none"/>
-                        <!-- Texture/crack lines -->
-                        <path d="M 15 10 L 22 18 L 28 22" stroke="#5E5449" stroke-width="1" fill="none" opacity="0.4"/>
-                        <path d="M 45 12 L 42 22 L 38 30" stroke="#5E5449" stroke-width="1" fill="none" opacity="0.3"/>
-                        <path d="M 28 25 L 35 32" stroke="#5E5449" stroke-width="0.8" fill="none" opacity="0.3"/>
-                        <!-- Highlights -->
-                        <ellipse cx="20" cy="15" rx="6" ry="4" fill="#A69A8E" opacity="0.4"/>
-                        <ellipse cx="45" cy="20" rx="5" ry="3" fill="#A69A8E" opacity="0.3"/>
-
-                        <defs>
-                            <radialGradient id="stoneGradient1" cx="35%" cy="30%">
-                                <stop offset="0%" stop-color="#9A8A7B" stop-opacity="0.3"/>
-                                <stop offset="60%" stop-color="#7D6F62" stop-opacity="0.5"/>
-                                <stop offset="100%" stop-color="#5E5449" stop-opacity="0.6"/>
-                            </radialGradient>
-                        </defs>
-                    </svg>
-                    <div class="roadblock-tooltip">"Pick a lane: technical or business"</div>
-                </div>
-
-                <!-- Stone 2: 270° (Bottom) - Between Engineering and Design -->
-                <div class="roadblock" data-roadblock="eng-design" style="position: absolute; left: 50%; top: calc(50% + 180px); transform: translate(-50%, -50%);">
-                    <svg class="roadblock-shape" width="68" height="48" viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Irregular stone shape - different than first -->
-                        <path d="M 8 25 L 6 18 L 10 10 L 20 6 L 35 5 L 50 8 L 60 15 L 63 25 L 58 38 L 45 44 L 30 46 L 18 40 Z"
-                              fill="#7D7167" stroke="none"/>
-                        <path d="M 8 25 L 6 18 L 10 10 L 20 6 L 35 5 L 50 8 L 60 15 L 63 25 L 58 38 L 45 44 L 30 46 L 18 40 Z"
-                              fill="url(#stoneGradient2)" stroke="none"/>
-                        <!-- Cracks -->
-                        <path d="M 20 12 L 25 20 L 30 26" stroke="#5E5449" stroke-width="1" fill="none" opacity="0.4"/>
-                        <path d="M 48 14 L 45 24" stroke="#5E5449" stroke-width="1" fill="none" opacity="0.3"/>
-                        <path d="M 32 28 L 38 35" stroke="#5E5449" stroke-width="0.8" fill="none" opacity="0.35"/>
-                        <!-- Highlights -->
-                        <ellipse cx="24" cy="14" rx="5" ry="4" fill="#A69A8E" opacity="0.35"/>
-                        <ellipse cx="48" cy="22" rx="6" ry="3" fill="#A69A8E" opacity="0.3"/>
-
-                        <defs>
-                            <radialGradient id="stoneGradient2" cx="38%" cy="28%">
-                                <stop offset="0%" stop-color="#9A8A7B" stop-opacity="0.3"/>
-                                <stop offset="60%" stop-color="#7D6F62" stop-opacity="0.5"/>
-                                <stop offset="100%" stop-color="#5E5449" stop-opacity="0.6"/>
-                            </radialGradient>
-                        </defs>
-                    </svg>
-                    <div class="roadblock-tooltip">"But engineers don't do user research"</div>
-                </div>
-
-                <!-- Stone 3: 45° (Top Right) - Between Design and Analytics -->
-                <div class="roadblock" data-roadblock="design-analytics" style="position: absolute; left: calc(50% + 127px); top: calc(50% - 127px); transform: translate(-50%, -50%);">
-                    <svg class="roadblock-shape" width="72" height="52" viewBox="0 0 72 52" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Irregular stone shape - third variation -->
-                        <path d="M 12 30 L 8 22 L 10 12 L 18 6 L 32 4 L 48 6 L 62 14 L 66 24 L 64 36 L 52 46 L 35 50 L 20 45 Z"
-                              fill="#7D7167" stroke="none"/>
-                        <path d="M 12 30 L 8 22 L 10 12 L 18 6 L 32 4 L 48 6 L 62 14 L 66 24 L 64 36 L 52 46 L 35 50 L 20 45 Z"
-                              fill="url(#stoneGradient3)" stroke="none"/>
-                        <!-- Cracks -->
-                        <path d="M 22 15 L 28 24 L 32 30" stroke="#5E5449" stroke-width="1" fill="none" opacity="0.4"/>
-                        <path d="M 50 16 L 48 26 L 44 34" stroke="#5E5449" stroke-width="1" fill="none" opacity="0.3"/>
-                        <path d="M 35 18 L 38 28" stroke="#5E5449" stroke-width="0.8" fill="none" opacity="0.35"/>
-                        <!-- Highlights -->
-                        <ellipse cx="26" cy="16" rx="6" ry="5" fill="#A69A8E" opacity="0.4"/>
-                        <ellipse cx="52" cy="24" rx="5" ry="4" fill="#A69A8E" opacity="0.3"/>
-
-                        <defs>
-                            <radialGradient id="stoneGradient3" cx="36%" cy="32%">
-                                <stop offset="0%" stop-color="#9A8A7B" stop-opacity="0.3"/>
-                                <stop offset="60%" stop-color="#7D6F62" stop-opacity="0.5"/>
-                                <stop offset="100%" stop-color="#5E5449" stop-opacity="0.6"/>
-                            </radialGradient>
-                        </defs>
-                    </svg>
-                    <div class="roadblock-tooltip">"You can't quantify aesthetics"</div>
-                </div>
+            <!-- Tree Markers (Knowledge Domains) -->
+            <div class="tree-marker" data-tree="engineering" style="left: 15%; bottom: 25%;">
+                <div class="marker-icon tree-icon">🌲</div>
+                <div class="marker-label">Engineering Foundation</div>
             </div>
 
-            <!-- Project Popups (Hidden by default) -->
-            <div class="project-popup" id="popup-engineering">
+            <div class="tree-marker" data-tree="product-design" style="left: 50%; bottom: 40%;">
+                <div class="marker-icon tree-icon">🌳</div>
+                <div class="marker-label">Product & Design</div>
+            </div>
+
+            <div class="tree-marker" data-tree="analytics" style="left: 80%; bottom: 30%;">
+                <div class="marker-icon tree-icon">🌲</div>
+                <div class="marker-label">Analytics & ML</div>
+            </div>
+
+            <!-- Stone Markers (Roadblocks) -->
+            <div class="stone-marker" data-stone="cars-or-people" style="left: 20%; bottom: 35%;">
+                <div class="marker-icon stone-icon">🪨</div>
+            </div>
+
+            <div class="stone-marker" data-stone="dont-waste-degree" style="left: 35%; bottom: 45%;">
+                <div class="marker-icon stone-icon">🪨</div>
+            </div>
+
+            <div class="stone-marker" data-stone="underqualified" style="left: 65%; bottom: 50%;">
+                <div class="marker-icon stone-icon">🪨</div>
+            </div>
+
+            <div class="stone-marker" data-stone="finance-or-tech" style="left: 75%; bottom: 35%;">
+                <div class="marker-icon stone-icon">🪨</div>
+            </div>
+
+            <!-- Achievement Markers (Maple Leaves) -->
+            <div class="achievement-marker" data-achievement="uoft" style="left: 60%; bottom: 60%;">
+                <div class="marker-icon leaf-icon">🍁</div>
+            </div>
+
+            <div class="achievement-marker" data-achievement="minor-switch" style="left: 42%; bottom: 55%;">
+                <div class="marker-icon leaf-icon">🍁</div>
+            </div>
+
+            <div class="achievement-marker" data-achievement="international-move" style="left: 70%; bottom: 45%;">
+                <div class="marker-icon leaf-icon">🍁</div>
+            </div>
+
+            <!-- Popups for Trees (Knowledge Domains) -->
+            <div class="journey-popup" id="popup-engineering">
+                <div class="popup-close">&times;</div>
                 <div class="popup-header">
-                    <h3>Engineering Foundation</h3>
+                    <h3>Engineering Foundation (2021-2025)</h3>
                     <p class="popup-subtitle">Where I learned to build things</p>
                 </div>
                 <div class="popup-content">
+                    <p class="popup-description">Started with mechanical engineering, thinking I'd design machines. Learned CAD, simulations, product development. But I cared more about solving the right problems than building perfect solutions.</p>
+
                     <div class="popup-projects">
+                        <div class="popup-project">
+                            <span class="project-emoji">⚙️</span>
+                            <div>
+                                <strong>Ashok Leyland Engine Simulation</strong>
+                                <p>Built GT-Suite model for 4-cylinder diesel engine. Achieved brake torque error within ±3%, model accuracy >97%. Learned that technical precision matters, but understanding the system matters more.</p>
+                                <a href="projects/ashok-leyland.html" class="project-link">View Details →</a>
+                            </div>
+                        </div>
                         <div class="popup-project">
                             <span class="project-emoji">🔧</span>
                             <div>
                                 <strong>Mining Safety Haptic Glove</strong>
-                                <p>Stakeholder research revealed miners needed hands-free safety communication. Pivoted from inner-braces to glove-based haptic feedback system after field interviews.</p>
+                                <p>Stakeholder research revealed miners needed hands-free safety communication. Pivoted from inner-braces to glove-based haptic feedback after field interviews. First lesson in product-market fit.</p>
                             </div>
                         </div>
                         <div class="popup-project">
-                            <span class="project-emoji">🖨️</span>
+                            <span class="project-emoji">📦</span>
                             <div>
-                                <strong>Printing Press Workflow Optimization</strong>
-                                <p>Observed print shop operations to identify bottlenecks operators couldn't articulate. Proposed automated loading systems to reduce operator fatigue.</p>
-                            </div>
-                        </div>
-                        <div class="popup-project">
-                            <span class="project-emoji">⚙️</span>
-                            <div>
-                                <strong>Mechanical Engineering Core</strong>
-                                <p>CAD, thermodynamics, manufacturing processes. Built technical foundation for understanding how systems work and fail.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-popup" id="popup-design">
-                <div class="popup-header">
-                    <h3>Design Thinking</h3>
-                    <p class="popup-subtitle">Where I learned to ask "why"</p>
-                </div>
-                <div class="popup-content">
-                    <div class="popup-projects">
-                        <div class="popup-project">
-                            <span class="project-emoji">🎯</span>
-                            <div>
-                                <strong>Aesthify: ML-Powered Design Framework</strong>
-                                <p>Built framework to quantify aesthetic preferences using computer vision. Study with 101 participants revealed simplicity drives preference over symmetry. Open-sourced for design researchers.</p>
-                                <a href="https://github.com/sanjxksl/Aesthify" target="_blank" class="project-link">GitHub →</a>
-                            </div>
-                        </div>
-                        <div class="popup-project">
-                            <span class="project-emoji">📱</span>
-                            <div>
-                                <strong>Headspace App Usability Audit</strong>
-                                <p>Applied Nielsen's 10 heuristics across 5 core screens. Identified 47 usability issues with prioritized recommendations for meditation app improvement.</p>
-                                <a href="#" target="_blank" class="project-link">Report →</a>
-                            </div>
-                        </div>
-                        <div class="popup-project">
-                            <span class="project-emoji">👥</span>
-                            <div>
-                                <strong>User Research & Field Studies</strong>
-                                <p>Process mapping, contextual interviews, behavioral observation. Learning to find what users need but don't say.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-popup" id="popup-analytics">
-                <div class="popup-header">
-                    <h3>Data & Analytics</h3>
-                    <p class="popup-subtitle">Where I learned numbers tell stories</p>
-                </div>
-                <div class="popup-content">
-                    <div class="popup-projects">
-                        <div class="popup-project">
-                            <span class="project-emoji">🧠</span>
-                            <div>
-                                <strong>Income Prediction Neural Network</strong>
-                                <p>Built 2-layer neural network on Census data. Achieved 85.6% accuracy using ensemble of 5 k-fold models with optimized decision thresholds for class imbalance.</p>
-                                <a href="https://github.com/sanjxksl/us-income-prediction" target="_blank" class="project-link">GitHub →</a>
+                                <strong>Auxetic Phone Case</strong>
+                                <p>Designed impact-absorbing phone case using auxetic structures. Learned CAD, prototyping, and that good design requires understanding material properties and user needs.</p>
                             </div>
                         </div>
                         <div class="popup-project">
                             <span class="project-emoji">🎓</span>
                             <div>
-                                <strong>Alumni Career Trajectory Analysis</strong>
-                                <p>Cleaned and analyzed 3,300+ fragmented alumni records. Built Random Forest models for salary prediction and career path classification to inform curriculum development.</p>
+                                <strong>Alumni Career Data Analysis</strong>
+                                <p>Cleaned 3,300+ messy alumni records. Built Random Forest models for career prediction. Discovered data science while managing alumni affairs. This project opened the analytics path.</p>
                                 <a href="https://github.com/sanjxksl/alumni-career-success" target="_blank" class="project-link">GitHub →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="journey-popup" id="popup-product-design">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>Product & Design Thinking (2023-2025)</h3>
+                    <p class="popup-subtitle">Where I learned to ask "why"</p>
+                </div>
+                <div class="popup-content">
+                    <p class="popup-description">Added product design minor after realizing I cared more about people than machines. Learned ethnography, systems design, strategic frameworks. Discovered that good products start with understanding problems, not solutions.</p>
+
+                    <div class="popup-projects">
+                        <div class="popup-project">
+                            <span class="project-emoji">🎯</span>
+                            <div>
+                                <strong>Aesthify: Design Intelligence Framework</strong>
+                                <p>Built ML framework to quantify aesthetic principles using YOLOv8. Study with 101 participants revealed simplicity and contrast drive preference. Proved you CAN quantify aesthetics, contrary to what everyone said.</p>
+                                <a href="projects/aesthify.html" class="project-link">View Details →</a>
+                                <a href="https://github.com/sanjxksl/Aesthify" target="_blank" class="project-link">GitHub →</a>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">🌊</span>
+                            <div>
+                                <strong>HyperHorizon Go-to-Market Strategy</strong>
+                                <p>Led market research for autonomous underwater vehicle. Researched 22 competitors, interviewed potential users, won 4 government competitions. Learned ownership the hard way in messy startup environment.</p>
+                                <a href="projects/hyperhorizon.html" class="project-link">View Details →</a>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">📱</span>
+                            <div>
+                                <strong>Headspace UX Evaluation</strong>
+                                <p>Applied Nielsen's 10 heuristics across 5 core screens. Identified 47 usability issues with actionable recommendations. Learned to critique design systematically, not just say "it feels off."</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">🏢</span>
+                            <div>
+                                <strong>TATA Semiconductor Strategy</strong>
+                                <p>Analyzed India's semiconductor opportunity. Competitive analysis of 22 global players, market sizing, multi-phase roadmap. Learned to think about markets, not just products.</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">🖨️</span>
+                            <div>
+                                <strong>Printing Press Ethnography</strong>
+                                <p>Observed print shop operations to find bottlenecks operators couldn't articulate. Proposed automation based on actual workflow, not assumptions. First real ethnographic research project.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="journey-popup" id="popup-analytics">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>Analytics & ML (2025-Present)</h3>
+                    <p class="popup-subtitle">Where numbers started telling stories</p>
+                </div>
+                <div class="popup-content">
+                    <p class="popup-description">Currently at Rotman's Management Analytics program. Learning deep learning, recommendation systems, statistical modeling. Figuring out how to use data not just to measure what happened, but to understand what should happen next.</p>
+
+                    <div class="popup-projects">
+                        <div class="popup-project">
+                            <span class="project-emoji">🧠</span>
+                            <div>
+                                <strong>US Income Prediction with Neural Networks</strong>
+                                <p>Built 2-layer neural network on Census data. Achieved 85.6% accuracy using ensemble of 5 k-fold models with optimized thresholds for class imbalance. First serious deep learning project.</p>
+                                <a href="projects/us-income.html" class="project-link">View Details →</a>
+                                <a href="https://github.com/sanjxksl/us-income-prediction" target="_blank" class="project-link">GitHub →</a>
                             </div>
                         </div>
                         <div class="popup-project">
                             <span class="project-emoji">🏠</span>
                             <div>
-                                <strong>Vacation Property Recommender</strong>
-                                <p>Built recommendation system using collaborative filtering and user preference analysis for summer home matching.</p>
+                                <strong>Summer Home Recommendation System</strong>
+                                <p>Built collaborative filtering system for vacation property matching. Learned recommendation algorithms, user preference analysis, and how to handle sparse data.</p>
+                                <a href="projects/summer-home.html" class="project-link">View Details →</a>
                                 <a href="https://github.com/samirhendawi1/RSM8431" target="_blank" class="project-link">GitHub →</a>
                             </div>
                         </div>
                         <div class="popup-project">
                             <span class="project-emoji">📊</span>
                             <div>
-                                <strong>Statistical Modeling & Analysis</strong>
-                                <p>Regression, hypothesis testing, experimental design. Learning when data supports decisions and when it doesn't.</p>
+                                <strong>Statistical Modeling & Experimentation</strong>
+                                <p>Regression, hypothesis testing, A/B testing, experimental design. Learning when data actually supports a decision and when it doesn't. Most important lesson: knowing what you can't conclude.</p>
+                            </div>
+                        </div>
+                        <div class="popup-project">
+                            <span class="project-emoji">🎯</span>
+                            <div>
+                                <strong>Aesthify ML Framework</strong>
+                                <p>Applied computer vision (YOLOv8) to design evaluation. Built entire ML pipeline from data collection to model validation. Bridges my design thinking and analytics work.</p>
+                                <a href="projects/aesthify.html" class="project-link">View Details →</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="project-popup" id="popup-product">
+            <!-- Popups for Stones (Roadblocks) -->
+            <div class="journey-popup small" id="popup-cars-or-people">
+                <div class="popup-close">&times;</div>
                 <div class="popup-header">
-                    <h3>Product & Strategy</h3>
-                    <p class="popup-subtitle">Where everything connects</p>
+                    <h3>Cars or People?</h3>
                 </div>
                 <div class="popup-content">
-                    <div class="popup-projects">
-                        <div class="popup-project">
-                            <span class="project-emoji">🏢</span>
-                            <div>
-                                <strong>TATA Semiconductor Market Entry Strategy</strong>
-                                <p>Analyzed India's semiconductor opportunity for TATA Group. Competitive analysis of 22 global players, market sizing, and multi-phase roadmap from foundry acquisition to market expansion.</p>
-                                <a href="#" target="_blank" class="project-link">Report →</a>
-                            </div>
-                        </div>
-                        <div class="popup-project">
-                            <span class="project-emoji">🌊</span>
-                            <div>
-                                <strong>HyperHorizon Product Strategy</strong>
-                                <p>Led GTM strategy for autonomous underwater vehicle. Ethnographic research with government agencies validated product assumptions. Secured funding through competitive positioning and business cases.</p>
-                            </div>
-                        </div>
-                        <div class="popup-project">
-                            <span class="project-emoji">💼</span>
-                            <div>
-                                <strong>Alumni CRM Migration & Automation</strong>
-                                <p>Migrated 1,270+ alumni records across 20+ countries to modern CRM. Automated grant approval workflows, achieving 57% growth in participation and 10% improvement in data accuracy.</p>
-                            </div>
-                        </div>
-                        <div class="popup-project">
-                            <span class="project-emoji">🩸</span>
-                            <div>
-                                <strong>Red Ribbon Society (Founder)</strong>
-                                <p>Founded campus health initiative from zero. Organized 4 blood donation camps serving 300+ participants with 161 donors in inaugural event. Built sustainable operations model.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <p>Three years into mechanical engineering, I realized I was more interested in why people wanted things than how things worked. Working on the haptic glove project, I spent more time interviewing miners than designing the device. That's when it clicked - I cared about the people, not the machines.</p>
                 </div>
             </div>
+
+            <div class="journey-popup small" id="popup-dont-waste-degree">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>Don't Waste the Degree</h3>
+                </div>
+                <div class="popup-content">
+                    <p>Everyone said switching to design would waste my engineering degree. But I found the product design minor and realized engineering taught me to understand systems - I just needed to apply it to people and products instead of machines. The degree wasn't wasted. I was building a bridge, not abandoning a path.</p>
+                </div>
+            </div>
+
+            <div class="journey-popup small" id="popup-underqualified">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>Underqualified but Overambitious</h3>
+                </div>
+                <div class="popup-content">
+                    <p>In 2022, I put "UofT Rotman" on my vision board. Everyone said I needed more work experience, better grades, stronger profile. But I applied anyway in 2024, got in, and moved to Canada in 2025. Sometimes you're exactly qualified enough if you're willing to do the work to catch up.</p>
+                </div>
+            </div>
+
+            <div class="journey-popup small" id="popup-finance-or-tech">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>Finance or Tech?</h3>
+                </div>
+                <div class="popup-content">
+                    <p>At Rotman, everyone networks for finance or consulting. I tried. Felt like an impostor in every finance networking session. But in tech conversations? I belonged. Stopped forcing the finance path, started building ML projects, and realized I was done trying to fit into spaces that didn't feel right.</p>
+                </div>
+            </div>
+
+            <!-- Popups for Achievements (Maple Leaves) -->
+            <div class="journey-popup small" id="popup-uoft">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>🍁 UofT Admission</h3>
+                </div>
+                <div class="popup-content">
+                    <p>Vision board in 2022. Application in 2024. Admission letter in 2025. Turned the impossible into inevitable through consistent work. Learned that audacious goals need timelines, not just hope.</p>
+                </div>
+            </div>
+
+            <div class="journey-popup small" id="popup-minor-switch">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>🍁 Product Design Minor</h3>
+                </div>
+                <div class="popup-content">
+                    <p>Found the bridge between engineering and people. Added product design minor in third year. Learned ethnography, systems thinking, user-centered design. Proved you don't have to abandon technical skills to care about humans.</p>
+                </div>
+            </div>
+
+            <div class="journey-popup small" id="popup-international-move">
+                <div class="popup-close">&times;</div>
+                <div class="popup-header">
+                    <h3>🍁 International Move to Canada</h3>
+                </div>
+                <div class="popup-content">
+                    <p>Left India, family, familiarity. Moved to Toronto in January 2025 to start Rotman's Management Analytics program. Learned to build a life from scratch while learning neural networks and A/B testing. Still figuring it out, but that's the point.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
