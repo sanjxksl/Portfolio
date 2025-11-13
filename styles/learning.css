@@ -4,15 +4,15 @@
    ========================================== */
 
 #learning {
-    padding: calc(var(--section-padding) + 80px) 0 20px;
-    background: #E8D5C4;
+    padding: calc(var(--section-padding) + 20px) 0 20px;
+    background: var(--cream);
     position: relative;
     overflow-x: hidden;
 }
 
 /* Learning Hero with Frost Quote */
 .learning-hero {
-    padding: 60px var(--container-padding) 80px;
+    padding: 20px var(--container-padding) 40px;
     text-align: center;
     max-width: 1000px;
     margin: 0 auto;
