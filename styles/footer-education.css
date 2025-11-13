@@ -4,7 +4,7 @@
 
 /* Footer - Minimal Design */
 .footer {
-    background: var(--soft-beige);
+    background: var(--cream);
     padding: 60px var(--container-padding) 40px;
     margin-top: var(--section-padding);
 }

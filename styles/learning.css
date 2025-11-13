@@ -4,7 +4,7 @@
    ========================================== */
 
 #learning {
-    padding: calc(var(--section-padding) + 20px) 0 20px;
+    padding: calc(var(--section-padding) + 40px) 0 20px;
     background: var(--cream);
     position: relative;
     overflow-x: hidden;
@@ -12,7 +12,7 @@
 
 /* Learning Hero with Frost Quote */
 .learning-hero {
-    padding: 20px var(--container-padding) 40px;
+    padding: 0 var(--container-padding) 40px;
     text-align: center;
     max-width: 1000px;
     margin: 0 auto;
