@@ -275,7 +275,7 @@ nav.hidden {
 
 /* Footer */
 .footer {
-    background: var(--soft-beige);
+    background: var(--cream);
     padding: var(--section-padding) var(--container-padding);
     margin-top: var(--section-padding);
 }
