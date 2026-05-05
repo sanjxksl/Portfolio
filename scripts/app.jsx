@@ -562,7 +562,7 @@ function App() {
       id: 'terminal',
       title: 'Terminal — guest@portfolio.os',
       x: Math.max(20, tvw - tw - 40),
-      y: Math.max(32, tvh - th - 110),
+      y: Math.max(32, tvh - th - 126),
       w: tw, h: th,
       kind: 'terminal',
     });
@@ -599,7 +599,7 @@ function App() {
     const w = Math.min(s.w, vw - 40);
     const h = Math.min(s.h, vh - 80);
     const x = Math.max(20, Math.round((vw - w) / 2) + offset);
-    const y = Math.max(32, Math.round((vh - 100 - h) / 2) + offset);
+    const y = Math.max(32, Math.round((vh - 116 - h) / 2) + offset);
     wm.openWindow({ id, x, y, w, h, kind: s.kind, title: s.title });
     if (id === 'finder' && arg) { setFolderOpen(arg); setActiveTag(null); }
     else if (id === 'finder' && !arg) { setFolderOpen('about'); setActiveTag(null); }
