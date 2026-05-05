@@ -273,10 +273,10 @@ function LearningLogIcon() {
 function getDefaultIcons() {
   return [
     { id: 'work',         label: 'work',         kind: 'folder', color: 'blue',  anchor_h:'left', dx:32,   anchor_v:'top', dy:77,  action: { type: 'finder', folder: 'work' } },
-    { id: 'notion',       label: 'Notes',        kind: 'notion',                 anchor_h:'left', dx:1153, anchor_v:'top', dy:113, action: { type: 'reading' } },
+    { id: 'notion',       label: 'Notes',        kind: 'notion',                 anchor_h:'right', dx:35,  anchor_v:'top', dy:113, action: { type: 'reading' } },
     { id: 'projects',     label: 'projects',     kind: 'folder', color: 'blue',  anchor_h:'left', dx:149,  anchor_v:'top', dy:80,  action: { type: 'finder', folder: 'projects' } },
     { id: 'headshot',     label: 'about.png',    kind: 'image', src: 'images/headshot.png', anchor_h:'left', dx:35, anchor_v:'top', dy:186, action: { type: 'about' } },
-    { id: 'learning',     label: 'log',           kind: 'learning',               anchor_h:'left', dx:1062, anchor_v:'top', dy:114, action: { type: 'launch', id: 'learning' } },
+    { id: 'learning',     label: 'log',           kind: 'learning',               anchor_h:'right', dx:125, anchor_v:'top', dy:114, action: { type: 'launch', id: 'learning' } },
     { id: 'competitions', label: 'competitions', kind: 'folder', color: 'peony', anchor_h:'left', dx:34,   anchor_v:'top', dy:319, action: { type: 'finder', folder: 'competitions' } },
     { id: 'resume',       label: 'resume.pdf',   kind: 'resume',                 anchor_h:'left', dx:148,  anchor_v:'top', dy:191, action: { type: 'launch', id: 'resume' } },
   ];
@@ -618,7 +618,7 @@ function App() {
       title: item.name,
       x: Math.max(30, Math.round((vw - 680) / 2) + offset),
       y: Math.max(40, 80 + offset),
-      w: 680, h: Math.min(640, Math.round(vh * 0.8)),
+      w: 680, h: Math.min(640, Math.round((vh - 116) * 0.85)),
       kind: 'doc',
       item,
     });

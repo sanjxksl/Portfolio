@@ -157,7 +157,7 @@ img { display: block; }
 /* ---------- Desktop icon grid (scattered placement) ---------- */
 .desktop-icons {
   position: fixed;
-  inset: 30px 30px 100px 30px;
+  inset: 30px 30px 120px 30px;
   z-index: 5;
   pointer-events: none;
 }
@@ -1356,6 +1356,16 @@ img { display: block; }
 
 
 /* ---------- Responsive desktop breakpoints ---------- */
+@media (min-width: 1600px) {
+  .dock-item { width: 68px; height: 68px; }
+  .dock-item svg, .dock-item img { width: 58px; height: 58px; }
+  .dock { gap: 10px; padding: 12px 18px 14px; border-radius: 26px; }
+  .di .icon-art { width: 72px; height: 64px; }
+  .di .icon-art img { width: 68px; height: 68px; }
+  .di .icon-art.image-thumb { width: 84px; height: 84px; }
+  .di .label { font-size: 12px; }
+}
+
 @media (max-width: 1280px) {
   .finder { grid-template-columns: 150px 1fr; }
   .finder-sidebar { min-width: 0; }
