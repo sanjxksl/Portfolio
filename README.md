@@ -83,3 +83,5 @@ portfolio/
 ---
 
 *Sanjana Kanchibotla — [linkedin.com/in/sanjanaksl](https://linkedin.com/in/sanjanaksl) · sanjanakanchibotla@gmail.com*
+
+*Co-designed with [Claude](https://claude.ai) by Anthropic.*
