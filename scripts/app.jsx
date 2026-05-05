@@ -556,10 +556,14 @@ function App() {
   // Auto-open terminal as a widget after boot
   useEffect(() => {
     if (!booted) return;
+    const tvw = window.innerWidth, tvh = window.innerHeight;
+    const tw = 452, th = 256;
     wm.openWindow({
       id: 'terminal',
       title: 'Terminal — guest@portfolio.os',
-      x: 946, y: 417, w: 452, h: 256,
+      x: Math.max(20, tvw - tw - 40),
+      y: Math.max(32, tvh - th - 110),
+      w: tw, h: th,
       kind: 'terminal',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -595,7 +599,7 @@ function App() {
     const w = Math.min(s.w, vw - 40);
     const h = Math.min(s.h, vh - 80);
     const x = Math.max(20, Math.round((vw - w) / 2) + offset);
-    const y = Math.max(32, Math.round((vh - h) / 2) - 10 + offset);
+    const y = Math.max(32, Math.round((vh - 100 - h) / 2) + offset);
     wm.openWindow({ id, x, y, w, h, kind: s.kind, title: s.title });
     if (id === 'finder' && arg) { setFolderOpen(arg); setActiveTag(null); }
     else if (id === 'finder' && !arg) { setFolderOpen('about'); setActiveTag(null); }
