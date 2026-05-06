@@ -601,10 +601,10 @@ function LearningArchive() {
 function ResumeView() {
   return (
     <div style={{ width: '100%', height: '100%', background: '#2a231e' }}>
-      <object data="assets/resume.pdf" type="application/pdf" style={{ width: '100%', height: '100%' }}>
+      <object data="assets/resume.pdf?v=202505061431" type="application/pdf" style={{ width: '100%', height: '100%' }}>
         <div style={{ padding: 32, textAlign: 'center', color: 'var(--paper)' }}>
           <p>Your browser cannot display the PDF inline.</p>
-          <a href="assets/resume.pdf" target="_blank" rel="noopener" style={{ color: 'var(--ochre)' }}>Open in a new tab</a>
+          <a href="assets/resume.pdf?v=202505061431" target="_blank" rel="noopener" style={{ color: 'var(--ochre)' }}>Open in a new tab</a>
         </div>
       </object>
     </div>
