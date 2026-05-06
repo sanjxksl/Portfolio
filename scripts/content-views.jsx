@@ -362,6 +362,7 @@ function DocView({ item }) {
         <React.Fragment key={i}>
           {b.h && <h3>{b.h}</h3>}
           {b.p && <p>{b.p}</p>}
+          {b.quote && <blockquote className="doc-quote">{b.quote}</blockquote>}
           {b.list && <ul>{b.list.map((li, j) => <li key={j}>{li}</li>)}</ul>}
         </React.Fragment>
       ))}
