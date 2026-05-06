@@ -32,7 +32,6 @@ window.PORTFOLIO = {
       kicker: "ML Analyst · CIBC CEEP · AML/ATF Compliance",
       title: "ExamScopeAI: <em>Semantic Search</em> for Compliance Examinations",
       subtitle: "A search and analytics system that makes 12 years of CIBC examination history instantly searchable, cutting exam scoping from hours to minutes.",
-      arch: ["PDF Extraction", "Validation + QA", "Databricks Warehouse", "Semantic Vectors", "Search API", "Examiner UI + Export"],
       body: [
         { h: "The Problem", p: "CIBC's CEEP team examines how well Lines of Business manage AML, sanctions, and regulatory compliance risk. Before any examination begins, examiners have to scope it: determine which processes and controls to assess, surface prior deficiencies, and understand what has changed since the last review. This scoping was entirely manual. Examiners downloaded reports one at a time, read entire documents to extract a few relevant facts, and reconstructed institutional knowledge from memory and partial notes." },
         { p: "Three things made this harder than it needed to be. AML regulations shift constantly, which means scope from two years ago can be partially obsolete with no easy way to surface what has changed. The exam history lived across two separate document repositories with no central index. And scoping decisions were difficult to document and defend under regulatory scrutiny because there was no clear record of what was reviewed and why." },
