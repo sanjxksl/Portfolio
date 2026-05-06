@@ -86,11 +86,10 @@ window.PORTFOLIO = {
         tableau: "https://public.tableau.com/views/ExecutiveCompensationAnomalyDetection/Dashboard1",
       },
       tableauPath: "ExecutiveCompensationAnomalyDetection/Dashboard1",
-      arch: ["Compustat WRDS (30yr)", "SQL Modular Views", "Industry Peer Baseline", "Anomaly Scoring", "Tableau Dashboard"],
       body: [
         { p: "Are North American executives being paid unusually compared to their industry peers — and does their company's performance justify it? This is a forensic finance question dressed as a data problem." },
         { h: "How It Works", p: "An end-to-end anomaly detection system built on thirty years of executive compensation data. The SQL is structured in clean, reusable layers: industry peer groups are built through a self-join, then each flagged executive is measured against their company's actual revenue, profit, and growth performance." },
-        { h: "Why The Method Matters", p: "Anomalies are flagged relative to industry peers — not absolute pay levels — so a $10M package in pharma is measured differently than one in regional banking. The composite risk score combines how often anomalies appear with how severe they are, adapted from actuarial risk modelling, so larger industries aren't penalised just for having more data." },
+        { h: "Why The Method Matters", p: "Anomalies are flagged relative to industry peers, not absolute pay levels, so a $10M package in pharma is measured differently than one in regional banking. The composite risk score combines how often anomalies appear with how severe they are, adapted from actuarial risk modelling, so larger industries aren't penalised just for having more data." },
         { h: "What the Data Said", p: "The industries with the most anomalies weren't the most structurally problematic once adjusted for size. Forest Products, Brewers, and Industrial Gases had the highest composite risk scores. Systems Software and Industrial REITs had the most extreme individual cases despite lower overall frequency." },
         { h: "The Counterintuitive Finding", p: "Anomaly counts rose steadily from 1992 to 2008, but the average severity actually declined. Governance reforms appear to have moderated how extreme the excess gets, even as the number of anomalous pay packages increased." },
       ],
@@ -112,10 +111,9 @@ window.PORTFOLIO = {
       links: {
         github: "https://github.com/sanjxksl/PEAD",
       },
-      arch: ["CRSP + Compustat", "CCM Merge", "SUE Decile Construction", "Event-Time Return Panel", "Cross-Section Regressions"],
       body: [
-        { p: "When a company reports earnings that beat expectations, its stock tends to keep rising for months afterwards. Ball and Brown showed this in 1968. This replication asks whether it still holds on twenty-three years of modern data — and why." },
-        { h: "What Was Built", p: "A full replication on stock and accounting data from 2000 to 2023. Earnings surprises were constructed using a rolling historical window — critically, using prior-quarter benchmarks rather than current-quarter ones, which prevents a common error in studies of this kind where future information leaks into the analysis." },
+        { p: "When a company reports earnings that beat expectations, its stock tends to keep rising for months afterwards. Ball and Brown showed this in 1968. This replication asks whether it still holds on twenty-three years of modern data, and why it does." },
+        { h: "What Was Built", p: "A full replication on stock and accounting data from 2000 to 2023. Earnings surprises were constructed using a rolling historical window, with prior-quarter benchmarks rather than current-quarter ones, which prevents a common error in studies of this kind where future information leaks into the analysis." },
         { h: "What the Analysis Found", p: "The drift concentrates in smaller companies, consistent with a well-known theory: it's costly and risky to bet against a misprice in small stocks, so inefficiencies persist longer. The gap between the highest and lowest earnings-surprise groups has narrowed over the sample period, consistent with algorithmic trading speeding up how quickly markets process news." },
       ],
       tags: ["Empirical Finance", "Asset Pricing", "Python", "WRDS", "CRSP"],
@@ -136,11 +134,10 @@ window.PORTFOLIO = {
       links: {
         github: "https://github.com/sanjxksl/esg-returns-study",
       },
-      arch: ["LSEG ESG Scores + CRSP + Compustat", "Panel Data Construction", "OLS Regression Models", "Industry Fixed Effects", "Return Signal Test"],
       body: [
         { p: "Does ESG performance predict financial returns — or is any observed relationship really just a reflection of factors investors already price in?" },
         { h: "The Study", p: "A co-authored analysis of 20,764 firm-year observations across 3,351 US companies from 2013 to 2023, combining ESG ratings from LSEG Refinitiv with financial data from Compustat and CRSP. I led the section on what drives ESG performance itself." },
-        { h: "Two Findings Worth Highlighting", p: "First, a relationship between leverage and ESG that appeared in early models vanished entirely once we controlled for industry. It was an industry composition effect, not a real signal. Second, R&D intensity reversed direction within industries compared to the overall average — a textbook Simpson's paradox, where looking at the full picture hides what's actually happening within groups." },
+        { h: "Two Findings Worth Highlighting", p: "First, a relationship between leverage and ESG that appeared in early models vanished entirely once we controlled for industry. It was an industry composition effect, not a real signal. Second, R&D intensity reversed direction within industries compared to the overall average, a textbook Simpson's paradox, where looking at the full picture hides what's actually happening within groups." },
         { h: "The Central Finding", p: "ESG positively predicts next-year profitability after controlling for other factors. But the stock return signal disappears once earnings news enters the model. The market prices ESG through fundamentals — not as a standalone factor. ESG is not a source of excess return. It's a signal that gets absorbed by what it's actually predicting." },
       ],
       tags: ["Empirical Finance", "ESG", "Regression", "WRDS"],
@@ -161,12 +158,11 @@ window.PORTFOLIO = {
       links: {
         github: "https://github.com/sanjxksl/credit-risk-counterfactual",
       },
-      arch: ["148K Mortgage Applications", "Feature Audit + Cleaning", "MLP + XGBoost", "DiCE Counterfactuals", "FastAPI on SageMaker"],
       body: [
         { p: "Can a credit risk model not only predict default accurately, but also explain to a declined applicant what would specifically need to change for an approval — without encoding demographic bias?" },
-        { h: "The Models", p: "Two models were trained on 148,670 mortgage applications — a neural network and XGBoost — achieving strong predictive accuracy (AUC-ROC of 0.901) with well-calibrated probability outputs." },
+        { h: "The Models", p: "Two models were trained on 148,670 mortgage applications, a neural network and XGBoost, achieving strong predictive accuracy (AUC-ROC of 0.901) with well-calibrated probability outputs." },
         { h: "Where the Real Work Happened", p: "Most of the effort came before any modelling. A careful audit of the input features uncovered that one variable appeared highly predictive only because a single category within it showed a 100% default rate across 15,000 cases — a sign of an unobserved loan programme, not genuine borrower risk. Five such features were removed before training. A model built on those features would have looked accurate in testing and failed on new data." },
-        { h: "Counterfactuals as a Feature", p: "After a decline decision, the system generates counterfactual explanations: the minimum changes to loan structure that would flip the prediction to an approval. When no such restructuring is feasible, that's treated as meaningful information — it means the risk is driven by factors that can't be changed, not by adjustable loan terms." },
+        { h: "Counterfactuals as a Feature", p: "After a decline decision, the system generates counterfactual explanations: the minimum changes to loan structure that would flip the prediction to an approval. When no such restructuring is feasible, that's treated as meaningful information: the risk is driven by factors that cannot be changed, not by adjustable loan terms." },
         { h: "Fairness and Deployment", p: "A fairness audit across gender, age, and geography returned a disparate impact ratio of 1.021, passing the 80% rule. Deployed as a live API endpoint on AWS SageMaker with automated monitoring that triggers retraining when data patterns drift beyond defined thresholds." },
       ],
       tags: ["PyTorch", "XGBoost", "Explainable AI", "AWS SageMaker", "FinTech"],
@@ -187,7 +183,6 @@ window.PORTFOLIO = {
       links: {
         github: "https://github.com/sanjxksl/Aesthify",
       },
-      arch: ["Interior Layout Images", "YOLOv8 Object Detection", "7 Principle Scores", "101-Person Study", "Correlation Analysis"],
       body: [
         { p: "Can visual design principles be measured objectively — and does what a computer calculates as \"good design\" actually match what people prefer?" },
         { h: "How It Works", p: "A web application that analyses interior layout images and scores them across seven design principles: balance, proportion, symmetry, simplicity, harmony, contrast, and unity. Object detection (YOLOv8) identifies what's in the room; rule-based scoring computes each principle from those detections." },
@@ -197,7 +192,7 @@ window.PORTFOLIO = {
           "Symmetry was negatively correlated (r = −0.60). People preferred asymmetric layouts.",
           "Aesthetic judgment varied significantly across demographic groups.",
         ]},
-        { p: "The point isn't that design can be reduced to a formula. The point is that it can't — and this study makes that measurable." },
+        { p: "The point is not that design can be reduced to a formula. The point is that it cannot be, and this study makes that measurable." },
       ],
       tags: ["Computer Vision", "Python", "Design Research"],
       metrics: [
@@ -217,7 +212,6 @@ window.PORTFOLIO = {
       links: {
         github: "https://github.com/sanjxksl/evidence-engine",
       },
-      arch: ["User Query", "Intent Classification", "Evidence Extraction", "Synthesis Layer", "Reasoning Trace + Output"],
       body: [
         { p: "Prioritisation frameworks get gamed because the evidence behind the scores is never rigorously gathered or challenged. What if the tool forced that rigour before any scoring began?" },
         { h: "What Was Built", p: "A conversational AI tool built in Streamlit using the Gemini API, designed for product managers synthesising research into structured, defensible decisions. The architecture has six modules: evidence extractor, synthesiser, intent classifier, output generator, reasoning tracer, and a database persistence layer." },
@@ -246,7 +240,7 @@ window.PORTFOLIO = {
       arch: ["Census Data (90 features)", "Preprocessing Pipeline", "2-Layer Neural Network", "Threshold Optimisation", "Income Prediction"],
       body: [
         { p: "Predict whether a person earns above or below $50K annually from US Census data. The class split is 75/25, and naive models optimised for accuracy will simply predict everyone as low-income and look fine on paper." },
-        { h: "Key Preprocessing Decisions", p: "MinMaxScaler normalisation was chosen over the more common StandardScaler after a 2% accuracy improvement was observed. Two engineered capital features were added — more than two decreased performance, a finding that held consistently across cross-validation folds." },
+        { h: "Key Preprocessing Decisions", p: "MinMaxScaler normalisation was chosen over the more common StandardScaler after a 2% accuracy improvement was observed. Two engineered capital features were added; more than two decreased performance, a finding that held consistently across cross-validation folds." },
         { h: "Model and Training", p: "A two-hidden-layer neural network trained with 5-fold cross-validation. The classification threshold was optimised from the default 0.5 to 0.70 to reduce false positives — an important adjustment given the class imbalance." },
         { h: "Result", p: "85.62% accuracy, 0.9094 AUC-ROC, competitive with gradient boosting methods while demonstrating neural network applicability to tabular data." },
       ],
@@ -272,9 +266,9 @@ window.PORTFOLIO = {
       arch: ["4 Fragmented Datasets", "Merge + Standardise", "Feature Engineering", "Random Forest Models", "CLI Predictor"],
       body: [
         { p: "Predict salary and career outcomes for university alumni given their role and location. The institutional problem is that alumni data lives across fragmented, inconsistent files that can't be used for any analysis as-is." },
-        { h: "Data Preparation", p: "Merged four separate alumni datasets with salaries stored in incompatible formats — USD, INR, lakhs per annum, monthly figures. Built a pipeline to standardise, convert, and unify all records into a single usable dataset." },
+        { h: "Data Preparation", p: "Merged four separate alumni datasets with salaries stored in incompatible formats including USD, INR, lakhs per annum, and monthly figures. Built a pipeline to standardise, convert, and unify all records into a single usable dataset." },
         { h: "Models", p: "A Random Forest model for salary prediction, evaluated with MAE and R². A second classifier for binary career success (above or below median salary) with balanced class weights, evaluated across accuracy, AUC-ROC, and precision-recall." },
-        { h: "Interface", p: "An interactive command-line tool that predicts salary and career success for any combination of role and country — useful for curriculum planning and outcome reporting." },
+        { h: "Interface", p: "An interactive command-line tool that predicts salary and career success for any combination of role and country, useful for curriculum planning and outcome reporting." },
       ],
       tags: ["Random Forest", "Python", "Coursework"],
       metrics: [
@@ -318,7 +312,7 @@ window.PORTFOLIO = {
       subtitle: "Six thousand hours of web traffic, causal inference, and a budget reallocation.",
       body: [
         { h: "Outcome", p: "First place out of all participating teams, Rotman MMA Datathon, January 2026." },
-        { h: "The Problem", p: "A retail brand operating across Canada and the US wanted to evaluate whether its paid search campaigns were actually driving traffic — or whether the traffic would have come anyway. Simply correlating ad spend with visits gives the wrong answer because organic and paid traffic move together for reasons unrelated to the campaign." },
+        { h: "The Problem", p: "A retail brand operating across Canada and the US wanted to evaluate whether its paid search campaigns were actually driving traffic, or whether the traffic would have come anyway. Simply correlating ad spend with visits gives the wrong answer because organic and paid traffic move together for reasons unrelated to the campaign." },
         { h: "The Method", p: "Causal inference applied to 6,865 hours of web traffic data to isolate the campaign's true impact from the organic baseline. Separating what the campaign caused from what was already happening is where most analyses of this type go wrong." },
         { h: "The Findings", p: "35% positive ROI in the US. Loss-making spend in Canada. Recommendation: reallocate $75,000–$90,000 in paid search budget from Canada to the US. Specific enough to act on the next day." },
       ],
@@ -339,9 +333,9 @@ window.PORTFOLIO = {
       subtitle: "An AI agent inside Manulife's app to close the health-wealth gap.",
       body: [
         { h: "Outcome", p: "Finalist, top 7 of 43 teams, Rotman Design Challenge 2026. Designed for Manulife." },
-        { h: "The Problem", p: "73% of users leave health benefits unused — not because the products are bad, but because the system is too complex to navigate. This is a navigability failure, not a product failure. That distinction changes everything about what the solution needs to be." },
+        { h: "The Problem", p: "73% of users leave health benefits unused, not because the products are bad, but because the system is too complex to navigate. This is a navigability failure, not a product failure. That distinction changes everything about what the solution needs to be." },
         { h: "Research", p: "Seven empathy interviews and 38 survey responses revealed a compounding problem: people who can't access their benefits incur out-of-pocket costs that add up over time. Three failure modes emerged: users don't know what they have, can't find it when they need it, and aren't reminded at the moments it matters." },
-        { h: "The Product", p: "Compass: an AI agent embedded in Manulife's existing app, connected across Group Benefits, Vitality, and Individual Insurance. A conversational interface answers questions in plain language. An event-trigger engine detects life signals — job change, new dependent, policy renewal — and surfaces relevant coverage at the exact moment a user would otherwise miss it. The trigger layer is what makes it different from a better search bar." },
+        { h: "The Product", p: "Compass: an AI agent embedded in Manulife's existing app, connected across Group Benefits, Vitality, and Individual Insurance. A conversational interface answers questions in plain language. An event-trigger engine detects life signals including job changes, new dependents, and policy renewals, and surfaces relevant coverage at the exact moment a user would otherwise miss it. The trigger layer is what makes it different from a better search bar." },
         { h: "Validation", p: "87% of users said they would use Compass to find unused benefits, 79% to understand their coverage, and 62% rated it 7–10 out of 10 for usefulness." },
       ],
       tags: ["FinTech", "Product Design", "LLM Architecture", "User Research"],
