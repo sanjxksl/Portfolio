@@ -34,12 +34,12 @@ function CountUp({ to, dur = 900, decimals = 0, suffix = '', prefix = '' }) {
 }
 
 // Common diagram shell
-function DiaShell({ caption, note, children }) {
+function DiaShell({ caption, note, children, viewBox = "0 0 480 200" }) {
   const [ref, seen] = useReveal(0.2);
   return (
     <div className="dia" ref={ref}>
       {caption && <div className="dia-caption">{caption}</div>}
-      <svg viewBox="0 0 480 200" className={`dia-svg ${seen ? 'seen' : ''}`} preserveAspectRatio="xMidYMid meet">
+      <svg viewBox={viewBox} className={`dia-svg ${seen ? 'seen' : ''}`} preserveAspectRatio="xMidYMid meet">
         {children}
       </svg>
       {note && <div className="dia-note">{note}</div>}
@@ -48,41 +48,100 @@ function DiaShell({ caption, note, children }) {
 }
 
 // ============================================================
-// 1. CIBC — clean three-stage flow
+// 1. CIBC — 6-step pipeline + exam history bar chart
 // ============================================================
-function CIBCDiagram() {
+function ExamScopeArchDiagram() {
+  const BOX_W = 136, BOX_H = 50;
+  const COLS = [14, 182, 350];
+  const R1 = 18, R2 = 152;
+
+  const steps = [
+    { n: '01', label: 'PDF Extraction',   sub: 'pypdf · pdfplumber',  done: true  },
+    { n: '02', label: 'Validation + QA',  sub: '23 flagged records',  done: true  },
+    { n: '03', label: 'Databricks',       sub: 'Delta table layer',   done: false },
+    { n: '04', label: 'Semantic Vectors', sub: 'all-MiniLM-L6-v2',   done: false },
+    { n: '05', label: 'Search API',       sub: 'FastAPI · ChromaDB',  done: false },
+    { n: '06', label: 'Examiner UI',      sub: 'React · xlsx export', done: false },
+  ];
+
+  const pos = [
+    { x: COLS[0], y: R1 }, { x: COLS[1], y: R1 }, { x: COLS[2], y: R1 },
+    { x: COLS[2], y: R2 }, { x: COLS[1], y: R2 }, { x: COLS[0], y: R2 },
+  ];
+  const midY1 = R1 + BOX_H / 2;
+  const midY2 = R2 + BOX_H / 2;
+
   return (
-    <DiaShell caption="how the agent answers a scoping question" note={<>three sources of truth fold into <em>one draft</em>.</>}>
+    <DiaShell
+      caption="6-layer extraction and search pipeline"
+      note={<>steps 01 and 02 complete · steps 03 to 06 <em>in progress</em> for June delivery.</>}
+      viewBox="0 0 500 220"
+    >
       <defs>
-        <marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-          <path d="M 0 0 L 10 5 L 0 10 z" fill="#9c4a64"/>
+        <marker id="ar-arch" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#c9bda7"/>
         </marker>
       </defs>
-      {/* three input rows on left */}
-      {[
-        { y: 50,  l: 'historical exams' },
-        { y: 100, l: 'examiner question' },
-        { y: 150, l: 'live news' },
-      ].map((r, i) => (
-        <g key={i} className="step" style={{ '--i': i }}>
-          <rect x="40" y={r.y - 15} width="160" height="30" rx="15" fill="#f5efe1" stroke="#c9bda7" strokeWidth="1"/>
-          <text x="120" y={r.y + 4} textAnchor="middle" fontFamily="Cormorant Garamond" fontSize="14" fontStyle="italic" fill="#2b1e16">{r.l}</text>
-          <line x1="200" y1={r.y} x2="270" y2="100" stroke="#c46a85" strokeWidth="1.2" markerEnd="url(#ar1)" fill="none"/>
+      <line x1={COLS[0]+BOX_W+2} y1={midY1} x2={COLS[1]-2}        y2={midY1} stroke="#c9bda7" strokeWidth="1.3" markerEnd="url(#ar-arch)"/>
+      <line x1={COLS[1]+BOX_W+2} y1={midY1} x2={COLS[2]-2}        y2={midY1} stroke="#c9bda7" strokeWidth="1.3" markerEnd="url(#ar-arch)"/>
+      <line x1={COLS[2]+BOX_W/2} y1={R1+BOX_H+2} x2={COLS[2]+BOX_W/2} y2={R2-2} stroke="#c9bda7" strokeWidth="1.3" markerEnd="url(#ar-arch)"/>
+      <line x1={COLS[2]-2}       y1={midY2} x2={COLS[1]+BOX_W+2}  y2={midY2} stroke="#c9bda7" strokeWidth="1.3" markerEnd="url(#ar-arch)"/>
+      <line x1={COLS[1]-2}       y1={midY2} x2={COLS[0]+BOX_W+2}  y2={midY2} stroke="#c9bda7" strokeWidth="1.3" markerEnd="url(#ar-arch)"/>
+
+      {steps.map((s, i) => {
+        const { x, y } = pos[i];
+        const bg  = s.done ? '#edf2ea' : '#fef0e8';
+        const brd = s.done ? '#7a8868' : '#d68aa3';
+        const nc  = s.done ? '#7a8868' : '#9c4a64';
+        const dc  = s.done ? '#7a8868' : '#d68aa3';
+        return (
+          <g key={i} className="step" style={{ '--i': i }}>
+            <rect x={x} y={y} width={BOX_W} height={BOX_H} rx="5" fill={bg} stroke={brd} strokeWidth="1.2"/>
+            <text x={x+9} y={y+14} fontFamily="JetBrains Mono" fontSize="8" fill={nc} opacity="0.85">{s.n}</text>
+            <circle cx={x+BOX_W-10} cy={y+11} r="3.2" fill={dc} opacity="0.85"/>
+            <text x={x+BOX_W/2} y={y+29} textAnchor="middle" fontFamily="Cormorant Garamond" fontSize="13.5" fontStyle="italic" fill="#2b1e16">{s.label}</text>
+            <text x={x+BOX_W/2} y={y+43} textAnchor="middle" fontFamily="JetBrains Mono" fontSize="7.5" fill="#8a7560">{s.sub}</text>
+          </g>
+        );
+      })}
+    </DiaShell>
+  );
+}
+
+function ExamScopeHistoryDiagram() {
+  const raw   = [30, 33, 36, 35, 38, 40, 29, 36, 41, 44, 46, 46, 14];
+  const years = ["'14","'15","'16","'17","'18","'19","'20","'21","'22","'23","'24","'25","'26"];
+  const data  = raw.map((v, i) => ({ v, y: years[i], current: i === 12 }));
+
+  const L = 34, T = 22, plotW = 432, plotH = 134;
+  const baseline = T + plotH;
+  const maxV = 50, barW = 24, stepPx = 34;
+  const bx = (i) => L + i * stepPx;
+  const bh = (v) => (v / maxV) * plotH;
+  const by = (v) => baseline - bh(v);
+
+  return (
+    <DiaShell caption="exam reports indexed by fiscal year (FY2014 to FY2026)" note={<>468 reports total · FY2026 <em>ongoing</em>.</>}>
+      {[10, 20, 30, 40].map(v => (
+        <g key={v}>
+          <line x1={L} y1={by(v)} x2={L+plotW} y2={by(v)} stroke="#ddd1bb" strokeWidth="0.6" strokeDasharray="3 3"/>
+          <text x={L-5} y={by(v)+4} textAnchor="end" fontFamily="JetBrains Mono" fontSize="7.5" fill="#8a7560">{v}</text>
         </g>
       ))}
-      {/* center: synthesis */}
-      <g className="step" style={{ '--i': 3 }}>
-        <circle cx="290" cy="100" r="40" fill="#fef0e8" stroke="#9c4a64" strokeWidth="1.5"/>
-        <text x="290" y="98" textAnchor="middle" fontFamily="Cormorant Garamond" fontSize="13" fontStyle="italic" fill="#2b1e16">synthesise</text>
-        <text x="290" y="114" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="9" fill="#9c4a64">+ chatbot</text>
-      </g>
-      {/* arrow to draft */}
-      <line x1="330" y1="100" x2="380" y2="100" stroke="#9c4a64" strokeWidth="1.5" markerEnd="url(#ar1)"/>
-      <g className="step" style={{ '--i': 4 }}>
-        <rect x="380" y="80" width="80" height="40" rx="6" fill="#d68aa3"/>
-        <text x="420" y="98" textAnchor="middle" fontFamily="Cormorant Garamond" fontSize="14" fontStyle="italic" fill="#fff">scope</text>
-        <text x="420" y="113" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="9" fill="#fff">draft</text>
-      </g>
+      <text x={L+plotW} y={T-6} textAnchor="end" fontFamily="Cormorant Garamond" fontSize="11" fontStyle="italic" fill="#5a4434">468 reports</text>
+      {data.map((d, i) => (
+        <g key={d.y} className="bar" style={{ '--i': i }}>
+          <rect
+            x={bx(i)} y={by(d.v)} width={barW} height={bh(d.v)}
+            fill={d.current ? '#d68aa3' : '#6a9cc8'}
+            fillOpacity={d.current ? 0.75 : 0.65}
+            stroke={d.current ? '#9c4a64' : '#4f86b8'}
+            strokeWidth="0.8" rx="2"
+          />
+          <text x={bx(i)+barW/2} y={baseline+14} textAnchor="middle" fontFamily="JetBrains Mono" fontSize="7.5" fill="#8a7560">{d.y}</text>
+        </g>
+      ))}
+      <line x1={L} y1={baseline} x2={L+plotW} y2={baseline} stroke="#c9bda7" strokeWidth="1"/>
     </DiaShell>
   );
 }
@@ -305,7 +364,7 @@ function MetricStrip({ items }) {
 }
 
 function ProjectDiagram({ id }) {
-  if (id === 'cibc')           return <CIBCDiagram />;
+  if (id === 'cibc')           return <><ExamScopeArchDiagram /><ExamScopeHistoryDiagram /></>;
   if (id === 'credit-risk')    return <CreditRiskDiagram />;
   if (id === 'aesthify')       return <AesthifyDiagram />;
   if (id === 'pead')           return <PEADDiagram />;
