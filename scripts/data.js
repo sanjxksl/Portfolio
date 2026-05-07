@@ -462,9 +462,9 @@ window.PORTFOLIO = {
   now: {
     updated: "this week",
     reading: [
-      { title: "Inspired", author: "Marty Cagan", note: "rereading to understand what the product management function actually is, not what people claim it is." },
-      { title: "The Ballad of Never After", author: "Stephanie Garber", note: "because I miss a good fantasy romance." },
-      { title: "The Alchemist", author: "Paulo Coelho", note: "I introspect and contemplate a lot, and this book has always met me there. deceptively simple and genuinely deep. the kind of writing that holds up no matter how many times you return to it." },
+      { title: "Inspired", author: "Marty Cagan", note: "want to properly understand the product function." },
+      { title: "The Ballad of Never After", author: "Stephanie Garber", note: "missed a good old fantasy romance." },
+      { title: "The Alchemist", author: "Paulo Coelho", note: "i think a lot. this one always has something for me." },
     ],
     studying: [
       { title: "quant finance", checked: true,  items: ["options pricing and payoff structures", "Black-Scholes model and its assumptions", "derivatives pricing"] },
