@@ -509,34 +509,33 @@ function NowView() {
       preview: (n.studying || [])[0]?.title || '',
       date: today,
       content: (
-        <div>
-          {(n.studying || []).map((s, i) => (
-            <div key={i} className="dnotes-entry">
-              <div className="dnotes-entry-title">{s.title}</div>
-              {s.note && <p className="dnotes-entry-note">{s.note}</p>}
-            </div>
-          ))}
-        </div>
-      ),
-    },
-    {
-      title: 'Now Listening',
-      preview: (n.listening || []).join(', '),
-      date: today,
-      content: (
         <ul className="dnotes-checklist">
-          {(n.listening || []).map((l, i) => (
-            <li key={i}><span className="dnotes-bullet">♪</span>{l}</li>
+          {(n.studying || []).map((s, i) => (
+            <li key={i} style={{ flexDirection: 'column', alignItems: 'flex-start', paddingBottom: 14, gap: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <span className="dnotes-bullet" style={{
+                  background: s.checked ? 'rgba(255,212,38,0.2)' : 'rgba(255,255,255,0.05)',
+                  color: s.checked ? '#ffd426' : '#636366',
+                  fontFamily: 'var(--font-mono)', fontSize: 13,
+                }}>
+                  {s.checked ? '✓' : '○'}
+                </span>
+                <span style={{ fontSize: 15, color: s.checked ? '#f5f5f7' : '#aeaeb2' }}>{s.title}</span>
+              </div>
+              {s.items && s.items.length > 0 && (
+                <ul style={{ listStyle: 'none', padding: '6px 0 0 34px', margin: 0 }}>
+                  {s.items.map((item, j) => (
+                    <li key={j} style={{ fontSize: 12.5, color: '#636366', padding: '3px 0', display: 'flex', gap: 8, alignItems: 'center' }}>
+                      <span style={{ color: '#48484a', flexShrink: 0 }}>–</span>{item}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
           ))}
         </ul>
       ),
     },
-    ...(n.thinking ? [{
-      title: 'Turning Over',
-      preview: n.thinking.slice(0, 48) + (n.thinking.length > 48 ? '…' : ''),
-      date: today,
-      content: <p className="dnotes-thinking">{n.thinking}</p>,
-    }] : []),
   ];
 
   return (
@@ -601,13 +600,13 @@ function LearningArchive() {
   return (
     <div style={{ padding: '32px 40px', maxWidth: 620, margin: '0 auto' }}>
       <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--oxblood)', marginBottom: 10 }}>
-        Commit Log · Learning
+        git log · sanjana@portfolio
       </div>
       <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 30, fontWeight: 400, margin: '0 0 8px', letterSpacing: '-0.015em' }}>
-        A <em style={{ color: 'var(--oxblood)', fontWeight: 300 }}>working archive</em>
+        What I'm <em style={{ color: 'var(--oxblood)', fontWeight: 300 }}>working through</em>
       </h1>
       <p style={{ color: 'var(--ink-faint)', fontSize: 13, lineHeight: 1.6, margin: '0 0 28px' }}>
-        Every project, course, and competition that taught me something. Most recent first.
+        A running log of what I study, build, and compete in. Branched by domain. I add a commit when something actually clicks.
       </p>
 
       <div style={{ position: 'relative', paddingLeft: 20, borderLeft: '1px solid var(--paper-3)' }}>
