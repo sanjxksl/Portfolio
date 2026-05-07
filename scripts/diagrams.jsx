@@ -244,9 +244,9 @@ function PEADDiagram() {
 // ============================================================
 function AnomalyDiagram() {
   const points = [
-    { i: 'Forest Products',  x: 0.36, y: 0.62, hi: true },
-    { i: 'Brewers',          x: 0.32, y: 0.48, hi: true },
-    { i: 'Industrial Gases', x: 0.28, y: 0.44, hi: true },
+    { i: 'Forest Products',  x: 0.36, y: 0.64, hi: true },
+    { i: 'Brewers',          x: 0.33, y: 0.51, hi: true },
+    { i: 'Industrial Gases', x: 0.24, y: 0.37, hi: true },
     { i: 'Software',         x: 0.18, y: 0.78 },
     { i: 'REITs',            x: 0.14, y: 0.72 },
     { i: 'Banks',            x: 0.62, y: 0.26 },
@@ -259,7 +259,7 @@ function AnomalyDiagram() {
       <line x1="60" y1="170" x2="430" y2="170" stroke="#c9bda7"/>
       <line x1="60" y1="20" x2="60" y2="170" stroke="#c9bda7"/>
       <text x="245" y="190" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="9" fill="#8a7560">rate →</text>
-      <text x="50" y="95" textAnchor="end" fontFamily="JetBrains Mono" fontSize="9" fill="#8a7560" transform="rotate(-90 50 95)">severity →</text>
+      <text x="64" y="16" fontFamily="JetBrains Mono" fontSize="8.5" fill="#8a7560">severity →</text>
       {points.map((p, i) => (
         <g key={p.i} className="pt" style={{ '--i': i }}>
           <circle
