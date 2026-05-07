@@ -467,9 +467,9 @@ window.PORTFOLIO = {
       { title: "The Alchemist", author: "Paulo Coelho", note: "i think a lot. this one always has something for me." },
     ],
     studying: [
-      { title: "quant finance", checked: true,  items: ["options pricing and payoff structures", "Black-Scholes model and its assumptions", "derivatives pricing"] },
       { title: "MLOps", checked: false, items: ["hardening the credit risk inference pipeline", "SageMaker deployment patterns", "Evidently drift monitoring"] },
       { title: "Databricks + cloud architecture", checked: false, items: ["Delta Lake and medallion architecture", "cloud-native ETL pipelines", "production data engineering at CIBC"] },
+      { title: "quant finance", checked: true,  items: ["options pricing and payoff structures", "Black-Scholes model and its assumptions", "derivatives pricing"] },
     ],
   },
 

@@ -520,7 +520,7 @@ function NowView() {
                 }}>
                   {s.checked ? '✓' : '○'}
                 </span>
-                <span style={{ fontSize: 15, color: s.checked ? '#f5f5f7' : '#aeaeb2' }}>{s.title}</span>
+                <span style={{ fontSize: 15, color: s.checked ? '#636366' : '#aeaeb2', textDecoration: s.checked ? 'line-through' : 'none' }}>{s.title}</span>
               </div>
               {s.items && s.items.length > 0 && (
                 <ul style={{ listStyle: 'none', padding: '6px 0 0 34px', margin: 0 }}>
