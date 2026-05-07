@@ -194,21 +194,23 @@ function AesthifyDiagram() {
     { k: 'balance',    v:  0.22 },
     { k: 'symmetry',   v: -0.60 },
   ];
-  const max = 0.7;
+  // Zero line at x=360 so even the -0.60 bar (extends ~129px left) stops at x≈231,
+  // well clear of the label column (left-aligned at x=8, ends ~x=85).
+  const ZERO = 360, MAX = 0.7, SCALE = 150, STEP = 40, Y0 = 38, BH = 15;
+  const bw = (v) => (Math.abs(v) / MAX) * SCALE;
+  const bx = (v) => v >= 0 ? ZERO : ZERO - bw(v);
+  const vx = (v) => v >= 0 ? ZERO + bw(v) + 8 : ZERO - bw(v) - 8;
   return (
-    <DiaShell caption="design score vs. user preference (n=101)" note={<>simplicity wins. people prefer <em>asymmetric</em> rooms.</>}>
-      <line x1="240" y1="20" x2="240" y2="180" stroke="#c9bda7" strokeDasharray="2 3"/>
+    <DiaShell caption="design score vs. user preference (n=101)" note={<>simplicity wins. people prefer <em>asymmetric</em> rooms.</>} viewBox="0 0 540 196">
+      <line x1={ZERO} y1="18" x2={ZERO} y2="178" stroke="#c9bda7" strokeDasharray="2 3"/>
       {data.map((d, i) => {
-        const y = 36 + i * 36;
-        const len = (d.v / max) * 160;
-        const x = d.v >= 0 ? 240 : 240 + len;
-        const w = Math.abs(len);
+        const y = Y0 + i * STEP;
         const fill = d.v >= 0 ? '#7a8868' : '#c46a85';
         return (
           <g key={d.k} className="bar" style={{ '--i': i }}>
-            <text x="232" y={y + 5} textAnchor="end" fontFamily="Cormorant Garamond" fontSize="14" fontStyle="italic" fill="#2b1e16">{d.k}</text>
-            <rect className="b" x={d.v >= 0 ? 240 : x} y={y - 7} width={w} height="14" fill={fill} rx="2"/>
-            <text x={d.v >= 0 ? 240 + w + 8 : x - 8} y={y + 5} textAnchor={d.v >= 0 ? 'start' : 'end'} fontFamily="JetBrains Mono" fontSize="10" fill="#5a4434">
+            <text x="8" y={y + 5} fontFamily="Cormorant Garamond" fontSize="14" fontStyle="italic" fill="#2b1e16">{d.k}</text>
+            <rect className="b" x={bx(d.v)} y={y - BH/2} width={bw(d.v)} height={BH} fill={fill} fillOpacity="0.85" rx="2"/>
+            <text x={vx(d.v)} y={y + 5} textAnchor={d.v >= 0 ? 'start' : 'end'} fontFamily="JetBrains Mono" fontSize="10" fill="#5a4434">
               {d.v > 0 ? '+' : ''}{d.v.toFixed(2)}
             </text>
           </g>

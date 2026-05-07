@@ -62,7 +62,7 @@ window.PORTFOLIO = {
           "Small architecture decisions compound. Designing the data loading step as an isolated function took an extra ten minutes upfront. It means the Databricks migration takes ten lines of code rather than a full rewrite.",
         ]},
       ],
-      tags: ["Python", "Semantic Search", "FastAPI", "ChromaDB", "Databricks", "FinTech", "AML"],
+      tags: ["Python", "Semantic Search", "FastAPI", "Databricks", "AML", "FinTech"],
       metrics: [
         { v: "468", l: "exam reports indexed" },
         { v: "95%", l: "extraction accuracy" },
