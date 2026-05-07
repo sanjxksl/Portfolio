@@ -312,6 +312,53 @@ function glyphFor(t) {
   return '§';
 }
 
+// ==================== TABLEAU EMBED ====================
+function TableauEmbed({ path, href }) {
+  const containerRef = React.useRef(null);
+  const initialised = React.useRef(false);
+
+  React.useEffect(() => {
+    const el = containerRef.current;
+    if (!el || initialised.current) return;
+    initialised.current = true;
+
+    const obj = el.getElementsByTagName('object')[0];
+    if (!obj) return;
+    obj.style.width = '100%';
+    obj.style.height = (el.offsetWidth * 0.75) + 'px';
+
+    const script = document.createElement('script');
+    script.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+    obj.parentNode.insertBefore(script, obj);
+
+    return () => { if (script.parentNode) script.parentNode.removeChild(script); };
+  }, []);
+
+  const html = `<object class="tableauViz" style="display:none;">
+    <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F"/>
+    <param name="embed_code_version" value="3"/>
+    <param name="site_root" value=""/>
+    <param name="name" value="${path}"/>
+    <param name="tabs" value="yes"/>
+    <param name="toolbar" value="yes"/>
+    <param name="animate_transition" value="yes"/>
+    <param name="display_static_image" value="yes"/>
+    <param name="display_spinner" value="yes"/>
+    <param name="display_overlay" value="yes"/>
+    <param name="display_count" value="yes"/>
+    <param name="language" value="en-US"/>
+  </object>`;
+
+  return (
+    <div style={{ margin: '20px 0', border: '1px solid var(--ink-faint)', borderRadius: 4, overflow: 'hidden' }}>
+      <div ref={containerRef} style={{ position: 'relative', background: '#fff' }} dangerouslySetInnerHTML={{ __html: html }} />
+      <div style={{ padding: '8px 12px', fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--ink-faint)', borderTop: '1px solid var(--ink-faint)', background: 'var(--paper-soft)' }}>
+        Live Tableau Public dashboard. {href && <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>Open in Tableau Public ↗</a>}
+      </div>
+    </div>
+  );
+}
+
 // ==================== DOC (Dossier) ====================
 function DocView({ item }) {
   const onTagClick = (t) => {
@@ -368,17 +415,7 @@ function DocView({ item }) {
       ))}
 
       {item.tableauPath && (
-        <div className="tableau-embed" style={{ margin: '20px 0', border: '1px solid var(--ink-faint)', borderRadius: 4, overflow: 'hidden', background: '#fff' }}>
-          <iframe
-            src={`https://public.tableau.com/views/${item.tableauPath}?:embed=y&:showVizHome=no&:toolbar=top&:tabs=no`}
-            style={{ width: '100%', height: 640, border: 0, display: 'block' }}
-            title="Tableau dashboard"
-            allowFullScreen
-          />
-          <div style={{ padding: '8px 12px', fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--ink-faint)', borderTop: '1px solid var(--ink-faint)', background: 'var(--paper-soft)' }}>
-            Live Tableau Public dashboard. <a href={item.links?.tableau} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>Open in Tableau Public ↗</a>
-          </div>
-        </div>
+        <TableauEmbed path={item.tableauPath} href={item.links?.tableau} />
       )}
 
       {item.links?.tableau && !item.tableauPath && (

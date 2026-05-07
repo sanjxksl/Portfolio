@@ -83,9 +83,9 @@ window.PORTFOLIO = {
       subtitle: "An end-to-end anomaly detection and risk scoring system on 30 years of Compustat data, built to surface structural governance risk rather than raw counts.",
       links: {
         github: "https://github.com/sanjxksl/executive-compensation-anomaly",
-        tableau: "https://public.tableau.com/views/ExecutiveCompensationAnomalyDetection/Dashboard1",
+        tableau: "https://public.tableau.com/views/ExecutiveCompensationAnomalyDetection/AnomalyTrendsbyYear",
       },
-      tableauPath: "ExecutiveCompensationAnomalyDetection/Dashboard1",
+      tableauPath: "ExecutiveCompensationAnomalyDetection/AnomalyTrendsbyYear",
       body: [
         { h: "The Problem", p: "Naive anomaly detection in executive pay is misleading. Large industries like Regional Banks produce high raw anomaly counts simply because they have more firms, not because their governance is worse. Without normalisation, any analysis conflates scale with structural failure." },
         { p: "Raw pay figures without performance context are also meaningless. An executive earning ten times the industry median is anomalous. Whether that anomaly reflects governance failure or justified outperformance requires overlaying revenue, profitability, and Tobin's Q." },
