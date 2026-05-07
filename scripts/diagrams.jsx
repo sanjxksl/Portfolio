@@ -243,36 +243,40 @@ function PEADDiagram() {
 // 5. Anomaly — quadrant, severity vs frequency
 // ============================================================
 function AnomalyDiagram() {
+  const W = 500, H = 240;
+  const X0 = 64, X1 = 460, Y0 = 24, Y1 = 196;
+  const cx = (x) => X0 + x * (X1 - X0);
+  const cy = (y) => Y1 - y * (Y1 - Y0);
+
   const points = [
-    { i: 'Forest Products',  x: 0.36, y: 0.64, hi: true },
-    { i: 'Brewers',          x: 0.33, y: 0.51, hi: true },
-    { i: 'Industrial Gases', x: 0.24, y: 0.37, hi: true },
-    { i: 'Software',         x: 0.18, y: 0.78 },
-    { i: 'REITs',            x: 0.14, y: 0.72 },
-    { i: 'Banks',            x: 0.62, y: 0.26 },
-    { i: 'Restaurants',      x: 0.40, y: 0.30 },
-    { i: 'Pharma',           x: 0.46, y: 0.22 },
-    { i: 'Retail',           x: 0.50, y: 0.18 },
+    { i: 'Forest Products',  x: 0.36, y: 0.76, hi: true },
+    { i: 'Brewers',          x: 0.32, y: 0.57, hi: true },
+    { i: 'Industrial Gases', x: 0.25, y: 0.38, hi: true },
+    { i: 'Software',         x: 0.18, y: 0.88 },
+    { i: 'REITs',            x: 0.14, y: 0.80 },
+    { i: 'Banks',            x: 0.64, y: 0.28 },
+    { i: 'Restaurants',      x: 0.42, y: 0.32 },
+    { i: 'Pharma',           x: 0.48, y: 0.22 },
+    { i: 'Retail',           x: 0.54, y: 0.16 },
   ];
   return (
-    <DiaShell caption="composite risk = anomaly rate × avg severity (illustrative)" note={<>three small sectors carry the highest <em>composite</em> score.</>}>
-      <line x1="60" y1="170" x2="430" y2="170" stroke="#c9bda7"/>
-      <line x1="60" y1="20" x2="60" y2="170" stroke="#c9bda7"/>
-      <text x="245" y="190" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="9" fill="#8a7560">rate →</text>
-      <text x="64" y="16" fontFamily="JetBrains Mono" fontSize="8.5" fill="#8a7560">severity →</text>
+    <DiaShell caption="composite risk = anomaly rate × avg severity (illustrative)" note={<>three small sectors carry the highest <em>composite</em> score.</>} viewBox={`0 0 ${W} ${H}`}>
+      <line x1={X0} y1={Y1} x2={X1} y2={Y1} stroke="#c9bda7"/>
+      <line x1={X0} y1={Y0} x2={X0} y2={Y1} stroke="#c9bda7"/>
+      <text x={(X0+X1)/2} y={H-4} textAnchor="middle" fontFamily="JetBrains Mono" fontSize="9.5" fill="#8a7560">rate →</text>
+      <text x={X0+4} y={Y0+1} fontFamily="JetBrains Mono" fontSize="9.5" fill="#8a7560">severity →</text>
       {points.map((p, i) => (
         <g key={p.i} className="pt" style={{ '--i': i }}>
           <circle
-            cx={60 + p.x * 370}
-            cy={170 - p.y * 150}
-            r={p.hi ? 7 : 5}
+            cx={cx(p.x)} cy={cy(p.y)}
+            r={p.hi ? 8 : 5}
             fill={p.hi ? '#c46a85' : '#6a9cc8'}
             fillOpacity={p.hi ? 0.7 : 0.3}
             stroke={p.hi ? '#9c4a64' : '#356597'}
             strokeWidth="1"
           />
           {p.hi && (
-            <text x={60 + p.x * 370 + 11} y={170 - p.y * 150 + 4} fontFamily="Cormorant Garamond" fontSize="12" fontStyle="italic" fill="#9c4a64">{p.i}</text>
+            <text x={cx(p.x) + 13} y={cy(p.y) + 5} fontFamily="Cormorant Garamond" fontSize="14" fontStyle="italic" fill="#9c4a64">{p.i}</text>
           )}
         </g>
       ))}
