@@ -412,7 +412,7 @@ function Dock({ openApps, windows, onLaunch }) {
     { id: 'finder',   label: 'Finder',        render: () => <FinderAppIcon /> },
     { id: 'gallery',  label: 'Gallery',       render: () => <GalleryAppIcon />, galleryAction: true },
     { sep: true },
-    { id: 'terminal', label: 'Ask Me Anything', render: () => <TerminalAppIcon /> },
+    { id: 'terminal', label: 'Terminal', render: () => <TerminalAppIcon /> },
     { id: 'resume',   label: 'Resume',          render: () => <ResumeIcon /> },
     { sep: true },
     { id: 'mail',     label: 'Contact',    render: () => <MailAppIcon />,     href: 'mailto:sanjanakanchibotla@gmail.com' },
