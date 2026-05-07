@@ -603,7 +603,7 @@ function LearningArchive() {
         git log · sanjana@portfolio
       </div>
       <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 30, fontWeight: 400, margin: '0 0 8px', letterSpacing: '-0.015em' }}>
-        What I'm <em style={{ color: 'var(--oxblood)', fontWeight: 300 }}>working through</em>
+        What I'm <em style={{ color: 'var(--oxblood)', fontWeight: 300 }}>up to</em>
       </h1>
       <p style={{ color: 'var(--ink-faint)', fontSize: 13, lineHeight: 1.6, margin: '0 0 28px' }}>
         A running log of what I study, build, and compete in. Branched by domain. I add a commit when something actually clicks.
