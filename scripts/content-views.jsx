@@ -74,14 +74,7 @@ function IndexCardHero({ onOpen }) {
 
 // ==================== FINDER ====================
 function FinderSidebar({ activeFolder, onOpenFolder, activeTag, onOpenTag }) {
-  const allTags = (() => {
-    const s = new Set();
-    const d = DATA();
-    ['work', 'projects', 'competitions'].forEach((k) => {
-      (d[k] || []).forEach((p) => (p.tags || []).forEach((t) => s.add(t)));
-    });
-    return [...s].sort();
-  })();
+  const pinnedTags = ["Python", "FinTech", "WRDS", "Empirical Finance", "Explainable AI", "Product Strategy"];
 
   return (
     <div className="finder-sidebar">
@@ -104,7 +97,7 @@ function FinderSidebar({ activeFolder, onOpenFolder, activeTag, onOpenTag }) {
 
       <div className="group">
         <div className="group-title">Tags</div>
-        {allTags.slice(0, 14).map((t) => (
+        {pinnedTags.map((t) => (
           <div key={t}
                className={`item ${activeTag === t ? 'active' : ''}`}
                onClick={() => { onOpenTag(t); }}>
