@@ -112,10 +112,13 @@ function FinderSidebar({ activeFolder, onOpenFolder, activeTag, onOpenTag }) {
 
 // ==================== GALLERY GRID + LIGHTBOX ====================
 function GalleryView() {
-  const { useState: useS, useEffect: useE, useCallback: useC } = React;
+  const { useState: useS, useEffect: useE, useCallback: useC, useMemo: useM } = React;
   const captions = DATA().gallery || [];
   const [images, setImages] = useS([]);
   const [lightbox, setLightbox] = useS(null); // index or null
+  const [view, setView] = useS('all');         // years | months | days | all
+  const [zoom, setZoom] = useS(2);              // 1 sparse → 4 dense
+  const [showInfo, setShowInfo] = useS(false);
 
   useE(() => {
     const found = [];
@@ -125,7 +128,13 @@ function GalleryView() {
       const num = String(i).padStart(2, '0');
       const img = new Image();
       img.onload = () => {
-        found.push({ src: `images/gallery/${num}.jpeg`, caption: captions[i - 1] || '' });
+        found.push({
+          src: `images/gallery/${num}.jpeg`,
+          caption: captions[i - 1] || '',
+          w: img.naturalWidth,
+          h: img.naturalHeight,
+          ratio: img.naturalWidth / img.naturalHeight,
+        });
         i++;
         tryNext();
       };
@@ -144,47 +153,195 @@ function GalleryView() {
       if (e.key === 'ArrowLeft') prev();
       else if (e.key === 'ArrowRight') next();
       else if (e.key === 'Escape') setLightbox(null);
+      else if (e.key.toLowerCase() === 'i') setShowInfo((s) => !s);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [lightbox, prev, next]);
 
+  // Group photos into "sections" with fake but plausible date headers.
+  // We don't have EXIF here so we infer rolling months from index.
+  const sections = useM(() => {
+    if (!images.length) return [];
+    const now = new Date(2026, 4, 1); // May 2026
+    const groups = [];
+    images.forEach((img, idx) => {
+      // every 3 photos shift one month back, so we get ~3-4 sections for ~8 images
+      const monthOffset = Math.floor(idx / 3);
+      const d = new Date(now.getFullYear(), now.getMonth() - monthOffset, 12 - idx);
+      const key = `${d.getFullYear()}-${d.getMonth()}`;
+      const label = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      const day = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+      const cur = groups[groups.length - 1];
+      if (cur && cur.key === key) cur.items.push({ img, idx, day });
+      else groups.push({ key, label, items: [{ img, idx, day }] });
+    });
+    return groups;
+  }, [images]);
+
   if (!images.length) {
     return (
-      <div className="finder-content">
-        <div className="finder-toolbar"><span>Gallery · everyday frames</span></div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '80%', color: 'var(--ink-faint)', fontFamily: 'var(--font-mono)', fontSize: 12 }}>loading images...</div>
+      <div className="photos-app">
+        <div className="photos-toolbar">
+          <div className="photos-titlebar">
+            <h2 className="photos-title">Library</h2>
+          </div>
+        </div>
+        <div className="photos-empty">Loading photos…</div>
       </div>
     );
   }
 
+  const cur = lightbox !== null ? images[lightbox] : null;
+
   return (
-    <div className="finder-content" style={{ display: 'flex', flexDirection: 'column' }}>
-      <div className="finder-toolbar">
-        <span>Gallery · everyday frames</span>
-        <span>{images.length} photos</span>
-      </div>
-      <div className="gallery-grid">
-        {images.map((img, i) => (
-          <div key={img.src} className="gallery-thumb" onClick={() => setLightbox(i)}>
-            <img src={img.src} alt={img.caption} />
-          </div>
-        ))}
+    <div className="photos-app">
+      {/* Top toolbar */}
+      <div className="photos-toolbar">
+        <div className="photos-titlebar">
+          <h2 className="photos-title">
+            {view === 'years' && 'Years'}
+            {view === 'months' && 'Months'}
+            {view === 'days' && 'Days'}
+            {view === 'all' && 'All Photos'}
+          </h2>
+          <span className="photos-count">{images.length} Photos</span>
+        </div>
+        <div className="photos-seg">
+          {[
+            { id: 'years', label: 'Years' },
+            { id: 'months', label: 'Months' },
+            { id: 'days', label: 'Days' },
+            { id: 'all', label: 'All Photos' },
+          ].map((v) => (
+            <button
+              key={v.id}
+              className={`photos-seg-btn ${view === v.id ? 'on' : ''}`}
+              onClick={() => setView(v.id)}
+            >{v.label}</button>
+          ))}
+        </div>
+        <div className="photos-zoom">
+          <button className="photos-zoom-btn" onClick={() => setZoom((z) => Math.max(1, z - 1))} aria-label="Smaller">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="M4 8h8"/></svg>
+          </button>
+          <button className="photos-zoom-btn" onClick={() => setZoom((z) => Math.min(4, z + 1))} aria-label="Larger">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="M4 8h8M8 4v8"/></svg>
+          </button>
+        </div>
       </div>
 
-      {lightbox !== null && (
-        <div className="gallery-lightbox" onClick={() => setLightbox(null)}>
-          <button className="gallery-lb-close" onClick={(e) => { e.stopPropagation(); setLightbox(null); }}>×</button>
-          <button className="gallery-lb-nav gallery-lb-prev" onClick={(e) => { e.stopPropagation(); prev(); }}>&#8249;</button>
-          <div className="gallery-lb-stage" onClick={(e) => e.stopPropagation()}>
-            <img src={images[lightbox].src} alt={images[lightbox].caption} />
-            <div className="gallery-lb-caption">
-              <span className="gallery-lb-num">{lightbox + 1} / {images.length}</span>
-              {images[lightbox].caption}
+      {/* Grid */}
+      <div className={`photos-body zoom-${zoom} view-${view}`}>
+        {view === 'all' && (
+          <div className="photos-grid-all">
+            {images.map((img, i) => (
+              <button key={img.src} className="photos-cell" onClick={() => setLightbox(i)} aria-label={img.caption || `Photo ${i + 1}`}>
+                <img src={img.src} alt={img.caption} loading="lazy" />
+              </button>
+            ))}
+          </div>
+        )}
+
+        {(view === 'days' || view === 'months') && sections.map((sec) => (
+          <div key={sec.key} className="photos-section">
+            <div className="photos-section-head">
+              <span className="photos-section-title">{sec.label}</span>
+              <span className="photos-section-sub">{sec.items.length} photos</span>
+            </div>
+            <div className={`photos-grid-${view === 'days' ? 'days' : 'months'}`}>
+              {sec.items.map(({ img, idx }, k) => (
+                <button
+                  key={img.src}
+                  className={`photos-cell ${view === 'months' && k === 0 ? 'hero' : ''}`}
+                  onClick={() => setLightbox(idx)}
+                >
+                  <img src={img.src} alt={img.caption} loading="lazy" />
+                </button>
+              ))}
             </div>
           </div>
-          <button className="gallery-lb-nav gallery-lb-next" onClick={(e) => { e.stopPropagation(); next(); }}>&#8250;</button>
-        </div>
+        ))}
+
+        {view === 'years' && (
+          <div className="photos-years">
+            {sections.slice(0, 3).map((sec, i) => {
+              const first = sec.items[0];
+              return (
+                <button
+                  key={sec.key}
+                  className="photos-year"
+                  onClick={() => { setView('months'); }}
+                >
+                  <div className="photos-year-img">
+                    <img src={first.img.src} alt="" loading="lazy" />
+                  </div>
+                  <div className="photos-year-meta">
+                    <span className="photos-year-num">{sec.label.split(' ')[1] || '2026'}</span>
+                    <span className="photos-year-month">{sec.label.split(' ')[0]}</span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* Lightbox — portal to body so it escapes the window's containing block */}
+      {cur && ReactDOM.createPortal(
+        <div className="photos-lightbox" onClick={() => setLightbox(null)}>
+          <div className="photos-lb-bar" onClick={(e) => e.stopPropagation()}>
+            <button className="photos-lb-icon" onClick={() => setLightbox(null)} aria-label="Close">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M15 6l-9 9M6 6l9 9"/></svg>
+            </button>
+            <div className="photos-lb-title">
+              <div className="photos-lb-title-main">{cur.caption || 'Untitled'}</div>
+              <div className="photos-lb-title-sub">{lightbox + 1} of {images.length}</div>
+            </div>
+            <div className="photos-lb-actions">
+              <button className="photos-lb-icon" onClick={() => setShowInfo((s) => !s)} aria-label="Info" title="Info (i)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v0M11 12h1v5h1"/></svg>
+              </button>
+              <button className="photos-lb-icon" onClick={() => window.open(cur.src, '_blank')} aria-label="Share">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="M12 3l-4 4h3v8h2V7h3l-4-4zM5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div className="photos-lb-stage" onClick={(e) => e.stopPropagation()}>
+            <button className="photos-lb-arrow left" onClick={(e) => { e.stopPropagation(); prev(); }} aria-label="Previous">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+            </button>
+            <img key={cur.src} src={cur.src} alt={cur.caption} className="photos-lb-img" />
+            <button className="photos-lb-arrow right" onClick={(e) => { e.stopPropagation(); next(); }} aria-label="Next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+
+            {showInfo && (
+              <div className="photos-lb-info" onClick={(e) => e.stopPropagation()}>
+                <div className="photos-lb-info-head">Info</div>
+                {cur.caption && <p className="photos-lb-info-caption">{cur.caption}</p>}
+                <div className="photos-lb-info-row"><span>Dimensions</span><span>{cur.w} × {cur.h}</span></div>
+                <div className="photos-lb-info-row"><span>Aspect</span><span>{cur.ratio.toFixed(2)}</span></div>
+                <div className="photos-lb-info-row"><span>File</span><span style={{ fontFamily: 'monospace', fontSize: 11 }}>{cur.src.split('/').pop()}</span></div>
+              </div>
+            )}
+          </div>
+
+          {/* Filmstrip */}
+          <div className="photos-lb-strip" onClick={(e) => e.stopPropagation()}>
+            {images.map((img, i) => (
+              <button
+                key={img.src}
+                className={`photos-lb-thumb ${i === lightbox ? 'active' : ''}`}
+                onClick={() => setLightbox(i)}
+              >
+                <img src={img.src} alt="" />
+              </button>
+            ))}
+          </div>
+        </div>,
+        document.body
       )}
     </div>
   );
@@ -477,108 +634,194 @@ function NowView() {
   const d = DATA();
   const n = d.now || {};
   const [sel, setSel] = useS(0);
+  // Track which entries are expanded within each note. Default: all open.
+  const [openMap, setOpenMap] = useS({
+    reading: (n.reading || []).map(() => true),
+    studying: (n.studying || []).map(() => true),
+  });
+  const toggle = (group, idx) => setOpenMap((m) => ({
+    ...m,
+    [group]: m[group].map((v, i) => (i === idx ? !v : v)),
+  }));
+  const setAll = (group, val) => setOpenMap((m) => ({
+    ...m,
+    [group]: m[group].map(() => val),
+  }));
 
-  const today = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  const today = new Date();
+  const dateLabel = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  const timeLabel = today.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  const listDate = today.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: '2-digit' });
+
+  // Chevron caret
+  const Chev = ({ open }) => (
+    <svg className={`dnotes-chev ${open ? 'open' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 6l6 6-6 6" />
+    </svg>
+  );
+
+  const readingOpen = (openMap.reading || []).filter(Boolean).length;
+  const studyingOpen = (openMap.studying || []).filter(Boolean).length;
 
   const notes = [
     {
       title: 'Currently Reading',
       preview: (n.reading || [])[0]?.title || '',
-      date: today,
+      date: listDate,
       content: (
         <div>
-          {(n.reading || []).map((b, i) => (
-            <div key={i} className="dnotes-entry">
-              <div className="dnotes-entry-title">{b.title}</div>
-              {b.author && <div className="dnotes-entry-by">— {b.author}</div>}
-              {b.note && <p className="dnotes-entry-note">{b.note}</p>}
+          <div className="dnotes-section">
+            <button
+              className="dnotes-section-head"
+              onClick={() => setAll('reading', readingOpen < (openMap.reading?.length || 0))}
+            >
+              <Chev open={readingOpen > 0} />
+              <span className="dnotes-section-title">Reading list</span>
+              <span className="dnotes-section-count">{(n.reading || []).length} items</span>
+            </button>
+            <div className="dnotes-section-body">
+              {(n.reading || []).map((b, i) => {
+                const open = !!(openMap.reading || [])[i];
+                return (
+                  <div key={i} className={`dnotes-entry collapsible ${open ? 'open' : ''}`}>
+                    <button className="dnotes-entry-head" onClick={() => toggle('reading', i)}>
+                      <Chev open={open} />
+                      <span className="dnotes-entry-title">{b.title}</span>
+                    </button>
+                    <div className="dnotes-entry-body">
+                      {b.author && <div className="dnotes-entry-by">— {b.author}</div>}
+                      {b.note && <p className="dnotes-entry-note">{b.note}</p>}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          ))}
+          </div>
         </div>
       ),
     },
     {
       title: 'Currently Learning',
       preview: (n.studying || [])[0]?.title || '',
-      date: today,
+      date: listDate,
       content: (
-        <ul className="dnotes-checklist">
-          {(n.studying || []).map((s, i) => (
-            <li key={i} style={{ flexDirection: 'column', alignItems: 'flex-start', paddingBottom: 14, gap: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                <span className="dnotes-bullet" style={{
-                  background: s.checked ? 'rgba(255,212,38,0.2)' : 'rgba(255,255,255,0.05)',
-                  color: s.checked ? '#ffd426' : '#636366',
-                  fontFamily: 'var(--font-mono)', fontSize: 13,
-                }}>
-                  {s.checked ? '✓' : '○'}
-                </span>
-                <span style={{ fontSize: 15, color: s.checked ? '#636366' : '#aeaeb2', textDecoration: s.checked ? 'line-through' : 'none' }}>{s.title}</span>
-              </div>
-              {s.items && s.items.length > 0 && (
-                <ul style={{ listStyle: 'none', padding: '6px 0 0 34px', margin: 0 }}>
-                  {s.items.map((item, j) => (
-                    <li key={j} style={{ fontSize: 12.5, color: '#636366', padding: '3px 0', display: 'flex', gap: 8, alignItems: 'center' }}>
-                      <span style={{ color: '#48484a', flexShrink: 0 }}>–</span>{item}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
-        </ul>
+        <div>
+          <div className="dnotes-section">
+            <button
+              className="dnotes-section-head"
+              onClick={() => setAll('studying', studyingOpen < (openMap.studying?.length || 0))}
+            >
+              <Chev open={studyingOpen > 0} />
+              <span className="dnotes-section-title">Currently studying</span>
+              <span className="dnotes-section-count">{(n.studying || []).length} topics</span>
+            </button>
+            <ul className="dnotes-checklist">
+              {(n.studying || []).map((s, i) => {
+                const open = !!(openMap.studying || [])[i];
+                return (
+                  <li key={i} className={`dnotes-study ${open ? 'open' : ''}`}>
+                    <button className="dnotes-study-head" onClick={() => toggle('studying', i)}>
+                      <Chev open={open} />
+                      <span className={`dnotes-check ${s.checked ? 'on' : ''}`} aria-hidden="true" />
+                      <span className="dnotes-study-title" style={{ color: s.checked ? '#8e8e93' : '#e5e5e7', textDecoration: s.checked ? 'line-through' : 'none' }}>{s.title}</span>
+                    </button>
+                    {s.items && s.items.length > 0 && (
+                      <ul className="dnotes-study-items">
+                        {s.items.map((item, j) => (
+                          <li key={j}>
+                            <span>–</span>{item}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
       ),
     },
+  ];
+
+  // SF-Symbol-style toolbar glyphs
+  const tools = [
+    { label: 'Lock', path: 'M7 9V7a5 5 0 0 1 10 0v2h1a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h1zm2 0h6V7a3 3 0 0 0-6 0v2z' },
+    { label: 'Delete', path: 'M9 4h6l1 2h4v2H4V6h4l1-2zm-3 5h12l-1 11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 9z' },
+    { label: 'New', path: 'M18 4H6a2 2 0 0 0-2 2v14l4-4h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-6 3h0v6m-3-3h6' },
+    { label: 'Format', path: 'M5 4h14v3H5V4zm2 5h10v2H7V9zm-2 5h14v2H5v-2zm2 5h10v2H7v-2z' },
+    { label: 'Checklist', path: 'M4 6l2 2 4-4M4 13l2 2 4-4M4 20l2 2 4-4M13 6h8M13 13h8M13 20h8' },
+    { label: 'Table', path: 'M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5zm0 6h18M9 3v18' },
+    { label: 'Photo', path: 'M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm2 11l4-5 3 4 2-2 4 5H6z M8 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z' },
+    { label: 'Share', path: 'M12 3l-4 4h3v8h2V7h3l-4-4zM5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6h-2v6H7v-6H5z' },
   ];
 
   return (
     <div className="dnotes-app">
       {/* Folders rail */}
       <div className="dnotes-rail">
-        <div className="dnotes-rail-head">Folders</div>
-        <div className="dnotes-rail-item active">
-          <span className="dnotes-rail-ico">≡</span>
-          <span>All Notes</span>
-          <span className="dnotes-rail-count">{notes.length}</span>
+        <div className="dnotes-rail-section">
+          <div className="dnotes-rail-head">iCloud</div>
+          <div className="dnotes-rail-item active">
+            <svg className="dnotes-rail-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+            <span>All iCloud</span>
+            <span className="dnotes-rail-count">{notes.length}</span>
+          </div>
+          <div className="dnotes-rail-item">
+            <svg className="dnotes-rail-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M4 6a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z"/></svg>
+            <span>Notes</span>
+            <span className="dnotes-rail-count">{notes.length}</span>
+          </div>
         </div>
-        <div className="dnotes-rail-item">
-          <span className="dnotes-rail-ico">★</span>
-          <span>Pinned</span>
-        </div>
-        <div className="dnotes-rail-item">
-          <span className="dnotes-rail-ico">⌫</span>
-          <span>Recently Deleted</span>
+        <div className="dnotes-rail-section">
+          <div className="dnotes-rail-head">Smart Folders</div>
+          <div className="dnotes-rail-item">
+            <svg className="dnotes-rail-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 4l2 5 5 1-4 4 1 5-4-3-4 3 1-5-4-4 5-1z" transform="translate(5 0)"/></svg>
+            <span>Pinned</span>
+          </div>
+          <div className="dnotes-rail-item">
+            <svg className="dnotes-rail-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M6 7h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 7zM9 4h6v3H9z"/></svg>
+            <span>Recently Deleted</span>
+          </div>
         </div>
       </div>
 
       {/* Notes list */}
       <div className="dnotes-list">
         <div className="dnotes-list-head">
-          <input className="dnotes-search" placeholder="Search" readOnly />
-        </div>
-        {notes.map((note, i) => (
-          <div key={i} className={`dnotes-item ${sel === i ? 'active' : ''}`} onClick={() => setSel(i)}>
-            <div className="dnotes-item-title">{note.title}</div>
-            <div className="dnotes-item-meta">
-              <span className="dnotes-item-date">{note.date}</span>
-              <span className="dnotes-item-preview">{note.preview}</span>
-            </div>
+          <div className="dnotes-search-wrap">
+            <svg className="dnotes-search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg>
+            <input className="dnotes-search" placeholder="Search" readOnly />
           </div>
-        ))}
+          <div className="dnotes-list-title">All iCloud</div>
+          <div className="dnotes-list-sub">{notes.length} Notes</div>
+        </div>
+        <div className="dnotes-list-body">
+          {notes.map((note, i) => (
+            <div key={i} className={`dnotes-item ${sel === i ? 'active' : ''}`} onClick={() => setSel(i)}>
+              <div className="dnotes-item-title">{note.title}</div>
+              <div className="dnotes-item-meta">
+                <span className="dnotes-item-date">{note.date}</span>
+                <span className="dnotes-item-preview">{note.preview}</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Active note */}
       <div className="dnotes-content">
         <div className="dnotes-content-toolbar">
-          <div className="dnotes-tools">
-            <span className="dnotes-tool">Aa</span>
-            <span className="dnotes-tool">☑</span>
-            <span className="dnotes-tool">⊞</span>
-            <span className="dnotes-tool">🔗</span>
-          </div>
-          <div className="dnotes-content-date">{notes[sel]?.date}</div>
+          {tools.map((t, i) => (
+            <button key={i} className="dnotes-tool" title={t.label} aria-label={t.label}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <path d={t.path} />
+              </svg>
+            </button>
+          ))}
         </div>
         <div className="dnotes-content-body">
+          <div className="dnotes-content-stamp">{dateLabel} at {timeLabel}</div>
           <h1 className="dnotes-content-title">{notes[sel]?.title}</h1>
           {notes[sel]?.content}
         </div>
@@ -587,40 +830,88 @@ function NowView() {
   );
 }
 
-// ==================== LEARNING (Timeline) ====================
+// ==================== LEARNING (git log terminal) ====================
 function LearningArchive() {
   const items = DATA().learning;
-  return (
-    <div style={{ padding: '32px 40px', maxWidth: 620, margin: '0 auto' }}>
-      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--oxblood)', marginBottom: 10 }}>
-        git log · sanjana@portfolio
-      </div>
-      <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 30, fontWeight: 400, margin: '0 0 8px', letterSpacing: '-0.015em' }}>
-        What I'm <em style={{ color: 'var(--oxblood)', fontWeight: 300 }}>up to</em>
-      </h1>
-      <p style={{ color: 'var(--ink-faint)', fontSize: 13, lineHeight: 1.6, margin: '0 0 28px' }}>
-        A running log of what I study, build, and compete in. Branched by domain. I add a commit when something actually clicks.
-      </p>
+  const { useState: useS } = React;
+  const [openIdx, setOpenIdx] = useS(0);
+  const today = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
 
-      <div style={{ position: 'relative', paddingLeft: 20, borderLeft: '1px solid var(--paper-3)' }}>
-        {items.map((it, i) => (
-          <div key={it.hash} style={{ position: 'relative', marginBottom: 26 }}>
-            <div style={{
-              position: 'absolute', left: -25, top: 6,
-              width: 9, height: 9, borderRadius: '50%',
-              background: it.current ? 'var(--oxblood)' : 'var(--paper-deep)',
-              border: it.current ? '2px solid var(--paper)' : 'none',
-              boxShadow: it.current ? '0 0 0 3px rgba(110, 31, 46, 0.2)' : 'none',
-            }} />
-            <div style={{ display: 'flex', gap: 10, alignItems: 'baseline', marginBottom: 4, flexWrap: 'wrap' }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--ochre)', letterSpacing: '0.05em' }}>{it.hash}</span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--ink-faint)', letterSpacing: '0.05em' }}>{it.date}</span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--sage)', letterSpacing: '0.08em', textTransform: 'uppercase', border: '1px solid var(--paper-3)', padding: '1px 5px', borderRadius: 2 }}>{it.branch}</span>
+  // Stable color per branch name
+  const branchColor = (name) => {
+    const palette = ['#7ec98f', '#7fb3e8', '#e8a87c', '#d68aa3', '#c9a96e', '#b08fd4', '#6cb9b3'];
+    let h = 0; for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 997;
+    return palette[h % palette.length];
+  };
+
+  return (
+    <div className="gitlog">
+      {/* Terminal title bar within the window */}
+      <div className="gitlog-bar">
+        <span className="gitlog-bar-prompt">guest@portfolio:~/career</span>
+        <span className="gitlog-bar-sep">·</span>
+        <span className="gitlog-bar-branch">git:(<span style={{ color: '#7ec98f' }}>main</span>)</span>
+        <span className="gitlog-bar-spacer" />
+        <span className="gitlog-bar-time">{today}</span>
+      </div>
+
+      {/* Command line */}
+      <div className="gitlog-cmd">
+        <span className="gitlog-prompt">$</span>
+        <span className="gitlog-cmd-text">git log --graph --decorate --branches --oneline</span>
+        <span className="gitlog-caret" />
+      </div>
+
+      {/* Stats header */}
+      <div className="gitlog-stats">
+        <span>commits: <b>{items.length}</b></span>
+        <span>branches: <b>{new Set(items.map(i => i.branch)).size}</b></span>
+        <span>HEAD <span className="gitlog-head-pill">→ {items.find(i => i.head)?.branch || items[0].branch}</span></span>
+      </div>
+
+      {/* Log body */}
+      <div className="gitlog-body">
+        {items.map((it, i) => {
+          const open = openIdx === i;
+          const colour = branchColor(it.branch);
+          return (
+            <div
+              key={it.hash}
+              className={`gitlog-row ${open ? 'open' : ''} ${it.head ? 'head' : ''} ${it.current ? 'current' : ''}`}
+              onClick={() => setOpenIdx(open ? -1 : i)}
+            >
+              <div className="gitlog-graph">
+                <span className="gitlog-rail" style={{ background: colour, opacity: 0.45 }} />
+                <span className={`gitlog-node ${it.head ? 'head' : it.current ? 'current' : ''}`} style={{ borderColor: colour, background: it.head ? colour : (it.current ? `${colour}33` : 'transparent') }} />
+              </div>
+              <div className="gitlog-main">
+                <div className="gitlog-line">
+                  <span className="gitlog-hash" style={{ color: colour }}>{it.hash}</span>
+                  {it.head && <span className="gitlog-head-tag">HEAD →</span>}
+                  <span className="gitlog-branch-tag" style={{ color: colour, borderColor: `${colour}55`, background: `${colour}10` }}>
+                    <span className="gitlog-branch-dot" style={{ background: colour }} />
+                    {it.branch}
+                  </span>
+                  <span className="gitlog-date">{it.date}</span>
+                </div>
+                <div className="gitlog-msg">{it.msg}</div>
+                <div className={`gitlog-desc ${open ? 'open' : ''}`}>
+                  <div className="gitlog-desc-inner">
+                    <div className="gitlog-diff">
+                      <span className="gitlog-diff-add">+ added context</span>
+                      <span className="gitlog-diff-meta">commit {it.hash.padEnd(40, '·')}</span>
+                    </div>
+                    <p>{it.desc}</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 17, color: 'var(--ink)', lineHeight: 1.35, marginBottom: 4 }}>{it.msg}</div>
-            <div style={{ fontSize: 12.5, color: 'var(--ink-soft)', lineHeight: 1.55 }}>{it.desc}</div>
-          </div>
-        ))}
+          );
+        })}
+        <div className="gitlog-end">
+          <span className="gitlog-prompt">$</span>
+          <span className="gitlog-caret blink" />
+        </div>
       </div>
     </div>
   );

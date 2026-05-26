@@ -131,45 +131,46 @@ function MailAppIcon() {
   );
 }
 
-// macOS Photos app — colour-wheel petals around a white core
+// macOS Photos app — 7-petal pinwheel rosette around a white core
 function GalleryAppIcon() {
+  // colours match real macOS Photos icon, going clockwise from top
   const petals = [
-    { a: 0,    f: '#fbbf24' }, // yellow
-    { a: 45,   f: '#f97316' }, // orange
-    { a: 90,   f: '#ef4444' }, // red
-    { a: 135,  f: '#ec4899' }, // pink
-    { a: 180,  f: '#a855f7' }, // purple
-    { a: 225,  f: '#3b82f6' }, // blue
-    { a: 270,  f: '#10b981' }, // teal
-    { a: 315,  f: '#84cc16' }, // green
+    { a: 0,   f1: '#fde047', f2: '#facc15' }, // yellow
+    { a: 51,  f1: '#fb923c', f2: '#f97316' }, // orange
+    { a: 102, f1: '#f87171', f2: '#ef4444' }, // red
+    { a: 154, f1: '#f472b6', f2: '#db2777' }, // magenta
+    { a: 206, f1: '#a78bfa', f2: '#7c3aed' }, // purple
+    { a: 257, f1: '#60a5fa', f2: '#2563eb' }, // blue
+    { a: 308, f1: '#4ade80', f2: '#16a34a' }, // green
   ];
-  const cx = 32, cy = 32, r1 = 11, r2 = 27, w = 15;
+  const cx = 32, cy = 32;
   return (
     <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
       <defs>
+        <radialGradient id="photosBg" cx="0.5" cy="0.45" r="0.6">
+          <stop offset="0%" stopColor="#fafafa" />
+          <stop offset="100%" stopColor="#e6e6e6" />
+        </radialGradient>
         {petals.map((p, i) => (
-          <radialGradient key={i} id={`pg${i}`} cx="0.5" cy="0.5" r="0.6">
-            <stop offset="0%" stopColor={p.f} stopOpacity="1" />
-            <stop offset="100%" stopColor={p.f} stopOpacity="0.85" />
-          </radialGradient>
+          <linearGradient key={i} id={`photoPet${i}`} x1="0.5" y1="0" x2="0.5" y2="1">
+            <stop offset="0%" stopColor={p.f1} />
+            <stop offset="100%" stopColor={p.f2} />
+          </linearGradient>
         ))}
       </defs>
-      {petals.map((p, i) => {
-        const rad = (p.a - 90) * Math.PI / 180;
-        const px = cx + Math.cos(rad) * (r1 + (r2 - r1) / 2);
-        const py = cy + Math.sin(rad) * (r1 + (r2 - r1) / 2);
-        return (
-          <ellipse
-            key={i}
-            cx={px} cy={py}
-            rx={(r2 - r1) / 2 + 2} ry={w / 2}
-            fill={`url(#pg${i})`}
-            transform={`rotate(${p.a} ${px} ${py})`}
-            opacity="0.95"
-          />
-        );
-      })}
-      <circle cx={cx} cy={cy} r={r1 - 1} fill="#ffffff" />
+      <rect x="4" y="4" width="56" height="56" rx="12" fill="url(#photosBg)" />
+      <g transform={`translate(${cx} ${cy})`}>
+        {petals.map((p, i) => (
+          <g key={i} transform={`rotate(${p.a})`}>
+            {/* tear-drop petal pointing up, rounded outer edge */}
+            <path
+              d="M 0 -22 C 6 -22 9 -16 9 -10 C 9 -5 5 -2 0 -2 C -5 -2 -9 -5 -9 -10 C -9 -16 -6 -22 0 -22 Z"
+              fill={`url(#photoPet${i})`}
+            />
+          </g>
+        ))}
+        <circle r="9" fill="#ffffff" />
+      </g>
     </svg>
   );
 }
@@ -179,28 +180,33 @@ function FinderAppIcon() {
   return (
     <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="finderBg" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="finderLight" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#f5f5f7" />
+          <stop offset="100%" stopColor="#cfd2d6" />
+        </linearGradient>
+        <linearGradient id="finderDark" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#7fb3e8" />
-          <stop offset="100%" stopColor="#4a85c4" />
+          <stop offset="100%" stopColor="#3d72b3" />
         </linearGradient>
         <clipPath id="finderClip">
-          <rect x="4" y="4" width="56" height="56" rx="11" />
+          <rect x="4" y="4" width="56" height="56" rx="13" />
         </clipPath>
       </defs>
-      {/* Rounded square base */}
-      <rect x="4" y="4" width="56" height="56" rx="11" fill="url(#finderBg)" />
-      {/* Light-side face (left) */}
       <g clipPath="url(#finderClip)">
-        <path d="M 4 4 L 32 4 L 32 60 L 4 60 Z" fill="#e8e8e8" />
-        {/* Left eye */}
-        <ellipse cx="22" cy="26" rx="2.6" ry="5.2" fill="#1a1a1a" />
-        {/* Right eye on the dark side */}
-        <ellipse cx="42" cy="26" rx="2.6" ry="5.2" fill="#1a1a1a" />
-        {/* Smile spanning both halves */}
-        <path d="M 18 42 Q 32 52 46 42" stroke="#1a1a1a" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-        {/* Vertical seam between the two halves */}
-        <line x1="32" y1="4" x2="32" y2="60" stroke="rgba(0,0,0,0.08)" strokeWidth="0.6" />
+        {/* Light half (left) */}
+        <rect x="4" y="4" width="28" height="56" fill="url(#finderLight)" />
+        {/* Dark half (right) */}
+        <rect x="32" y="4" width="28" height="56" fill="url(#finderDark)" />
+        {/* Subtle seam shadow */}
+        <rect x="31.6" y="4" width="0.8" height="56" fill="rgba(0,0,0,0.08)" />
+        {/* Eyes — tall ovals */}
+        <ellipse cx="22" cy="26" rx="2.4" ry="5.4" fill="#1d1d1f" />
+        <ellipse cx="42" cy="26" rx="2.4" ry="5.4" fill="#1d1d1f" />
+        {/* Smile — curve across the seam */}
+        <path d="M 18 40 Q 32 51 46 40" stroke="#1d1d1f" strokeWidth="2.6" fill="none" strokeLinecap="round" />
       </g>
+      {/* Outer stroke for crispness on dark backgrounds */}
+      <rect x="4.25" y="4.25" width="55.5" height="55.5" rx="12.75" fill="none" stroke="rgba(0,0,0,0.12)" strokeWidth="0.5" />
     </svg>
   );
 }
@@ -242,11 +248,39 @@ function ResumeIcon() {
 function NotesAppIcon() {
   return (
     <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4" y="4" width="56" height="56" rx="10" fill="#ffd426" />
-      <line x1="14" y1="21" x2="50" y2="21" stroke="#8a6300" strokeWidth="1.8" />
-      <line x1="14" y1="30" x2="50" y2="30" stroke="#8a6300" strokeWidth="1.8" />
-      <line x1="14" y1="39" x2="42" y2="39" stroke="#8a6300" strokeWidth="1.8" />
-      <line x1="14" y1="48" x2="34" y2="48" stroke="#8a6300" strokeWidth="1.8" />
+      <defs>
+        <linearGradient id="notesPaper" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="100%" stopColor="#ededed" />
+        </linearGradient>
+        <linearGradient id="notesHeader" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#fde047" />
+          <stop offset="100%" stopColor="#fbbf24" />
+        </linearGradient>
+        <clipPath id="notesClip">
+          <rect x="4" y="4" width="56" height="56" rx="13" />
+        </clipPath>
+      </defs>
+      <g clipPath="url(#notesClip)">
+        {/* Paper body */}
+        <rect x="4" y="4" width="56" height="56" fill="url(#notesPaper)" />
+        {/* Yellow top band */}
+        <rect x="4" y="4" width="56" height="16" fill="url(#notesHeader)" />
+        {/* Spiral binding holes along the band */}
+        <circle cx="14" cy="12" r="1.3" fill="rgba(0,0,0,0.18)" />
+        <circle cx="24" cy="12" r="1.3" fill="rgba(0,0,0,0.18)" />
+        <circle cx="34" cy="12" r="1.3" fill="rgba(0,0,0,0.18)" />
+        <circle cx="44" cy="12" r="1.3" fill="rgba(0,0,0,0.18)" />
+        <circle cx="54" cy="12" r="1.3" fill="rgba(0,0,0,0.18)" />
+        {/* Soft shadow under the band */}
+        <rect x="4" y="20" width="56" height="1.2" fill="rgba(0,0,0,0.06)" />
+        {/* Ruled lines below */}
+        <line x1="12" y1="29" x2="52" y2="29" stroke="#c9c9cc" strokeWidth="1.4" strokeLinecap="round" />
+        <line x1="12" y1="37" x2="52" y2="37" stroke="#c9c9cc" strokeWidth="1.4" strokeLinecap="round" />
+        <line x1="12" y1="45" x2="46" y2="45" stroke="#c9c9cc" strokeWidth="1.4" strokeLinecap="round" />
+        <line x1="12" y1="53" x2="38" y2="53" stroke="#c9c9cc" strokeWidth="1.4" strokeLinecap="round" />
+      </g>
+      <rect x="4.25" y="4.25" width="55.5" height="55.5" rx="12.75" fill="none" stroke="rgba(0,0,0,0.12)" strokeWidth="0.5" />
     </svg>
   );
 }
@@ -408,6 +442,15 @@ const DYNAMIC_DOCK = {
 };
 
 function Dock({ openApps, windows, onLaunch }) {
+  const [bouncing, setBouncing] = useState(null);
+  const bounce = (id) => {
+    setBouncing(id);
+    setTimeout(() => setBouncing((cur) => (cur === id ? null : cur)), 650);
+  };
+  const launch = (id, arg) => {
+    bounce(id);
+    if (arg) onLaunch(id, arg); else onLaunch(id);
+  };
   const items = [
     { id: 'finder',   label: 'Finder',        render: () => <FinderAppIcon /> },
     { id: 'gallery',  label: 'Gallery',       render: () => <GalleryAppIcon />, galleryAction: true },
@@ -432,20 +475,23 @@ function Dock({ openApps, windows, onLaunch }) {
         const isOpen = it.id === 'finder'
           ? openApps.some(id => id === 'finder' || id === 'about' || id.startsWith('doc-'))
           : openApps.includes(it.id);
+        const bouncyId = it.galleryAction ? 'gallery' : it.id;
+        const isBouncing = bouncing === bouncyId;
+        const cls = `dock-item ${isOpen ? 'open' : ''} ${isBouncing ? 'bouncing' : ''}`;
         const inner = (<>{it.render()}<span className="tip">{it.label}</span></>);
         if (it.href) return (
-          <a key={it.id} href={it.href} target={it.href.startsWith('http') ? '_blank' : undefined} rel="noopener" className="dock-item">{inner}</a>
+          <a key={it.id} href={it.href} target={it.href.startsWith('http') ? '_blank' : undefined} rel="noopener" className={cls} onClick={() => bounce(it.id)}>{inner}</a>
         );
         if (it.galleryAction) return (
-          <div key={it.id} className={`dock-item ${isOpen ? 'open' : ''}`} onClick={() => onLaunch('finder', 'gallery')}>{inner}</div>
+          <div key={it.id} className={cls} onClick={() => launch('finder', 'gallery')}>{inner}</div>
         );
         return (
-          <div key={it.id} className={`dock-item ${isOpen ? 'open' : ''}`} onClick={() => onLaunch(it.id)}>{inner}</div>
+          <div key={it.id} className={cls} onClick={() => launch(it.id)}>{inner}</div>
         );
       })}
       {dynamicItems.length > 0 && <div className="dock-sep" />}
       {dynamicItems.map((it) => (
-        <div key={it.id} className="dock-item open" onClick={() => onLaunch(it.id)}>
+        <div key={it.id} className={`dock-item open ${bouncing === it.id ? 'bouncing' : ''}`} onClick={() => launch(it.id)}>
           {it.render()}
           <span className="tip">{it.label}</span>
         </div>
@@ -557,17 +603,44 @@ function App() {
   useEffect(() => {
     if (!booted) return;
     const tvw = window.innerWidth, tvh = window.innerHeight;
-    const tw = 452, th = 256;
+    const tw = Math.round(Math.min(520, Math.max(360, tvw * 0.32)));
+    const th = Math.round(Math.min(320, Math.max(220, tvh * 0.28)));
+    // Clamp so the window can't extend past the viewport edge
+    const finalTw = Math.min(tw, tvw - 40);
+    const finalTh = Math.min(th, tvh - 140);
+    const finalX = Math.max(20, tvw - finalTw - 24);
+    const finalY = Math.max(40, tvh - finalTh - 100);
     wm.openWindow({
       id: 'terminal',
       title: 'Terminal — guest@portfolio.os',
-      x: Math.max(20, tvw - tw - 40),
-      y: Math.max(32, tvh - th - 126),
-      w: tw, h: th,
+      x: finalX,
+      y: finalY,
+      w: finalTw, h: finalTh,
       kind: 'terminal',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [booted]);
+
+  // Keep windows inside the viewport when the user resizes the browser
+  useEffect(() => {
+    const onResize = () => {
+      const vw = window.innerWidth, vh = window.innerHeight;
+      wm.windows.forEach((w) => {
+        const nw = Math.min(w.w, vw - 40);
+        const nh = Math.min(w.h, vh - 120);
+        // Clamp x/y so the right/bottom edge stays inside the viewport
+        const maxX = Math.max(20, vw - nw - 20);
+        const maxY = Math.max(32, vh - nh - 80);
+        const nx = Math.max(20, Math.min(maxX, w.x));
+        const ny = Math.max(32, Math.min(maxY, w.y));
+        if (nw !== w.w || nh !== w.h || nx !== w.x || ny !== w.y) {
+          wm.updateWindow(w.id, { w: nw, h: nh, x: nx, y: ny });
+        }
+      });
+    };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [wm]);
 
   // Tag click events
   useEffect(() => {
@@ -585,13 +658,39 @@ function App() {
     const existing = wm.windows.find((w) => w.id === id);
     if (existing) { wm.focusWindow(id); return; }
     const vw = window.innerWidth, vh = window.innerHeight;
+    const clamp = (lo, val, hi) => Math.max(lo, Math.min(hi, val));
+    // Sizes scale with viewport, clamped to a usable range per app kind
     const specs = {
-      finder:   { title: 'Finder',                          w: 800, h: 540, kind: 'finder' },
-      terminal: { title: 'Terminal — guest@portfolio.os',   w: 620, h: 380, kind: 'terminal' },
-      about:    { title: 'about.md',                        w: 660, h: 620, kind: 'about' },
-      learning: { title: 'learning.log',                    w: 700, h: 600, kind: 'learning' },
-      resume:   { title: 'resume.pdf',                      w: 720, h: 620, kind: 'resume' },
-      reading:  { title: 'Notes',                          w: 720, h: 520, kind: 'reading' },
+      finder:   {
+        title: 'Finder', kind: 'finder',
+        w: clamp(520, Math.round(vw * 0.62), 960),
+        h: clamp(400, Math.round(vh * 0.70), 660),
+      },
+      terminal: {
+        title: 'Terminal — guest@portfolio.os', kind: 'terminal',
+        w: clamp(420, Math.round(vw * 0.42), 700),
+        h: clamp(280, Math.round(vh * 0.50), 460),
+      },
+      about:    {
+        title: 'about.md', kind: 'about',
+        w: clamp(520, Math.round(vw * 0.50), 720),
+        h: clamp(440, Math.round(vh * 0.78), 720),
+      },
+      learning: {
+        title: 'learning.log', kind: 'learning',
+        w: clamp(540, Math.round(vw * 0.55), 800),
+        h: clamp(440, Math.round(vh * 0.74), 680),
+      },
+      resume:   {
+        title: 'resume.pdf', kind: 'resume',
+        w: clamp(540, Math.round(vw * 0.55), 780),
+        h: clamp(440, Math.round(vh * 0.80), 720),
+      },
+      reading:  {
+        title: 'Notes', kind: 'reading',
+        w: clamp(560, Math.round(vw * 0.62), 880),
+        h: clamp(420, Math.round(vh * 0.68), 620),
+      },
     };
     const s = specs[id];
     if (!s) return;
@@ -613,12 +712,14 @@ function App() {
     const vw = window.innerWidth, vh = window.innerHeight;
     if (wm.windows.find((w) => w.id === id)) { wm.focusWindow(id); return; }
     const offset = wm.windows.length * 18;
+    const w = Math.min(720, Math.max(440, Math.round(vw * 0.55)));
+    const h = Math.min(700, Math.max(400, Math.round((vh - 116) * 0.85)));
     wm.openWindow({
       id,
       title: item.name,
-      x: Math.max(30, Math.round((vw - 680) / 2) + offset),
+      x: Math.max(20, Math.round((vw - w) / 2) + offset),
       y: Math.max(40, 80 + offset),
-      w: 680, h: Math.min(640, Math.round((vh - 116) * 0.85)),
+      w, h,
       kind: 'doc',
       item,
     });

@@ -415,6 +415,10 @@ window.PORTFOLIO = {
   ],
 
   learning: [
+    { hash: "9e3f2a7", date: "2026·Q2", branch: "JOB SEARCH",
+      msg: "Looking for full-time roles — open to 2026 start",
+      desc: "MMA practicum wraps in June. Actively interviewing for financial analyst and data science roles in finance and fintech. Looking for teams where deep problem-solving and shipping production systems both matter. LinkedIn and email links are in the dock — reach out anytime.",
+      current: true, head: true },
     { hash: "f2c8a91", date: "2026·Q2", branch: "EXAMSCOPE / CIBC",
       msg: "Back at CIBC: final 8 weeks on ExamScopeAI",
       desc: "Returned to the CEEP team for the final stretch of the MMA practicum. Completing the Databricks migration, semantic search layer, and examiner UI ahead of the June leadership presentation. The goal is a system that actually works in the hands of real examiners, not just one that could.",

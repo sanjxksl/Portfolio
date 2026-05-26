@@ -244,17 +244,30 @@ function Terminal({ onCommand }) {
       {lines.map((l, i) => {
         if (l.kind === 'user') {
           return (
-            <div key={i} className="t-line">
+            <div key={i} className="t-line t-fade">
               <span className="t-prompt">guest@sanjana.os:~$ </span>
               <span className="t-user">{l.text}</span>
             </div>
           );
         }
         const cls = l.kind === 'err' ? 't-err' : l.kind === 'sys' ? 't-sys' : 't-assistant';
-        return <div key={i} className={`t-line ${cls}`}>{l.text}</div>;
+        // Stream-in: split text into words with staggered fade so it feels like it's being typed
+        const text = l.text || '';
+        const parts = text.split(/(\s+)/);
+        return (
+          <div key={i} className={`t-line ${cls}`}>
+            {parts.map((p, j) => {
+              if (!p) return null;
+              const delay = Math.min(j * 22, 1500); // cap so long lines don't crawl
+              return (
+                <span key={j} className="t-stream-word" style={{ animationDelay: `${delay}ms` }}>{p}</span>
+              );
+            })}
+          </div>
+        );
       })}
       {thinking && (
-        <div className="t-line t-sys"><span className="t-thinking">· · ·</span> thinking</div>
+        <div className="t-line t-sys t-fade"><span className="t-thinking">· · ·</span> thinking</div>
       )}
       <form onSubmit={submit} className="t-input-row" style={{ marginTop: 4 }}>
         <span className="t-prompt">guest@sanjana.os:~$</span>
