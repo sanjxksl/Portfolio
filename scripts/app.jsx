@@ -248,39 +248,11 @@ function ResumeIcon() {
 function NotesAppIcon() {
   return (
     <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="notesPaper" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="100%" stopColor="#ededed" />
-        </linearGradient>
-        <linearGradient id="notesHeader" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#fde047" />
-          <stop offset="100%" stopColor="#fbbf24" />
-        </linearGradient>
-        <clipPath id="notesClip">
-          <rect x="4" y="4" width="56" height="56" rx="13" />
-        </clipPath>
-      </defs>
-      <g clipPath="url(#notesClip)">
-        {/* Paper body */}
-        <rect x="4" y="4" width="56" height="56" fill="url(#notesPaper)" />
-        {/* Yellow top band */}
-        <rect x="4" y="4" width="56" height="16" fill="url(#notesHeader)" />
-        {/* Spiral binding holes along the band */}
-        <circle cx="14" cy="12" r="1.3" fill="rgba(0,0,0,0.18)" />
-        <circle cx="24" cy="12" r="1.3" fill="rgba(0,0,0,0.18)" />
-        <circle cx="34" cy="12" r="1.3" fill="rgba(0,0,0,0.18)" />
-        <circle cx="44" cy="12" r="1.3" fill="rgba(0,0,0,0.18)" />
-        <circle cx="54" cy="12" r="1.3" fill="rgba(0,0,0,0.18)" />
-        {/* Soft shadow under the band */}
-        <rect x="4" y="20" width="56" height="1.2" fill="rgba(0,0,0,0.06)" />
-        {/* Ruled lines below */}
-        <line x1="12" y1="29" x2="52" y2="29" stroke="#c9c9cc" strokeWidth="1.4" strokeLinecap="round" />
-        <line x1="12" y1="37" x2="52" y2="37" stroke="#c9c9cc" strokeWidth="1.4" strokeLinecap="round" />
-        <line x1="12" y1="45" x2="46" y2="45" stroke="#c9c9cc" strokeWidth="1.4" strokeLinecap="round" />
-        <line x1="12" y1="53" x2="38" y2="53" stroke="#c9c9cc" strokeWidth="1.4" strokeLinecap="round" />
-      </g>
-      <rect x="4.25" y="4.25" width="55.5" height="55.5" rx="12.75" fill="none" stroke="rgba(0,0,0,0.12)" strokeWidth="0.5" />
+      <rect x="4" y="4" width="56" height="56" rx="10" fill="#ffd426" />
+      <line x1="14" y1="21" x2="50" y2="21" stroke="#8a6300" strokeWidth="1.8" />
+      <line x1="14" y1="30" x2="50" y2="30" stroke="#8a6300" strokeWidth="1.8" />
+      <line x1="14" y1="39" x2="42" y2="39" stroke="#8a6300" strokeWidth="1.8" />
+      <line x1="14" y1="48" x2="34" y2="48" stroke="#8a6300" strokeWidth="1.8" />
     </svg>
   );
 }
