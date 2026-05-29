@@ -455,11 +455,10 @@ window.PORTFOLIO = {
   ],
 
   personality: {
-    quote: "I cannot engage with anything at surface level. I need to understand the full system before I trust myself to say or build anything.",
+    quote: "I can't engage with anything at surface level. I need to understand the full system.",
     paragraphs: [
-      "What genuinely excites me is problem solving. I love playing with data, building models, testing hypotheses, and seeing where the conclusions land.",
-      "Through engineering, product design, and now analytics at Rotman, I have deliberately built a toolkit — user empathy, statistical modelling, ML, financial data analysis — because I want to be able to solve these kinds of problems. Especially the ones where the deeper you go, the stronger the signal gets. And, that is where my passion lives.",
-      "Apart from work, I love to write and I have been a dancer. Fun Fact: The first time I performed on stage was when I was 5. I love Linkin Park and I listen to a lot of Indian niche r&b and hip hop artists. I tend to always find new hobbies to keep life exciting and the most recent one is baking!",
+      "Data scientist, trained as a designer, shaped by engineering. Wrapping up an MMA at Rotman — before that, mechanical engineering and product design in India. The work I care about lives at the intersection of data and real decisions, where the analysis has to hold up and actually change how someone thinks.",
+      "Outside of work: I write. I've been dancing since I was five. I listen to a lot of Indian niche R&B and Linkin Park, which makes more sense than it sounds.",
     ],
   },
 
