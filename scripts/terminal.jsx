@@ -62,7 +62,13 @@ function Terminal({ onCommand }) {
         { kind: 'assistant', text: "  learning     ,the commit log of how i got here" },
         { kind: 'assistant', text: "  skills       ,tools, methods, tech" },
         { kind: 'assistant', text: "  contact      ,email & links" },
+        { kind: 'assistant', text: "  neofetch     ,system info" },
+        { kind: 'assistant', text: "  note <text>  ,sign the guestbook" },
+        { kind: 'assistant', text: "  dance        ,off the clock" },
+        { kind: 'assistant', text: "  music        ,what's on loop" },
+        { kind: 'assistant', text: "  coffee       ,fuel status" },
         { kind: 'assistant', text: "  clear        ,clear the screen" },
+        { kind: 'sys', text: "also: whoami · ls · pwd · date · echo · cat about.md · hire sanjana" },
         { kind: 'sys', text: "or just ask a question in english." },
         { kind: 'sys', text: "" },
       ]);
@@ -160,6 +166,99 @@ function Terminal({ onCommand }) {
     if (c === 'ls' || c === 'ls ~') {
       push([
         { kind: 'assistant', text: "Work/  Projects/  Competitions/  Learning/  About_Me/  resume.pdf" },
+        { kind: 'sys', text: "" },
+      ]);
+      return true;
+    }
+    if (c === 'pwd') {
+      push([{ kind: 'assistant', text: "/Users/guest" }, { kind: 'sys', text: "" }]);
+      return true;
+    }
+    if (c === 'date' || c === 'time') {
+      push([
+        { kind: 'assistant', text: new Date().toString() },
+        { kind: 'sys', text: "" },
+      ]);
+      return true;
+    }
+    if (c.startsWith('echo ')) {
+      push([{ kind: 'assistant', text: cmd.trim().slice(5) }, { kind: 'sys', text: "" }]);
+      return true;
+    }
+    if (c === 'cat about.md' || c === 'cat about' || c === 'cat ~/about.md') {
+      push([
+        { kind: 'assistant', text: "# Sanjana Kanchibotla" },
+        { kind: 'assistant', text: "data scientist, trained as a designer, shaped by engineering." },
+        { kind: 'assistant', text: "" },
+        { kind: 'assistant', text: "i find the problems worth solving, then use whatever it takes to solve them. i need to understand the whole thing before i trust myself on any part of it." },
+        { kind: 'sys', text: "" },
+      ]);
+      return true;
+    }
+    if (c === 'neofetch' || c === 'fetch') {
+      push([
+        { kind: 'assistant', text: "       .--.        guest@sanjana.os" },
+        { kind: 'assistant', text: "      |o_o |       ----------------" },
+        { kind: 'assistant', text: "      |:_/ |       os       sanjana.os 6.0 (cream)" },
+        { kind: 'assistant', text: "     //   \\ \\      host     Toronto, ON" },
+        { kind: 'assistant', text: "    (|     | )     role     Data Scientist · Product Thinker" },
+        { kind: 'assistant', text: "   /'\\_   _/`\\     edu      MMA @ Rotman · B.Tech Mech + Design" },
+        { kind: 'assistant', text: "   \\___)=(___/     stack    python · pytorch · sql · rag · streamlit" },
+        { kind: 'assistant', text: "                   now      open to full-time · finance + fintech" },
+        { kind: 'assistant', text: "                   uptime   curious since boot" },
+        { kind: 'sys', text: "" },
+      ]);
+      return true;
+    }
+    if (c === 'dance') {
+      push([
+        { kind: 'assistant', text: "off the clock: trained in hip hop, contemporary, and two forms of indian classical dance." },
+        { kind: 'assistant', text: "movement is how i think when the screen is off." },
+        { kind: 'sys', text: "" },
+      ]);
+      return true;
+    }
+    if (c === 'music' || c === 'now playing') {
+      push([
+        { kind: 'assistant', text: "♪ on loop: Linkin Park · Alec Benjamin · niche indian hip hop & R&B" },
+        { kind: 'sys', text: "" },
+      ]);
+      return true;
+    }
+    if (c === 'coffee' || c === 'make coffee') {
+      push([
+        { kind: 'sys', text: "brewing..." },
+        { kind: 'assistant', text: "  ( (" },
+        { kind: 'assistant', text: "   ) )" },
+        { kind: 'assistant', text: "  [____]___" },
+        { kind: 'assistant', text: "  |    |  |}" },
+        { kind: 'assistant', text: "  \\____/__/" },
+        { kind: 'assistant', text: "fuel: sufficient. proceed." },
+        { kind: 'sys', text: "" },
+      ]);
+      return true;
+    }
+    if (c === 'sudo make me a sandwich') {
+      push([{ kind: 'assistant', text: "okay. ...but you should've said please. 🥪" }, { kind: 'sys', text: "" }]);
+      return true;
+    }
+    if (c === 'note' || c === 'note ' || c === 'guestbook') {
+      push([
+        { kind: 'sys', text: "usage: note <your message>" },
+        { kind: 'sys', text: "example: note loved the portfolio — let's talk" },
+        { kind: 'sys', text: "tip: open Notes → Guestbook to see the wall." },
+        { kind: 'sys', text: "" },
+      ]);
+      return true;
+    }
+    if (c.startsWith('note ')) {
+      const msg = cmd.trim().slice(5).trim();
+      if (!msg) { push([{ kind: 'err', text: "empty note." }, { kind: 'sys', text: "" }]); return true; }
+      if (window.Guestbook) window.Guestbook.add(msg, 'anonymous (via terminal)');
+      push([
+        { kind: 'sys', text: "✓ pinned to the wall as anonymous." },
+        { kind: 'assistant', text: `"${msg}"` },
+        { kind: 'sys', text: "open Notes → Guestbook to sign with your name." },
         { kind: 'sys', text: "" },
       ]);
       return true;

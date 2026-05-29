@@ -3,6 +3,137 @@
 
 const DATA = () => window.PORTFOLIO;
 
+// ==================== Guestbook store ====================
+// Visitor notes. Persisted in localStorage (per-browser). To make the wall
+// shared across ALL visitors, swap `read`/`write` to call a backend endpoint
+// (e.g. a Cloudflare Worker + KV). The component contract stays the same.
+window.Guestbook = (function () {
+  const KEY = 'sanjana_guestbook_v2';
+  const seed = [
+    { id: 1, name: 'Aanya', text: "Stumbled onto this from your LinkedIn — the terminal is so you. Coffee soon?", ts: Date.parse('2026-05-20T14:30:00') },
+    { id: 2, name: 'anonymous', text: "The credit-risk counterfactual project is genuinely impressive. Keep building.", ts: Date.parse('2026-05-24T09:10:00') },
+    { id: 3, name: 'Dev', text: "okay the git-log learning page is the coolest portfolio idea I've seen all year", ts: Date.parse('2026-05-27T19:45:00') },
+  ];
+  const read = () => {
+    try {
+      const r = JSON.parse(localStorage.getItem(KEY));
+      return Array.isArray(r) ? r : null;
+    } catch (e) { return null; }
+  };
+  const all = () => {
+    const r = read();
+    return (r || seed).slice().sort((a, b) => b.ts - a.ts);
+  };
+  const add = (text, name) => {
+    const list = read() || seed;
+    const entry = {
+      id: Date.now(),
+      name: (name || '').trim().slice(0, 40) || 'anonymous',
+      text: (text || '').trim().slice(0, 240),
+      ts: Date.now(),
+    };
+    if (!entry.text) return null;
+    const next = [entry, ...list];
+    try { localStorage.setItem(KEY, JSON.stringify(next)); } catch (e) {}
+    window.dispatchEvent(new CustomEvent('guestbook-updated'));
+    return entry;
+  };
+  return { all, add };
+})();
+
+function relTime(ts) {
+  const diff = Date.now() - ts;
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return 'just now';
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.floor(h / 24);
+  if (d < 7) return `${d}d ago`;
+  return new Date(ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function GuestbookView() {
+  const { useState: useS, useEffect: useE } = React;
+  const [notes, setNotes] = useS(() => window.Guestbook.all());
+  const [text, setText] = useS('');
+  const [name, setName] = useS('');
+  const [anon, setAnon] = useS(false);
+  const [justAdded, setJustAdded] = useS(null);
+
+  useE(() => {
+    const refresh = () => setNotes(window.Guestbook.all());
+    window.addEventListener('guestbook-updated', refresh);
+    return () => window.removeEventListener('guestbook-updated', refresh);
+  }, []);
+
+  const submit = (e) => {
+    e.preventDefault();
+    const t = text.trim();
+    if (!t) return;
+    const entry = window.Guestbook.add(t, anon ? 'anonymous' : name);
+    setText(''); setName(anon ? '' : name);
+    if (entry) { setJustAdded(entry.id); setTimeout(() => setJustAdded(null), 1600); }
+  };
+
+  const remaining = 240 - text.length;
+
+  return (
+    <div className="gbook">
+      <div className="gbook-intro">
+        Leave a note on the wall — a hello, a thought, a question. Sign it or stay anonymous.
+      </div>
+
+      {/* Composer */}
+      <form className="gbook-compose" onSubmit={submit}>
+        <textarea
+          className="gbook-textarea"
+          placeholder="Write a line or two…"
+          value={text}
+          maxLength={240}
+          rows={2}
+          onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submit(e); }}
+        />
+        <div className="gbook-compose-row">
+          <input
+            className="gbook-name"
+            placeholder="your name"
+            value={anon ? '' : name}
+            disabled={anon}
+            maxLength={40}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <label className="gbook-anon">
+            <input type="checkbox" checked={anon} onChange={(e) => setAnon(e.target.checked)} />
+            <span>anonymous</span>
+          </label>
+          <span className={`gbook-count ${remaining < 30 ? 'low' : ''}`}>{remaining}</span>
+          <button type="submit" className="gbook-post" disabled={!text.trim()}>Pin to wall</button>
+        </div>
+        <div className="gbook-hint">⌘↵ to post</div>
+      </form>
+
+      {/* Wall */}
+      <div className="gbook-wall-head">
+        <span>The wall</span>
+        <span className="gbook-wall-count">{notes.length} note{notes.length === 1 ? '' : 's'}</span>
+      </div>
+      <div className="gbook-wall">
+        {notes.map((n) => (
+          <div key={n.id} className={`gbook-note ${justAdded === n.id ? 'new' : ''}`}>
+            <p className="gbook-note-text">{n.text}</p>
+            <div className="gbook-note-foot">
+              <span className="gbook-note-name">— {n.name}</span>
+              <span className="gbook-note-time">{relTime(n.ts)}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ==================== Icons ====================
 const Icon = {
   folder: () => (<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M1 4a1 1 0 0 1 1-1h4l1.5 1.5H14a1 1 0 0 1 1 1V13a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4z"/></svg>),
@@ -382,6 +513,7 @@ function FinderContent({ folder, tag, activeFileId, onOpenFile }) {
             </div>
           ))}
         </div>
+        <FinderPathBar segs={['Macintosh HD', 'Users', 'guest', 'About_Me']} count={2} note="modified Apr 2026" />
       </div>
     );
   }
@@ -402,6 +534,11 @@ function FinderContent({ folder, tag, activeFileId, onOpenFile }) {
   const isProjects = !tag && folder === 'projects';
   const headline = isProjects ? items.filter((x) => !x.coursework) : items;
   const coursework = isProjects ? items.filter((x) => x.coursework) : [];
+
+  const folderName = d.folders.find((f) => f.id === folder)?.name || folder;
+  const pathSegs = tag
+    ? ['Macintosh HD', 'Users', 'guest', 'Tags', tag]
+    : ['Macintosh HD', 'Users', 'guest', folderName];
 
   const renderRow = (it) => {
     const [base, ext] = splitExt(it.name);
@@ -446,6 +583,7 @@ function FinderContent({ folder, tag, activeFileId, onOpenFile }) {
           </>
         )}
       </div>
+      <FinderPathBar segs={pathSegs} count={items.length} note="sorted · chronological" />
     </div>
   );
 }
@@ -454,6 +592,29 @@ function splitExt(name) {
   const i = name.lastIndexOf('.');
   if (i < 0) return [name, ''];
   return [name.slice(0, i), name.slice(i)];
+}
+
+// Finder bottom path/status bar — techy breadcrumb + item meta
+function FinderPathBar({ segs, count, note }) {
+  return (
+    <div className="finder-pathbar">
+      <div className="finder-crumbs">
+        {segs.map((s, i) => (
+          <React.Fragment key={i}>
+            {i > 0 && <span className="finder-crumb-sep">›</span>}
+            <span className={`finder-crumb ${i === segs.length - 1 ? 'cur' : ''}`}>
+              {i === 0 && <span className="finder-crumb-disk" />}
+              {s}
+            </span>
+          </React.Fragment>
+        ))}
+      </div>
+      <div className="finder-pathbar-meta">
+        {note && <span className="finder-pathbar-note">{note}</span>}
+        <span className="finder-pathbar-count">{count} item{count === 1 ? '' : 's'}</span>
+      </div>
+    </div>
+  );
 }
 function glyphFor(t) {
   if (t === 'EXP') return '¶';
@@ -595,33 +756,124 @@ function DocView({ item }) {
 function AboutDoc() {
   const d = DATA();
   const p = d.personality;
+  const o = d.owner;
+
+  // Award strings come as "1st Place,Event, Year" — split the rank badge off
+  // the front only when it actually looks like a placement.
+  const parseAward = (a) => {
+    const rank = a.match(/^((?:\d+(?:st|nd|rd|th)\s+Place)|(?:Top\s+\d+(?:\s+Teams?)?))\s*,\s*(.+)$/i);
+    if (rank) return { badge: rank[1], text: rank[2] };
+    return { badge: null, text: a };
+  };
+
+  // Programs come as "Dept,Degree" — split for two-line display
+  const parseProgram = (prog) => {
+    const parts = (prog || '').split(',').map((s) => s.trim()).filter(Boolean);
+    if (parts.length >= 2) return { line1: parts[0], line2: parts.slice(1).join(' · ') };
+    return { line1: prog, line2: '' };
+  };
+
+  const facts = [
+    { k: 'Based in', v: o.location },
+    { k: 'Focus', v: 'Applied ML · Interpretability' },
+    { k: 'Status', v: 'Open to full-time', accent: true },
+  ];
+
   return (
     <div className="about-doc">
-      <div className="hero-row">
-        <img src="images/headshot.png" alt="" />
-        <div>
-          <h1>{d.owner.name}</h1>
-          <div className="role">{d.owner.role}</div>
+      {/* Masthead */}
+      <div className="about-masthead">
+        <span className="about-masthead-kicker">Archivist&rsquo;s Note</span>
+        <span className="about-masthead-rule" />
+        <span className="about-masthead-vol">Vol. V · Ed. i</span>
+      </div>
+
+      {/* Hero */}
+      <div className="about-hero">
+        <div className="about-plate">
+          <img src="images/headshot.png" alt={o.name} />
+          <span className="about-plate-cap">PLATE I · TORONTO · 2026</span>
+        </div>
+        <div className="about-intro">
+          <h1>{o.name}</h1>
+          <div className="role">{o.role}</div>
+          <div className="about-facts">
+            {facts.map((f, i) => (
+              <div key={i} className={`about-fact ${f.accent ? 'accent' : ''}`}>
+                <span className="about-fact-k">{f.k}</span>
+                <span className="about-fact-v">
+                  {f.accent && <span className="about-fact-dot" />}
+                  {f.v}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {p.paragraphs.map((para, i) => <p key={i}>{para}</p>)}
+      {/* Pull quote */}
+      {p.quote && (
+        <blockquote className="about-quote">
+          <span className="about-quote-mark">&ldquo;</span>
+          {p.quote}
+        </blockquote>
+      )}
 
-      <div className="about-section-head">Education</div>
-      {d.education.map((e, i) => (
-        <div key={i} className="about-edu-row">
-          <span className="about-edu-year">{e.year}</span>
-          <span>
-            <div className="about-edu-school">{e.school}</div>
-            <div className="about-edu-prog">{e.program}</div>
-          </span>
-        </div>
-      ))}
+      {/* Body */}
+      <div className="about-body">
+        {p.paragraphs.map((para, i) => (
+          <p key={i} className={i === 0 ? 'lead' : ''}>{para}</p>
+        ))}
+      </div>
 
-      <div className="about-section-head">Recognitions</div>
-      <ul>
-        {d.achievements.map((a, i) => <li key={i}>{a}</li>)}
-      </ul>
+      {/* Education */}
+      <div className="about-section-head"><span>Education</span></div>
+      <div className="about-edu">
+        {d.education.map((e, i) => {
+          const prog = parseProgram(e.program);
+          return (
+            <div key={i} className="about-edu-row">
+              <span className="about-edu-year">{e.year}</span>
+              <span className="about-edu-body">
+                <span className="about-edu-school">{e.school}</span>
+                <span className="about-edu-prog">{prog.line1}{prog.line2 && <em> · {prog.line2}</em>}</span>
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Recognitions */}
+      <div className="about-section-head"><span>Recognitions</span></div>
+      <div className="about-awards">
+        {d.achievements.map((a, i) => {
+          const { badge, text } = parseAward(a);
+          return (
+            <div key={i} className="about-award">
+              {badge
+                ? <span className="about-award-badge">{badge}</span>
+                : <span className="about-award-mark">✦</span>}
+              <span className="about-award-text">{text}</span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Contact footer */}
+      <div className="about-contact">
+        <a href={`mailto:${o.email}`} className="about-contact-link">
+          <span className="about-contact-k">Write</span>
+          <span className="about-contact-v">{o.email}</span>
+        </a>
+        <a href={o.links.linkedin} target="_blank" rel="noopener" className="about-contact-link">
+          <span className="about-contact-k">LinkedIn</span>
+          <span className="about-contact-v">/in/sanjanaksl</span>
+        </a>
+        <a href={o.links.github} target="_blank" rel="noopener" className="about-contact-link">
+          <span className="about-contact-k">GitHub</span>
+          <span className="about-contact-v">@sanjxksl</span>
+        </a>
+      </div>
     </div>
   );
 }
@@ -632,34 +884,12 @@ function NowView() {
   const d = DATA();
   const n = d.now || {};
   const [sel, setSel] = useS(0);
-  // Track which entries are expanded within each note. Default: all open.
-  const [openMap, setOpenMap] = useS({
-    reading: (n.reading || []).map(() => true),
-    studying: (n.studying || []).map(() => true),
-  });
-  const toggle = (group, idx) => setOpenMap((m) => ({
-    ...m,
-    [group]: m[group].map((v, i) => (i === idx ? !v : v)),
-  }));
-  const setAll = (group, val) => setOpenMap((m) => ({
-    ...m,
-    [group]: m[group].map(() => val),
-  }));
+  const [railOpen, setRailOpen] = useS(true);
 
   const today = new Date();
   const dateLabel = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   const timeLabel = today.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
   const listDate = today.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: '2-digit' });
-
-  // Chevron caret
-  const Chev = ({ open }) => (
-    <svg className={`dnotes-chev ${open ? 'open' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9 6l6 6-6 6" />
-    </svg>
-  );
-
-  const readingOpen = (openMap.reading || []).filter(Boolean).length;
-  const studyingOpen = (openMap.studying || []).filter(Boolean).length;
 
   const notes = [
     {
@@ -668,33 +898,14 @@ function NowView() {
       date: listDate,
       content: (
         <div>
-          <div className="dnotes-section">
-            <button
-              className="dnotes-section-head"
-              onClick={() => setAll('reading', readingOpen < (openMap.reading?.length || 0))}
-            >
-              <Chev open={readingOpen > 0} />
-              <span className="dnotes-section-title">Reading list</span>
-              <span className="dnotes-section-count">{(n.reading || []).length} items</span>
-            </button>
-            <div className="dnotes-section-body">
-              {(n.reading || []).map((b, i) => {
-                const open = !!(openMap.reading || [])[i];
-                return (
-                  <div key={i} className={`dnotes-entry collapsible ${open ? 'open' : ''}`}>
-                    <button className="dnotes-entry-head" onClick={() => toggle('reading', i)}>
-                      <Chev open={open} />
-                      <span className="dnotes-entry-title">{b.title}</span>
-                    </button>
-                    <div className="dnotes-entry-body">
-                      {b.author && <div className="dnotes-entry-by">— {b.author}</div>}
-                      {b.note && <p className="dnotes-entry-note">{b.note}</p>}
-                    </div>
-                  </div>
-                );
-              })}
+          <div className="dnotes-section-label">Reading list</div>
+          {(n.reading || []).map((b, i) => (
+            <div key={i} className="dnotes-entry">
+              <div className="dnotes-entry-title">{b.title}</div>
+              {b.author && <div className="dnotes-entry-by">— {b.author}</div>}
+              {b.note && <p className="dnotes-entry-note">{b.note}</p>}
             </div>
-          </div>
+          ))}
         </div>
       ),
     },
@@ -704,41 +915,32 @@ function NowView() {
       date: listDate,
       content: (
         <div>
-          <div className="dnotes-section">
-            <button
-              className="dnotes-section-head"
-              onClick={() => setAll('studying', studyingOpen < (openMap.studying?.length || 0))}
-            >
-              <Chev open={studyingOpen > 0} />
-              <span className="dnotes-section-title">Currently studying</span>
-              <span className="dnotes-section-count">{(n.studying || []).length} topics</span>
-            </button>
-            <ul className="dnotes-checklist">
-              {(n.studying || []).map((s, i) => {
-                const open = !!(openMap.studying || [])[i];
-                return (
-                  <li key={i} className={`dnotes-study ${open ? 'open' : ''}`}>
-                    <button className="dnotes-study-head" onClick={() => toggle('studying', i)}>
-                      <Chev open={open} />
-                      <span className={`dnotes-check ${s.checked ? 'on' : ''}`} aria-hidden="true" />
-                      <span className="dnotes-study-title" style={{ color: s.checked ? '#8e8e93' : '#e5e5e7', textDecoration: s.checked ? 'line-through' : 'none' }}>{s.title}</span>
-                    </button>
-                    {s.items && s.items.length > 0 && (
-                      <ul className="dnotes-study-items">
-                        {s.items.map((item, j) => (
-                          <li key={j}>
-                            <span>–</span>{item}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          <div className="dnotes-section-label">Currently studying</div>
+          <ul className="dnotes-checklist">
+            {(n.studying || []).map((s, i) => (
+              <li key={i} className="dnotes-study">
+                <div className="dnotes-checkrow">
+                  <span className={`dnotes-check ${s.checked ? 'on' : ''}`} aria-hidden="true" />
+                  <span className="dnotes-study-title" style={{ color: s.checked ? '#8e8e93' : '#e5e5e7', textDecoration: s.checked ? 'line-through' : 'none' }}>{s.title}</span>
+                </div>
+                {s.items && s.items.length > 0 && (
+                  <ul className="dnotes-study-items">
+                    {s.items.map((item, j) => (
+                      <li key={j}><span>–</span>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       ),
+    },
+    {
+      title: 'Guestbook',
+      preview: 'leave a note for me →',
+      date: listDate,
+      content: <GuestbookView />,
     },
   ];
 
@@ -755,7 +957,7 @@ function NowView() {
   ];
 
   return (
-    <div className="dnotes-app">
+    <div className={`dnotes-app ${railOpen ? '' : 'rail-collapsed'}`}>
       {/* Folders rail */}
       <div className="dnotes-rail">
         <div className="dnotes-rail-section">
@@ -787,9 +989,21 @@ function NowView() {
       {/* Notes list */}
       <div className="dnotes-list">
         <div className="dnotes-list-head">
-          <div className="dnotes-search-wrap">
-            <svg className="dnotes-search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg>
-            <input className="dnotes-search" placeholder="Search" readOnly />
+          <div className="dnotes-list-toprow">
+            <button
+              className="dnotes-sidebar-toggle"
+              onClick={() => setRailOpen((v) => !v)}
+              title={railOpen ? 'Hide Folders' : 'Show Folders'}
+              aria-label="Toggle folders"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/>
+              </svg>
+            </button>
+            <div className="dnotes-search-wrap">
+              <svg className="dnotes-search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg>
+              <input className="dnotes-search" placeholder="Search" readOnly />
+            </div>
           </div>
           <div className="dnotes-list-title">All iCloud</div>
           <div className="dnotes-list-sub">{notes.length} Notes</div>

@@ -381,13 +381,11 @@ function DesktopIcons({ onAction }) {
 function Menubar({ activeApp }) {
   const [now, setNow] = useState(new Date());
   useEffect(() => {
-    const i = setInterval(() => setNow(new Date()), 20_000);
+    const i = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(i);
   }, []);
-  const fmt = now.toLocaleString('en-US', {
-    weekday: 'short', month: 'short', day: 'numeric',
-    hour: 'numeric', minute: '2-digit',
-  });
+  const day = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
   return (
     <div className="menubar">
       <span className="apple"></span>
@@ -397,8 +395,23 @@ function Menubar({ activeApp }) {
       <span className="menu-item">View</span>
       <span className="menu-item">Window</span>
       <span className="right">
-        <span className="hint">⌘K</span>
-        <span>{fmt}</span>
+        <span className="mb-status" title="online">
+          <span className="mb-dot" />
+          guest
+        </span>
+        {/* wifi */}
+        <svg className="mb-ico" viewBox="0 0 20 16" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
+          <path d="M2 5.5a12 12 0 0 1 16 0" /><path d="M5 8.5a8 8 0 0 1 10 0" /><path d="M7.5 11.5a4 4 0 0 1 5 0" />
+          <circle cx="10" cy="14" r="0.6" fill="currentColor" stroke="none" />
+        </svg>
+        {/* battery */}
+        <svg className="mb-ico mb-batt" viewBox="0 0 28 14" fill="none" stroke="currentColor" strokeWidth="1.2">
+          <rect x="1" y="2.5" width="22" height="9" rx="2.5" />
+          <rect x="3" y="4.5" width="15" height="5" rx="1" fill="currentColor" stroke="none" />
+          <rect x="24.5" y="5" width="2" height="4" rx="1" fill="currentColor" stroke="none" />
+        </svg>
+        <span className="mb-key" title="Spotlight">⌘K</span>
+        <span className="mb-clock"><span className="mb-day">{day}</span><span className="mb-time">{time}</span></span>
       </span>
     </div>
   );

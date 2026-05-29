@@ -455,7 +455,7 @@ window.PORTFOLIO = {
   ],
 
   personality: {
-    quote: "I need to understand the whole thing before I trust myself on any part of it. Always been that way.",
+    quote: "I need to understand the whole thing before I trust myself on any part of it.",
     paragraphs: [
       "I'm drawn to how data systems get built, where they quietly break, and what makes their outputs trustworthy enough to actually act on. I've worked across credit risk, retrieval, and applied ML — and the interpretability question is almost always more interesting to me than the performance number.",
       "In the world of AI and black-box ML, I'm still someone who wants to make sense of what's underneath. I love learning, talking about where tech is going, and meeting people who are genuinely curious about the same things — reach out anytime.",
