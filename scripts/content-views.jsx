@@ -600,22 +600,20 @@ function AboutDoc() {
       <div className="hero-row">
         <img src="images/headshot.png" alt="" />
         <div>
-          <h1>About</h1>
+          <h1>{d.owner.name}</h1>
           <div className="role">{d.owner.role}</div>
         </div>
       </div>
-
-      <div className="pull-quote">"{p.quote}"</div>
 
       {p.paragraphs.map((para, i) => <p key={i}>{para}</p>)}
 
       <div className="about-section-head">Education</div>
       {d.education.map((e, i) => (
-        <div key={i} style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: 12, marginBottom: 10, fontSize: 13 }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--ink-faint)', letterSpacing: '0.06em' }}>{e.year}</span>
+        <div key={i} className="about-edu-row">
+          <span className="about-edu-year">{e.year}</span>
           <span>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 16 }}>{e.school}</div>
-            <div style={{ color: 'var(--ink-faint)', fontSize: 12 }}>{e.program}</div>
+            <div className="about-edu-school">{e.school}</div>
+            <div className="about-edu-prog">{e.program}</div>
           </span>
         </div>
       ))}

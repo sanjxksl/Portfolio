@@ -485,8 +485,7 @@ window.PORTFOLIO = {
   achievements: [
     "1st Place,Koru Problem Hunt, 2025",
     "1st Place,Rotman MMA Datathon, 2026",
-    "Finals (Top 7 / 43),Rotman Design Challenge, 2026",
+    "Top 7 Teams,Manulife × Rotman Design Challenge, 2026",
     "Founded Alumni Association & Alumni Office at IIITDM (1,270+ records, 350 to 550 attendees)",
-    "AWS ML Engineer Associate,in progress",
   ],
 };
