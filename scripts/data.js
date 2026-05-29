@@ -455,10 +455,10 @@ window.PORTFOLIO = {
   ],
 
   personality: {
-    quote: "I can't engage with anything at surface level. I need to understand the full system.",
+    quote: "I can't put my name on something I don't fully understand. In this field, that's a constraint I'm not willing to relax.",
     paragraphs: [
-      "Data scientist, trained as a designer, shaped by engineering. Wrapping up an MMA at Rotman — before that, mechanical engineering and product design in India. The work I care about lives at the intersection of data and real decisions, where the analysis has to hold up and actually change how someone thinks.",
-      "Outside of work: I write. I've been dancing since I was five. I listen to a lot of Indian niche R&B and Linkin Park, which makes more sense than it sounds.",
+      "I care about how data systems get built, why they fail, and what makes their outputs trustworthy enough to act on. Credit risk, NLP-based retrieval, applied ML — across all of it, interpretability and decision relevance matter to me as much as model performance.",
+      "In a world of black-box models, I genuinely cannot publish work I haven't fully made sense of. Every output has to serve a purpose, and every decision it informs has to be defensible. I'd love to meet people who think the same way.",
     ],
   },
 
