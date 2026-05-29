@@ -457,8 +457,8 @@ window.PORTFOLIO = {
   personality: {
     quote: "I need to understand the whole thing before I trust myself on any part of it. Always been that way.",
     paragraphs: [
-      "I care about how data systems get built, why they fail, and what makes their outputs trustworthy enough to act on. Credit risk, NLP-based retrieval, applied ML — across all of it, interpretability and decision relevance matter to me as much as model performance.",
-      "In a world of black-box models, I genuinely cannot publish work I haven't fully made sense of. Every output has to serve a purpose, and every decision it informs has to be defensible. I'd love to meet people who think the same way.",
+      "I'm drawn to how data systems get built, where they quietly break, and what makes their outputs trustworthy enough to actually act on. I've worked across credit risk, retrieval, and applied ML — and the interpretability question is almost always more interesting to me than the performance number.",
+      "I tend to care a lot about whether what I build makes sense — not just to me, but to whoever has to use it or act on it. If you think about models that way too, I'd genuinely love to connect.",
     ],
   },
 
