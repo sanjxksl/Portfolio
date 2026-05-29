@@ -455,7 +455,7 @@ window.PORTFOLIO = {
   ],
 
   personality: {
-    quote: "I can't put my name on something I don't fully understand. In this field, that's a constraint I'm not willing to relax.",
+    quote: "I need to understand the whole thing before I trust myself on any part of it. Always been that way.",
     paragraphs: [
       "I care about how data systems get built, why they fail, and what makes their outputs trustworthy enough to act on. Credit risk, NLP-based retrieval, applied ML — across all of it, interpretability and decision relevance matter to me as much as model performance.",
       "In a world of black-box models, I genuinely cannot publish work I haven't fully made sense of. Every output has to serve a purpose, and every decision it informs has to be defensible. I'd love to meet people who think the same way.",
