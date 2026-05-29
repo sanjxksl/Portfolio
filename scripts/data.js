@@ -458,7 +458,7 @@ window.PORTFOLIO = {
     quote: "I need to understand the whole thing before I trust myself on any part of it. Always been that way.",
     paragraphs: [
       "I'm drawn to how data systems get built, where they quietly break, and what makes their outputs trustworthy enough to actually act on. I've worked across credit risk, retrieval, and applied ML — and the interpretability question is almost always more interesting to me than the performance number.",
-      "I tend to care a lot about whether what I build makes sense — not just to me, but to whoever has to use it or act on it. If you think about models that way too, I'd genuinely love to connect.",
+      "In the world of AI and black-box ML, I'm still someone who wants to make sense of what's underneath. I love learning, talking about where tech is going, and meeting people who are genuinely curious about the same things — reach out anytime.",
     ],
   },
 
