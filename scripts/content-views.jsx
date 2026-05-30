@@ -1143,6 +1143,130 @@ function ResumeView() {
   );
 }
 
+function DiaryView() {
+  const { useState: useS, useEffect: useE } = React;
+  const SUB = 'https://sansdiary.substack.com';
+  const FEED = 'https://sansdiary.substack.com/feed';
+  const [posts, setPosts] = useS(null); // null=loading, []=failed/empty, [...]=ok
+
+  useE(() => {
+    let dead = false;
+    const strip = (html) => {
+      const d = document.createElement('div');
+      d.innerHTML = html || '';
+      return (d.textContent || '').replace(/\s+/g, ' ').trim();
+    };
+    const firstImg = (html) => {
+      const m = /<img[^>]+src="([^"]+)"/i.exec(html || '');
+      return m ? m[1] : '';
+    };
+    const parse = (xmlText) => {
+      const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
+      return [...xml.querySelectorAll('item')].slice(0, 6).map((it) => {
+        const get = (t) => {
+          const el = it.querySelector(t);
+          return el ? el.textContent : '';
+        };
+        const ce = it.getElementsByTagName('content:encoded')[0];
+        const contentEncoded = ce ? ce.textContent : '';
+        const desc = get('description');
+        return {
+          title: get('title'),
+          link: get('link'),
+          date: get('pubDate'),
+          excerpt: strip(desc || contentEncoded).slice(0, 180),
+          img: firstImg(contentEncoded) || firstImg(desc),
+        };
+      });
+    };
+    const tryFetch = async () => {
+      const proxies = [
+        (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+        (u) => `https://corsproxy.io/?url=${encodeURIComponent(u)}`,
+      ];
+      for (const make of proxies) {
+        try {
+          const res = await fetch(make(FEED));
+          if (!res.ok) continue;
+          const text = await res.text();
+          const items = parse(text);
+          if (items.length && !dead) { setPosts(items); return; }
+        } catch (e) { /* next proxy */ }
+      }
+      if (!dead) setPosts([]);
+    };
+    tryFetch();
+    return () => { dead = true; };
+  }, []);
+
+  const fmtDate = (s) => {
+    const d = new Date(s);
+    if (isNaN(d)) return '';
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  };
+
+  return (
+    <div className="diary">
+      <div className="diary-masthead">
+        <span className="diary-kicker">Newsletter · Substack</span>
+        <h1 className="diary-title">sans <em>diary</em></h1>
+        <p className="diary-tagline">
+          Field notes from the in-between — what I&rsquo;m learning, building, and second-guessing,
+          written more honestly than a portfolio lets me be.
+        </p>
+      </div>
+
+      {posts === null && (
+        <div className="diary-feed">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="diary-post skeleton">
+              <div className="sk-line w40" />
+              <div className="sk-line w70" />
+              <div className="sk-line w100" />
+              <div className="sk-line w90" />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {posts && posts.length > 0 && (
+        <div className="diary-feed">
+          {posts.map((p, i) => (
+            <a key={i} className="diary-post" href={p.link} target="_blank" rel="noopener noreferrer">
+              {p.img && <div className="diary-post-thumb" style={{ backgroundImage: `url("${p.img}")` }} />}
+              <div className="diary-post-body">
+                <div className="diary-post-date">{fmtDate(p.date)}</div>
+                <div className="diary-post-title">{p.title}</div>
+                {p.excerpt && <div className="diary-post-excerpt">{p.excerpt}…</div>}
+                <span className="diary-post-read">Read on Substack ↗</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+
+      <div className="diary-embed-wrap">
+        <iframe
+          className="diary-embed"
+          src="https://sansdiary.substack.com/embed"
+          title="Subscribe to sans diary"
+          frameBorder="0"
+          scrolling="no"
+        />
+      </div>
+
+      <a className="diary-cta" href={SUB} target="_blank" rel="noopener noreferrer">
+        {posts && posts.length > 0 ? 'See the full archive on Substack' : 'Read every entry on Substack'}
+        <span className="diary-cta-arrow">↗</span>
+      </a>
+
+      <div className="diary-foot">
+        new entries land in your inbox · no spam, just thinking out loud
+      </div>
+    </div>
+  );
+}
+
 Object.assign(window, {
-  Icon, IndexCardHero, FinderSidebar, FinderContent, GalleryView, DocView, AboutDoc, LearningArchive, ResumeView, NowView,
+  Icon, IndexCardHero, FinderSidebar, FinderContent, GalleryView, DocView, AboutDoc, LearningArchive, ResumeView, NowView, DiaryView,
 });

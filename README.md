@@ -1,22 +1,53 @@
 # sanjana.os
 
-A portfolio built as a desktop operating system. Drag icons, open windows, run a terminal — it behaves like macOS because it's more interesting that way.
+A portfolio built as a macOS desktop. Drag things, open windows, run the terminal. It's more interesting than a webpage.
 
 **Live → [sanjanaksl.com](https://sanjanaksl.com)**
 
 ---
 
-## What it is
+## What's in it
 
-An interactive macOS-style desktop, built entirely with vanilla HTML, CSS, and React (no build step). Every element is functional:
+**Desktop**
+- Draggable icons with default scatter positions (reset on refresh)
+- Boot sequence on first load — skip it or let it run
+- Dock with bounce animation; active apps show a dot indicator
+- Menubar with live clock, wifi and battery icons, online status, and ⌘K shortcut
 
-- **Finder** — browse work, projects, competitions, and gallery folders
-- **Windows** — draggable, resizable, stackable, with traffic-light controls
-- **Dock** — launch any app; active apps show an indicator dot
-- **Terminal** — a real chatbot (`⌘K` or click) that answers questions about the portfolio
-- **Spotlight** — `⌘K` search across every project, app, and file
-- **Boot sequence** — skip it or watch it
-- **Desktop icons** — drag them anywhere; positions reset on refresh
+**Windows**
+- Draggable, resizable, stackable
+- Traffic-light close/minimise/fullscreen controls
+- Window sizes adapt to viewport; stay in bounds on resize
+
+**Finder**
+- Browse Work, Projects, Competitions, and Gallery folders
+- Filter by tag from the sidebar (6 pinned tags)
+- Each project opens as a document with inline SVG architecture diagrams and metrics
+
+**Gallery (Photos)**
+- View by Years, Months, Days, or All Photos
+- Zoom controls (4 density levels)
+- Lightbox with keyboard navigation (← → Esc) and info overlay (I)
+
+**Terminal**
+- Type `help` to see all commands
+- Useful ones: `whoami`, `ls`, `cat about.md`, `neofetch`, `hire sanjana`
+- Fun ones: `dance`, `music`, `coffee`
+- `note <your message>` — signs the guestbook
+
+**Guestbook**
+- Leave a note, named or anonymous
+- Stored in localStorage (per-browser)
+- Seeded with a few entries so it doesn't look empty
+
+**Spotlight** (`⌘K`)
+- Searches across every project, app, and file
+
+**Learning log**
+- Git-style commit history of what I'm studying, branched by domain
+
+**Notes**
+- What I'm currently reading (with notes) and a to-do list of things I'm learning, with sublists
 
 ---
 
@@ -24,29 +55,25 @@ An interactive macOS-style desktop, built entirely with vanilla HTML, CSS, and R
 
 | Layer | Detail |
 |---|---|
-| UI | React 18 (CDN, no bundler) |
-| Styling | Vanilla CSS with custom properties |
+| UI | React 18 via CDN, no bundler |
+| Styling | Vanilla CSS, custom properties |
 | Fonts | Cormorant Garamond · Fraunces · Inter · JetBrains Mono |
 | Hosting | GitHub Pages |
-| Domain | Cloudflare |
+| Domain | Cloudflare DNS |
 
-No framework. No build pipeline. One `index.html`.
+No framework. No build step. One `index.html`.
 
 ---
 
 ## Content
 
-- **Work** — AI exam-scoping assistant at CIBC (RAG + LLM)
-- **Projects** — executive compensation anomaly detection · PEAD replication · ESG returns study · credit risk with counterfactual explanations · Aesthify (computer vision + design research) · evidence engine for product decisions
-- **Competitions** — 1st place Rotman MMA Datathon · Finalist Koru Problem Hunt · Finalist Rotman Design Challenge (top 7/43)
-- **Learning log** — a git-style commit history of what I'm currently studying
-- **Notes** — what I'm reading, listening to, thinking about right now
+- **Work** — ExamScopeAI: semantic search over 12 years of CIBC AML examination history (RAG pipeline, in progress at CIBC)
+- **Projects** — executive compensation anomaly detection · PEAD replication · ESG factor returns · credit risk with counterfactual explanations · Aesthify (computer vision + design scoring) · evidence engine for product decisions
+- **Competitions** — 1st place Rotman MMA Datathon · 1st place Koru Problem Hunt · Top 7 teams Manulife × Rotman Design Challenge
 
 ---
 
 ## Running locally
-
-No install needed — just open `index.html` in a browser:
 
 ```bash
 git clone https://github.com/sanjxksl/portfolio.git
@@ -54,7 +81,7 @@ cd portfolio
 open index.html
 ```
 
-Or serve it to avoid any CORS quirks with local assets:
+Or with a local server to avoid asset CORS issues:
 
 ```bash
 npx serve .
@@ -66,22 +93,19 @@ npx serve .
 
 ```
 portfolio/
-├── index.html              # entry point — loads everything
+├── index.html              # entry point
 ├── scripts/
-│   ├── app.jsx             # desktop shell, dock, icons, window manager
+│   ├── app.jsx             # desktop, dock, menubar, window manager
 │   ├── window-system.jsx   # draggable/resizable window primitives
-│   ├── content-views.jsx   # finder, about, resume, gallery views
-│   ├── terminal.jsx        # chatbot terminal
-│   ├── diagrams.jsx        # inline SVG architecture diagrams
-│   └── data.js             # all portfolio content
+│   ├── content-views.jsx   # finder, gallery, about, guestbook, notes
+│   ├── terminal.jsx        # terminal + all commands
+│   ├── diagrams.jsx        # inline SVG project diagrams
+│   └── data.js             # all content lives here
 ├── styles/
-│   ├── os.css              # desktop, dock, windows, responsive breakpoints
-│   └── *.css               # per-view stylesheets
-└── assets/ images/         # resume PDF, photos, icons
+│   └── os.css              # everything visual
+└── assets/ images/         # resume PDF, gallery photos
 ```
 
 ---
 
 *Sanjana Kanchibotla — [linkedin.com/in/sanjanaksl](https://linkedin.com/in/sanjanaksl) · sanjanakanchibotla@gmail.com*
-
-*Co-designed with [Claude](https://claude.ai) by Anthropic.*

@@ -7,39 +7,50 @@ const { useState, useEffect, useRef, useCallback } = React;
 // ============================================================
 function Boot({ onDone }) {
   const [lines, setLines] = useState([]);
+  const [greet, setGreet] = useState(false);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
     const script = [
-      { t: '> initializing portfolio.os v6.0 ...', d: 140 },
-      { t: '> mounting /work /projects /competitions /learning ...', d: 160, ok: true },
-      { t: '> loading typography · fraunces + cormorant + inter', d: 180, ok: true },
-      { t: '> setting palette · cream · brown · peony', d: 150, ok: true },
-      { t: '> ready.', d: 240 },
+      { t: '> booting sanjana.os v6.0', d: 150 },
+      { t: '> mounting /work /projects /competitions /learning', d: 150, ok: true },
+      { t: '> loading 24 years of context', d: 190, ok: true },
+      { t: '> calibrating curiosity', d: 170, ok: true },
+      { t: '> reading personality.docx', d: 180, ok: true },
+      { t: '> palette · cream · brown · peony', d: 150, ok: true },
     ];
     let acc = 0;
     script.forEach((s) => {
       acc += s.d;
       setTimeout(() => setLines((ls) => [...ls, s]), acc);
     });
+    // personal greeting beat
+    setTimeout(() => setGreet(true), acc + 320);
     setTimeout(() => {
       setDone(true);
-      setTimeout(onDone, 500);
-    }, acc + 280);
+      setTimeout(onDone, 600);
+    }, acc + 1500);
   }, [onDone]);
 
+  const skip = () => { setDone(true); setTimeout(onDone, 200); };
+
   return (
-    <div className={`boot ${done ? 'done' : ''}`}>
-      <div className="boot-lines">
-        {lines.map((l, i) => (
-          <div key={i} className="line">
-            <span className="prompt">$</span>
-            <span className="body">{l.t.replace(/^>\s*/, '')}</span>
-            {l.ok && <span className="ok">ok</span>}
-          </div>
-        ))}
+    <div className={`boot ${done ? 'done' : ''}`} onClick={skip}>
+      <div className="boot-inner">
+        <div className="boot-lines">
+          {lines.map((l, i) => (
+            <div key={i} className="line">
+              <span className="prompt">$</span>
+              <span className="body">{l.t.replace(/^>\s*/, '')}</span>
+              {l.ok && <span className="ok">ok</span>}
+            </div>
+          ))}
+        </div>
+        <div className={`boot-greet ${greet ? 'show' : ''}`}>
+          good — you’re here.<span className="boot-cursor" />
+        </div>
       </div>
-      <button className="skip" onClick={() => { setDone(true); setTimeout(onDone, 200); }}>
+      <button className="skip" onClick={(e) => { e.stopPropagation(); skip(); }}>
         skip ⎋
       </button>
     </div>
@@ -71,6 +82,95 @@ function DisplayTitle() {
       <span className="dt-subtitle">user-centered data scientist</span>
     </div>
   );
+}
+
+// ============================================================
+// Living wallpaper — minimal drifting constellation (ink on cream)
+// ============================================================
+function LivingWallpaper() {
+  const ref = useRef(null);
+  const mouse = useRef({ x: -9999, y: -9999 });
+
+  useEffect(() => {
+    const canvas = ref.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let raf, w, h, dpr;
+    let nodes = [];
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const resize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = canvas.clientWidth; h = canvas.clientHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.round(Math.min(46, Math.max(22, (w * h) / 42000)));
+      nodes = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.12,
+        vy: (Math.random() - 0.5) * 0.12,
+        r: Math.random() * 1.4 + 0.8,
+      }));
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const LINK = 132;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      const mx = mouse.current.x, my = mouse.current.y;
+      for (const n of nodes) {
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < -20) n.x = w + 20; if (n.x > w + 20) n.x = -20;
+        if (n.y < -20) n.y = h + 20; if (n.y > h + 20) n.y = -20;
+      }
+      // links
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d = Math.hypot(dx, dy);
+          if (d < LINK) {
+            const o = (1 - d / LINK) * 0.12;
+            ctx.strokeStyle = `rgba(106, 61, 32, ${o})`;
+            ctx.lineWidth = 0.7;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+      // nodes + cursor links
+      for (const n of nodes) {
+        const dm = Math.hypot(n.x - mx, n.y - my);
+        const near = dm < 150;
+        ctx.fillStyle = near ? 'rgba(176, 96, 122, 0.55)' : 'rgba(106, 61, 32, 0.28)';
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill();
+        if (near) {
+          const o = (1 - dm / 150) * 0.4;
+          ctx.strokeStyle = `rgba(176, 96, 122, ${o})`;
+          ctx.lineWidth = 0.8;
+          ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(mx, my); ctx.stroke();
+        }
+      }
+      raf = requestAnimationFrame(draw);
+    };
+    if (reduce) { draw(); cancelAnimationFrame(raf); }
+    else raf = requestAnimationFrame(draw);
+
+    const onMove = (e) => { mouse.current = { x: e.clientX, y: e.clientY }; };
+    const onLeave = () => { mouse.current = { x: -9999, y: -9999 }; };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseleave', onLeave);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseleave', onLeave);
+    };
+  }, []);
+
+  return <canvas ref={ref} className="wallpaper-canvas" />;
 }
 
 // ============================================================
@@ -276,6 +376,18 @@ function LearningLogIcon() {
 // Default desktop icons & positions (percent-based for responsiveness)
 // anchor_h: 'left'|'right'  anchor_v: 'top'|'bottom'
 // dx/dy: px from that edge of the .desktop-icons container
+function DiaryIcon() {
+  // Substack logomark — orange tile, white "stack" symbol
+  return (
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="4" width="56" height="56" rx="11" fill="#FF6719" />
+      <rect x="18" y="20" width="28" height="4.6" fill="#fff" />
+      <rect x="18" y="28.7" width="28" height="4.6" fill="#fff" />
+      <path d="M18 37.4 h28 v12.2 l-14 -6.6 -14 6.6 z" fill="#fff" />
+    </svg>
+  );
+}
+
 function getDefaultIcons() {
   return [
     { id: 'work',         label: 'work',         kind: 'folder', color: 'blue',  anchor_h:'left', dx:32,   anchor_v:'top', dy:77,  action: { type: 'finder', folder: 'work' } },
@@ -367,6 +479,7 @@ function DesktopIcons({ onAction }) {
             {icon.kind === 'app-github' && <GithubAppIcon />}
             {icon.kind === 'notion' && <NotesAppIcon />}
             {icon.kind === 'learning' && <LearningLogIcon />}
+            {icon.kind === 'diary' && <DiaryIcon />}
           </div>
           <span className="label">{icon.label}</span>
         </div>
@@ -378,6 +491,125 @@ function DesktopIcons({ onAction }) {
 // ============================================================
 // Menubar
 // ============================================================
+// ---- Now Playing config -------------------------------------------------
+// To go LIVE with real Apple Music plays:
+//   1. Make a free Last.fm account, scrobble Apple Music to it (see chat).
+//   2. Get a free API key: https://www.last.fm/api/account/create
+//   3. Fill both fields below. Until then, the curated fallback list shows.
+const LASTFM = {
+  user: '',      // <-- your Last.fm username
+  apiKey: '',    // <-- your Last.fm API key
+};
+// Real tracks shown until Last.fm is connected (no more genres).
+const NP_FALLBACK = [
+  { title: 'Numb', artist: 'Linkin Park' },
+  { title: 'Let Me Down Slowly', artist: 'Alec Benjamin' },
+  { title: 'In the End', artist: 'Linkin Park' },
+  { title: 'Must Have Been the Wind', artist: 'Alec Benjamin' },
+  { title: 'One More Light', artist: 'Linkin Park' },
+];
+
+function appleMusicSearch(track, artist) {
+  return 'https://music.apple.com/search?term=' + encodeURIComponent(`${track} ${artist}`);
+}
+
+function NowPlaying() {
+  const live = !!(LASTFM.user && LASTFM.apiKey);
+  const [i, setI] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [track, setTrack] = useState(null); // {title, artist, album, art, nowplaying, when, url}
+
+  // Fallback rotation (only when not live)
+  useEffect(() => {
+    if (live) return;
+    const t = setInterval(() => setI((v) => (v + 1) % NP_FALLBACK.length), 7000);
+    return () => clearInterval(t);
+  }, [live]);
+
+  // Live Last.fm polling
+  useEffect(() => {
+    if (!live) return;
+    let stop = false;
+    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${encodeURIComponent(LASTFM.user)}&api_key=${LASTFM.apiKey}&format=json&limit=1`;
+    const pull = async () => {
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        const rt = data && data.recenttracks;
+        const t = rt && rt.track && rt.track[0];
+        if (!t || stop) return;
+        const imgs = t.image || [];
+        const art = (imgs[imgs.length - 1] || {})['#text'] || '';
+        setTrack({
+          title: t.name,
+          artist: (t.artist && (t.artist['#text'] || t.artist.name)) || '',
+          album: (t.album && t.album['#text']) || '',
+          art,
+          nowplaying: t['@attr'] && t['@attr'].nowplaying === 'true',
+          when: t.date && t.date.uts ? Number(t.date.uts) * 1000 : null,
+          url: t.url || '',
+        });
+      } catch (e) { /* keep last good / fallback */ }
+    };
+    pull();
+    const iv = setInterval(pull, 20000);
+    return () => { stop = true; clearInterval(iv); };
+  }, [live]);
+
+  // Resolve what to show
+  let title, artist, sub, playing, href, art = '';
+  if (live && track) {
+    title = track.title; artist = track.artist; art = track.art;
+    playing = track.nowplaying;
+    sub = playing ? 'Now Playing' : 'Last Played';
+    href = appleMusicSearch(track.title, track.artist);
+  } else {
+    const f = NP_FALLBACK[i];
+    title = f.title; artist = f.artist; playing = true;
+    sub = 'On Loop';
+    href = appleMusicSearch(f.title, f.artist);
+  }
+
+  const whenLabel = (ts) => {
+    if (!ts) return '';
+    const m = Math.floor((Date.now() - ts) / 60000);
+    if (m < 1) return 'moments ago';
+    if (m < 60) return `${m}m ago`;
+    const h = Math.floor(m / 60);
+    if (h < 24) return `${h}h ago`;
+    return new Date(ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  };
+
+  return (
+    <div className="np" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <span className={`np-eq ${playing ? '' : 'paused'}`} aria-hidden="true"><i /><i /><i /><i /></span>
+      <span className="np-title">{title}</span>
+      {open && (
+        <a className="np-pop" href={href} target="_blank" rel="noopener noreferrer">
+          <div className="np-pop-head">
+            <span className={`np-eq big ${playing ? '' : 'paused'}`} aria-hidden="true"><i /><i /><i /><i /></span>
+            <span>{sub}</span>
+            {live && track && track.nowplaying && <span className="np-live">● live</span>}
+          </div>
+          <div className="np-pop-row">
+            {art ? <img className="np-art" src={art} alt="" /> : <span className="np-art np-art-ph"></span>}
+            <div className="np-pop-meta">
+              <div className="np-pop-title">{title}</div>
+              <div className="np-pop-artist">{artist}</div>
+              {live && track && !track.nowplaying && track.when && (
+                <div className="np-pop-when">{whenLabel(track.when)}</div>
+              )}
+            </div>
+          </div>
+          <div className="np-pop-foot">
+            {live ? 'scrobbled from apple music ↗' : 'on loop while she works ↗'}
+          </div>
+        </a>
+      )}
+    </div>
+  );
+}
+
 function Menubar({ activeApp }) {
   const [now, setNow] = useState(new Date());
   useEffect(() => {
@@ -395,6 +627,7 @@ function Menubar({ activeApp }) {
       <span className="menu-item">View</span>
       <span className="menu-item">Window</span>
       <span className="right">
+        <NowPlaying />
         <span className="mb-status" title="online">
           <span className="mb-dot" />
           guest
@@ -444,8 +677,9 @@ function Dock({ openApps, windows, onLaunch }) {
     { id: 'resume',   label: 'Resume',          render: () => <ResumeIcon /> },
     { sep: true },
     { id: 'mail',     label: 'Contact',    render: () => <MailAppIcon />,     href: 'mailto:sanjanakanchibotla@gmail.com' },
-    { id: 'linkedin', label: 'LinkedIn',   render: () => <img src="assets/linkedin.png" alt="LinkedIn" style={{ width: 42, height: 42 }} />, href: 'https://linkedin.com/in/sanjanaksl' },
-    { id: 'github',   label: 'GitHub',     render: () => <GithubAppIcon />,   href: 'https://github.com/sanjxksl' },
+    { id: 'linkedin', label: 'LinkedIn',   render: () => <img src="assets/linkedin.png" alt="LinkedIn" />, href: 'https://linkedin.com/in/sanjanaksl' },
+    { id: 'github',   label: 'GitHub',     render: () => <img src="assets/github.png" alt="GitHub" />,     href: 'https://github.com/sanjxksl' },
+    { id: 'substack', label: 'Substack',   render: () => <DiaryIcon />,        href: 'https://sansdiary.substack.com' },
   ];
 
   // Dynamic items: only visible while their window is open
@@ -503,6 +737,7 @@ function Spotlight({ open, onClose, onLaunch, onOpenFile }) {
     { kind: 'app', name: 'Terminal', k: 'App', go: () => onLaunch('terminal') },
     { kind: 'app', name: 'About', k: 'App', go: () => onLaunch('about') },
     { kind: 'app', name: 'Learning Log', k: 'App', go: () => onLaunch('learning') },
+    { kind: 'app', name: 'Substack', k: 'Link', go: () => window.open('https://sansdiary.substack.com', '_blank') },
     { kind: 'app', name: 'Resume.pdf', k: 'File', go: () => onLaunch('resume') },
     { kind: 'app', name: 'Gallery', k: 'App', go: () => { onLaunch('finder'); } },
     ...[...d.work, ...d.projects, ...d.competitions].map((p) => ({
@@ -676,6 +911,12 @@ function App() {
         w: clamp(560, Math.round(vw * 0.62), 880),
         h: clamp(420, Math.round(vh * 0.68), 620),
       },
+      diary:    {
+        title: 'Diary — sans diary', kind: 'diary',
+        w: clamp(420, Math.round(vw * 0.40), 560),
+        h: clamp(440, Math.round(vh * 0.74), 680),
+        disabled: true,
+      },
     };
     const s = specs[id];
     if (!s) return;
@@ -742,7 +983,9 @@ function App() {
     <>
       {!booted && <Boot onDone={() => setBooted(true)} />}
 
-      <div className="wallpaper" />
+      <div className="wallpaper">
+        <LivingWallpaper />
+      </div>
       <DisplayTitle />
       <DesktopIcons onAction={handleIconAction} />
 
@@ -788,6 +1031,7 @@ function App() {
           {w.kind === 'doc' && <DocView item={w.item} />}
           {w.kind === 'resume' && <ResumeView />}
           {w.kind === 'reading' && <NowView />}
+          {w.kind === 'diary' && <DiaryView />}
         </Window>
       ))}
 

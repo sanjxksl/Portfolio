@@ -22,8 +22,9 @@ Rules:
 
 function Terminal({ onCommand }) {
   const [lines, setLines] = useState([
-    { kind: 'sys', text: "sanjana.os 4.0 · Chatbot" },
-    { kind: 'sys', text: "type 'help' for commands · or ask anything in plain english" },
+    { kind: 'sys', text: "sanjana.os 6.0 · terminal" },
+    { kind: 'assistant', text: "hey — i'm sanjana. well, the part of me that lives in a terminal." },
+    { kind: 'sys', text: "type 'help' for commands, or just ask me anything in plain english." },
     { kind: 'sys', text: "" },
   ]);
   const [input, setInput] = useState('');
@@ -31,8 +32,11 @@ function Terminal({ onCommand }) {
   const [history, setHistory] = useState([]);
   const [hIdx, setHIdx] = useState(-1);
   const [thinking, setThinking] = useState(false);
+  const [hinted, setHinted] = useState(false);
   const bodyRef = useRef(null);
   const inputRef = useRef(null);
+  const idleRef = useRef(null);
+  const actedRef = useRef(false);
 
   useEffect(() => {
     if (bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
@@ -42,6 +46,29 @@ function Terminal({ onCommand }) {
     const t = setTimeout(() => inputRef.current && inputRef.current.focus(), 200);
     return () => clearTimeout(t);
   }, []);
+
+  // Idle hint — if the visitor sits without typing, nudge them once.
+  useEffect(() => {
+    const HINTS = [
+      "psst — try typing `projects` to see what i've built.",
+      "stuck? `whoami` is a good place to start.",
+      "tip: try `neofetch`, `coffee`, or `music` — there are easter eggs.",
+    ];
+    const arm = () => {
+      clearTimeout(idleRef.current);
+      if (actedRef.current || hinted) return;
+      idleRef.current = setTimeout(() => {
+        if (actedRef.current || hinted) return;
+        setHinted(true);
+        setLines((prev) => [...prev,
+          { kind: 'sys', text: HINTS[Math.floor(Math.random() * HINTS.length)] },
+          { kind: 'sys', text: "" },
+        ]);
+      }, 13000);
+    };
+    arm();
+    return () => clearTimeout(idleRef.current);
+  }, [hinted, lines]);
 
   const push = (ls) => setLines((prev) => [...prev, ...ls]);
 
@@ -155,12 +182,46 @@ function Terminal({ onCommand }) {
       ]);
       return true;
     }
+    if (c === 'sudo feelings' || c === 'feelings') {
+      push([
+        { kind: 'sys', text: "[sudo] accessing /var/log/feelings ..." },
+        { kind: 'assistant', text: "honestly? equal parts terrified and thrilled, most days." },
+        { kind: 'assistant', text: "i like problems i don't yet know how to solve. that's the whole job." },
+        { kind: 'sys', text: "" },
+      ]);
+      return true;
+    }
     if (c === 'sudo rm -rf /' || c.startsWith('sudo')) {
       push([{ kind: 'err', text: "nice try." }, { kind: 'sys', text: "" }]);
       return true;
     }
     if (c === 'whoami') {
-      push([{ kind: 'assistant', text: "guest@sanjana.os" }, { kind: 'sys', text: "" }]);
+      push([
+        { kind: 'assistant', text: "   .--.       sanjana kanchibotla" },
+        { kind: 'assistant', text: "  |o_o |      data scientist · product thinker" },
+        { kind: 'assistant', text: "  |:_/ |      toronto, on" },
+        { kind: 'assistant', text: " //   \\ \\     ----------------------------" },
+        { kind: 'assistant', text: "(|     | )    starts with the question," },
+        { kind: 'assistant', text: "/'\\_   _/`\\   not the method." },
+        { kind: 'assistant', text: "\\___)=(___/   earns the depth before the authority." },
+        { kind: 'sys', text: "" },
+      ]);
+      return true;
+    }
+    if (c === 'konami' || c === 'up up down down') {
+      push([
+        { kind: 'sys', text: "↑ ↑ ↓ ↓ ← → ← → b a" },
+        { kind: 'assistant', text: "cheat unlocked: infinite curiosity. (it was always on.)" },
+        { kind: 'sys', text: "" },
+      ]);
+      return true;
+    }
+    if (c === 'shutdown' || c === 'exit' || c === 'logout') {
+      push([
+        { kind: 'assistant', text: "thanks for stopping by. let's build something." },
+        { kind: 'sys', text: "sanjanakanchibotla@gmail.com" },
+        { kind: 'sys', text: "" },
+      ]);
       return true;
     }
     if (c === 'ls' || c === 'ls ~') {
@@ -312,6 +373,8 @@ function Terminal({ onCommand }) {
     e.preventDefault();
     const v = input.trim();
     if (!v || busy) return;
+    actedRef.current = true;
+    clearTimeout(idleRef.current);
     setHistory((h) => [...h, v]);
     setHIdx(-1);
     push([{ kind: 'user', text: v, prompt: true }]);
