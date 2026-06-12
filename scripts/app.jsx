@@ -492,15 +492,10 @@ function DesktopIcons({ onAction }) {
 // Menubar
 // ============================================================
 // ---- Now Playing config -------------------------------------------------
-// To go LIVE with real Apple Music plays:
-//   1. Make a free Last.fm account, scrobble Apple Music to it (see chat).
-//   2. Get a free API key: https://www.last.fm/api/account/create
-//   3. Fill both fields below. Until then, the curated fallback list shows.
-const LASTFM = {
-  user: '',      // <-- your Last.fm username
-  apiKey: '',    // <-- your Last.fm API key
-};
-// Real tracks shown until Last.fm is connected (no more genres).
+// ListenBrainz — no API key needed. Set up scrobbling via Marvis Pro or
+// "Scrobbles for Last.fm" (iOS, free) and connect your ListenBrainz account.
+const LB_USER = 'sanjanaksl';
+
 const NP_FALLBACK = [
   { title: 'Numb', artist: 'Linkin Park' },
   { title: 'Let Me Down Slowly', artist: 'Alec Benjamin' },
@@ -514,47 +509,45 @@ function appleMusicSearch(track, artist) {
 }
 
 function NowPlaying() {
-  const live = !!(LASTFM.user && LASTFM.apiKey);
   const [i, setI] = useState(0);
   const [open, setOpen] = useState(false);
-  const [track, setTrack] = useState(null); // {title, artist, album, art, nowplaying, when, url}
+  const [track, setTrack] = useState(null);
+  const [live, setLive] = useState(false);
 
-  // Fallback rotation (only when not live)
+  // Fallback rotation while no live data
   useEffect(() => {
     if (live) return;
     const t = setInterval(() => setI((v) => (v + 1) % NP_FALLBACK.length), 7000);
     return () => clearInterval(t);
   }, [live]);
 
-  // Live Last.fm polling
+  // ListenBrainz polling — no API key needed
   useEffect(() => {
-    if (!live) return;
     let stop = false;
-    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${encodeURIComponent(LASTFM.user)}&api_key=${LASTFM.apiKey}&format=json&limit=1`;
     const pull = async () => {
       try {
-        const res = await fetch(url);
+        const res = await fetch(`https://api.listenbrainz.org/1/user/${LB_USER}/listens?count=1`);
         const data = await res.json();
-        const rt = data && data.recenttracks;
-        const t = rt && rt.track && rt.track[0];
-        if (!t || stop) return;
-        const imgs = t.image || [];
-        const art = (imgs[imgs.length - 1] || {})['#text'] || '';
+        const listens = data?.payload?.listens;
+        if (!listens || !listens.length || stop) return;
+        const l = listens[0];
+        const meta = l.track_metadata || {};
+        const info = meta.additional_info || {};
         setTrack({
-          title: t.name,
-          artist: (t.artist && (t.artist['#text'] || t.artist.name)) || '',
-          album: (t.album && t.album['#text']) || '',
-          art,
-          nowplaying: t['@attr'] && t['@attr'].nowplaying === 'true',
-          when: t.date && t.date.uts ? Number(t.date.uts) * 1000 : null,
-          url: t.url || '',
+          title: meta.track_name || '',
+          artist: meta.artist_name || '',
+          album: meta.release_name || '',
+          art: info.artwork_url || '',
+          nowplaying: !!l.playing_now,
+          when: l.listened_at ? l.listened_at * 1000 : null,
         });
-      } catch (e) { /* keep last good / fallback */ }
+        setLive(true);
+      } catch (e) { /* keep fallback */ }
     };
     pull();
-    const iv = setInterval(pull, 20000);
+    const iv = setInterval(pull, 30000);
     return () => { stop = true; clearInterval(iv); };
-  }, [live]);
+  }, []);
 
   // Resolve what to show
   let title, artist, sub, playing, href, art = '';
@@ -983,9 +976,7 @@ function App() {
     <>
       {!booted && <Boot onDone={() => setBooted(true)} />}
 
-      <div className="wallpaper">
-        <LivingWallpaper />
-      </div>
+      <div className="wallpaper" />
       <DisplayTitle />
       <DesktopIcons onAction={handleIconAction} />
 
