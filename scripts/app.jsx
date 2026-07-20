@@ -491,118 +491,6 @@ function DesktopIcons({ onAction }) {
 // ============================================================
 // Menubar
 // ============================================================
-// ---- Now Playing config -------------------------------------------------
-// ListenBrainz — no API key needed. Set up scrobbling via Marvis Pro or
-// "Scrobbles for Last.fm" (iOS, free) and connect your ListenBrainz account.
-const LB_USER = 'sanjanaksl';
-
-const NP_FALLBACK = [
-  { title: 'Numb', artist: 'Linkin Park' },
-  { title: 'Let Me Down Slowly', artist: 'Alec Benjamin' },
-  { title: 'In the End', artist: 'Linkin Park' },
-  { title: 'Must Have Been the Wind', artist: 'Alec Benjamin' },
-  { title: 'One More Light', artist: 'Linkin Park' },
-];
-
-function appleMusicSearch(track, artist) {
-  return 'https://music.apple.com/search?term=' + encodeURIComponent(`${track} ${artist}`);
-}
-
-function NowPlaying() {
-  const [i, setI] = useState(0);
-  const [open, setOpen] = useState(false);
-  const [track, setTrack] = useState(null);
-  const [live, setLive] = useState(false);
-
-  // Fallback rotation while no live data
-  useEffect(() => {
-    if (live) return;
-    const t = setInterval(() => setI((v) => (v + 1) % NP_FALLBACK.length), 7000);
-    return () => clearInterval(t);
-  }, [live]);
-
-  // ListenBrainz polling — no API key needed
-  useEffect(() => {
-    let stop = false;
-    const pull = async () => {
-      try {
-        const res = await fetch(`https://api.listenbrainz.org/1/user/${LB_USER}/listens?count=1`);
-        const data = await res.json();
-        const listens = data?.payload?.listens;
-        if (!listens || !listens.length || stop) return;
-        const l = listens[0];
-        const meta = l.track_metadata || {};
-        const info = meta.additional_info || {};
-        setTrack({
-          title: meta.track_name || '',
-          artist: meta.artist_name || '',
-          album: meta.release_name || '',
-          art: info.artwork_url || '',
-          nowplaying: !!l.playing_now,
-          when: l.listened_at ? l.listened_at * 1000 : null,
-        });
-        setLive(true);
-      } catch (e) { /* keep fallback */ }
-    };
-    pull();
-    const iv = setInterval(pull, 30000);
-    return () => { stop = true; clearInterval(iv); };
-  }, []);
-
-  // Resolve what to show
-  let title, artist, sub, playing, href, art = '';
-  if (live && track) {
-    title = track.title; artist = track.artist; art = track.art;
-    playing = track.nowplaying;
-    sub = playing ? 'Now Playing' : 'Last Played';
-    href = appleMusicSearch(track.title, track.artist);
-  } else {
-    const f = NP_FALLBACK[i];
-    title = f.title; artist = f.artist; playing = true;
-    sub = 'On Loop';
-    href = appleMusicSearch(f.title, f.artist);
-  }
-
-  const whenLabel = (ts) => {
-    if (!ts) return '';
-    const m = Math.floor((Date.now() - ts) / 60000);
-    if (m < 1) return 'moments ago';
-    if (m < 60) return `${m}m ago`;
-    const h = Math.floor(m / 60);
-    if (h < 24) return `${h}h ago`;
-    return new Date(ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  };
-
-  return (
-    <div className="np" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-      <span className={`np-eq ${playing ? '' : 'paused'}`} aria-hidden="true"><i /><i /><i /><i /></span>
-      <span className="np-title">{title}</span>
-      {open && (
-        <a className="np-pop" href={href} target="_blank" rel="noopener noreferrer">
-          <div className="np-pop-head">
-            <span className={`np-eq big ${playing ? '' : 'paused'}`} aria-hidden="true"><i /><i /><i /><i /></span>
-            <span>{sub}</span>
-            {live && track && track.nowplaying && <span className="np-live">● live</span>}
-          </div>
-          <div className="np-pop-row">
-            {art ? <img className="np-art" src={art} alt="" /> : <span className="np-art np-art-ph"></span>}
-            <div className="np-pop-meta">
-              <div className="np-pop-title">{title}</div>
-              <div className="np-pop-artist">{artist}</div>
-              {live && track && !track.nowplaying && track.when && (
-                <div className="np-pop-when">{whenLabel(track.when)}</div>
-              )}
-            </div>
-          </div>
-          <div className="np-pop-foot">
-            {live ? 'scrobbled from apple music ↗' : 'on loop while she works ↗'}
-          </div>
-        </a>
-      )}
-    </div>
-  );
-}
-
 function Menubar({ activeApp }) {
   const [now, setNow] = useState(new Date());
   useEffect(() => {
@@ -620,7 +508,6 @@ function Menubar({ activeApp }) {
       <span className="menu-item">View</span>
       <span className="menu-item">Window</span>
       <span className="right">
-        <NowPlaying />
         <span className="mb-status" title="online">
           <span className="mb-dot" />
           guest

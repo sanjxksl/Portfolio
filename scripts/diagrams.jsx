@@ -57,11 +57,11 @@ function ExamScopeArchDiagram() {
 
   const steps = [
     { n: '01', label: 'PDF Extraction',   sub: 'pypdf · pdfplumber',  done: true  },
-    { n: '02', label: 'Validation + QA',  sub: '23 flagged records',  done: true  },
+    { n: '02', label: 'Validation + QA',  sub: 'flagged records',  done: true  },
     { n: '03', label: 'Databricks',       sub: 'Delta table layer',   done: false },
-    { n: '04', label: 'Semantic Vectors', sub: 'all-MiniLM-L6-v2',   done: false },
-    { n: '05', label: 'Search API',       sub: 'FastAPI · ChromaDB',  done: false },
-    { n: '06', label: 'Examiner UI',      sub: 'React · xlsx export', done: false },
+    { n: '04', label: 'TF-IDF Vectors',   sub: 'scikit-learn · cosine sim',   done: true },
+    { n: '05', label: 'Search API',       sub: 'FastAPI · SQLite',  done: true },
+    { n: '06', label: 'Examiner UI',      sub: 'React · xlsx export', done: true },
   ];
 
   const pos = [
@@ -74,7 +74,7 @@ function ExamScopeArchDiagram() {
   return (
     <DiaShell
       caption="6-layer extraction and search pipeline"
-      note={<>steps 01 and 02 complete · steps 03 to 06 <em>in progress</em> for June delivery.</>}
+      note={<>steps 01, 02, 04, 05, 06 complete and deployed · step 03 (Databricks) <em>roadmapped</em>.</>}
       viewBox="0 0 500 220"
     >
       <defs>
@@ -109,11 +109,11 @@ function ExamScopeArchDiagram() {
 }
 
 function ExamScopeHistoryDiagram() {
-  const raw   = [30, 33, 36, 35, 38, 40, 29, 36, 41, 44, 46, 46, 14];
-  const years = ["'14","'15","'16","'17","'18","'19","'20","'21","'22","'23","'24","'25","'26"];
-  const data  = raw.map((v, i) => ({ v, y: years[i], current: i === 12 }));
+  const raw   = [38, 29, 36, 41, 44, 46, 14];
+  const years = ["'20","'21","'22","'23","'24","'25","'26"];
+  const data  = raw.map((v, i) => ({ v, y: years[i], current: i === 6 }));
 
-  const L = 34, T = 22, plotW = 432, plotH = 134;
+  const L = 34, T = 22, plotW = 232, plotH = 134;
   const baseline = T + plotH;
   const maxV = 50, barW = 24, stepPx = 34;
   const bx = (i) => L + i * stepPx;
@@ -121,14 +121,14 @@ function ExamScopeHistoryDiagram() {
   const by = (v) => baseline - bh(v);
 
   return (
-    <DiaShell caption="exam reports indexed by fiscal year (FY2014 to FY2026)" note={<>468 reports total · FY2026 <em>ongoing</em>.</>}>
+    <DiaShell caption="exam reports indexed by fiscal year (FY2020 to FY2026)" note={<>7 years of institutional knowledge · FY2026 <em>ongoing</em>.</>}>
       {[10, 20, 30, 40].map(v => (
         <g key={v}>
           <line x1={L} y1={by(v)} x2={L+plotW} y2={by(v)} stroke="#ddd1bb" strokeWidth="0.6" strokeDasharray="3 3"/>
           <text x={L-5} y={by(v)+4} textAnchor="end" fontFamily="JetBrains Mono" fontSize="7.5" fill="#8a7560">{v}</text>
         </g>
       ))}
-      <text x={L+plotW} y={T-6} textAnchor="end" fontFamily="Cormorant Garamond" fontSize="11" fontStyle="italic" fill="#5a4434">468 reports</text>
+      <text x={L+plotW} y={T-6} textAnchor="end" fontFamily="Cormorant Garamond" fontSize="11" fontStyle="italic" fill="#5a4434">7 years indexed</text>
       {data.map((d, i) => (
         <g key={d.y} className="bar" style={{ '--i': i }}>
           <rect
