@@ -67,7 +67,7 @@ No framework. No build step. One `index.html`.
 
 ## Content
 
-- **Work** — ExamScopeAI: semantic search over 12 years of CIBC AML examination history (RAG pipeline, in progress at CIBC)
+- **Work** — Senior Analyst, Finance Analytics and Portfolio Management at CIBC; previously built ExamScopeAI, semantic search over 12 years of CIBC AML examination history (RAG pipeline, piloted with examiners)
 - **Projects** — executive compensation anomaly detection · PEAD replication · ESG factor returns · credit risk with counterfactual explanations · Aesthify (computer vision + design scoring) · evidence engine for product decisions
 - **Competitions** — 1st place Rotman MMA Datathon · 1st place Koru Problem Hunt · Top 7 teams Manulife × Rotman Design Challenge
 

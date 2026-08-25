@@ -415,8 +415,8 @@ window.PORTFOLIO = {
 
   learning: [
     { hash: "b7d4e21", date: "2026·Q3", branch: "CIBC",
-      msg: "Starting as Senior Analyst, Finance Analytics and Portfolio Management",
-      desc: "MMA practicum wrapped in June. Accepted a full-time offer at CIBC, moving from AML compliance analytics into finance analytics and portfolio management. Start date July 22.",
+      msg: "Started as Senior Analyst, Finance Analytics and Portfolio Management",
+      desc: "MMA practicum wrapped in June. Started full-time at CIBC on August 17, moving from AML compliance analytics into finance analytics and portfolio management.",
       current: true, head: true },
     { hash: "f2c8a91", date: "2026·Q2", branch: "EXAMSCOPE / CIBC",
       msg: "Wrapped ExamScopeAI, presented to CIBC's VP of Compliance",

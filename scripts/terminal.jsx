@@ -7,7 +7,7 @@ const WORKER_URL = 'https://groq-proxy.sanjanakanchibotla.workers.dev';
 const SYSTEM_PROMPT = `You are Sanjana Kanchibotla's portfolio terminal assistant. You speak as her representative,warm, thoughtful, precise. Never verbose. Keep replies under 120 words. Use plain text, no markdown.
 
 Context about Sanjana:
-- Currently at CIBC (Jan 2026-present) designing an AI-driven exam-scoping assistant for AML examiners: a proactive AI agent + RAG over historical exam reports, inline chatbot for document Q&A, roadmap for Databricks ingestion and a news-trained insight LLM. Deployed in Streamlit.
+- Currently at CIBC (Aug 2026-present) as Senior Analyst, Finance Analytics and Portfolio Management. Previously (Jan-Jul 2026) on CIBC's CEEP team, designed an AI-driven exam-scoping assistant for AML examiners: a proactive AI agent + RAG over historical exam reports, inline chatbot for document Q&A, roadmap for Databricks ingestion and a news-trained insight LLM. Deployed in Streamlit, piloted with examiners.
 - Master of Management Analytics, Rotman (2026). B.Tech Mechanical Engineering + Minor in Product Design, IIITDM (2025).
 - Key projects: Credit risk with counterfactual explanations (88.8% AUC-ROC, PyTorch, fairness audit DIR 1.02); Evidence Engine (bias mitigation tool for PMs, Gemini-powered); Aesthify (Computer Vision + 101-person user study,simplicity r=0.68, symmetry r=-0.60); US Census income NN (85.6%, 0.91 AUC, Keras); Alumni career ML on 3,300+ unified records.
 - Wins: 1st Koru Problem Hunt 2025 (ThirdPlace hobby marketplace), 1st Rotman MMA Datathon 2026 (causal inference, $75-90K reallocation), Finals Rotman Design Challenge 2026 (Compass for Manulife, top 7 of 43).
@@ -120,9 +120,9 @@ function Terminal({ onCommand }) {
     }
     if (c === 'work') {
       push([
-        { kind: 'assistant', text: "CIBC · Global Methodology Programs & Strategy · Jan 2026,present" },
-        { kind: 'assistant', text: "building an AI-driven exam-scoping assistant for AML examiners." },
-        { kind: 'assistant', text: "RAG over historical reports + inline chatbot + roadmap for databricks ingestion and a news-trained insight layer. deployed in streamlit." },
+        { kind: 'assistant', text: "CIBC · Senior Analyst, Finance Analytics and Portfolio Management · Aug 2026,present" },
+        { kind: 'assistant', text: "previously (Jan,Jul 2026): CEEP team, AML/ATF compliance." },
+        { kind: 'assistant', text: "built ExamScopeAI,an AI-driven exam-scoping assistant with RAG over historical reports + inline chatbot, deployed in streamlit and piloted with examiners." },
         { kind: 'sys', text: "" },
       ]);
       return true;
